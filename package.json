@@ -6,6 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
+    "firebase": "^9.13.0",
+    "mongodb": "4.11",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"

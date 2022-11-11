@@ -1,0 +1,1 @@
+export const leagueUrl= "http://localhost:3000"

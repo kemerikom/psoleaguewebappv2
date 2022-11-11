@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    @apply flex flex-col bg-green-100
+}
+
+main{
+    @apply flex container mx-auto mt-3
+}
+
+hr{
+    @apply flex w-full border-b-green-600 border-b
+}
