@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 export default function MainMenu() {
     const router=useRouter()
     return(
-        <div className="flex flex-row h-10 items-center justify-start bg-green-800 text-white px-2">
+        <div className="flex flex-row h-10 items-center bg-black bg-opacity-5 backdrop-blur-sm justify-start hover:bg-blue-800 text-white px-2 transition-all">
             <div className="flex flex-row">
                 <Link className='flex mx-1' href={'/'}>PSO League</Link>
                 <Link className='flex mx-1' href={'/leagues'}>Leagues</Link>

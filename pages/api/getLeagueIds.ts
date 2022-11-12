@@ -6,7 +6,7 @@ export default async function getLeagueIds(req:NextApiRequest,res:NextApiRespons
         const leagueIds= await getIds()
         const data=leagueIds.map((li)=>{
             return{
-                _id:li._id
+                id:li.id.toString()
             }
         })
         res.status(200).json(data)

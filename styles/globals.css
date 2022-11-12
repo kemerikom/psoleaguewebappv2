@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 html {
-    @apply flex flex-col bg-green-100
+    @apply flex flex-col bg-stadium bg-fixed bg-no-repeat bg-cover bg-center
 }
 
-main{
-    @apply flex container mx-auto mt-3
+body{
+    @apply flex flex-col w-full
+}
+
+h1{
+    @apply font-semibold text-xl
 }
 
 hr{
-    @apply flex w-full border-b-green-600 border-b
+    @apply flex w-full
+}
+
+Link{
+    @apply cursor-pointer
 }

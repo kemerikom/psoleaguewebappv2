@@ -1,19 +1,46 @@
-'use client'
 import { leagueUrl } from "../../../utils/src/leagueUrl"
-import { leagueIdType } from "../../../typings"
+import PageView from './PageView'
+import {leagueName} from '../../../typings'
+import LeagueHeader from './LeagueHeader'
 
-export default function LeaguePage(){
+type PageProps={
+    params:{
+        league:string
+    }
+}
+
+async function getLeagueInfo({league}:{league:string}) {
+    const res = await fetch(`${leagueUrl}/api/getLeagueApi`,{
+        method:'POST',
+        body:league,
+        next:{revalidate:60}
+    })
+    const data =await res.json()
+    return data
+}
+
+
+
+
+export default async function LeaguePage({params:{league}}:PageProps){
+    const leagueInfo:leagueName= await getLeagueInfo({league})
+    const {name,logo}=leagueInfo
     return(
-        <div>
-            League page asdasd
+        <div className="flex flex-col items-center justify-center bg-white backdrop-blur-sm bg-opacity-70 rounded">
+            <LeagueHeader name={name} logo={logo}></LeagueHeader>
+            <hr/>
+            <PageView data={leagueInfo}></PageView>
         </div>
     )
 }
 
 export async function generateStaticParams() {
-    const data = await fetch(`${leagueUrl}/api/getLeagueIds`)
-    const result:leagueIdType[]= await data.json()
-    return result.map((r)=>{
-        league:r._id.toString()
+    const res = await fetch(`${leagueUrl}/api/getLeagueIds`)
+    const result = await res.json()
+    const paths= result.map((path:any)=>{
+        return{
+            league:path.id.toString()
+        }
     })
+    return paths
 }
