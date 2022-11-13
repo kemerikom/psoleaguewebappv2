@@ -1,7 +1,6 @@
-'use client'
 import { memo } from "react";
 import {leagueName} from '../../typings'
-import {useRouter}from 'next/navigation'
+import Link from "next/link";
 
 
 type Data={
@@ -9,11 +8,9 @@ type Data={
 }
 
 export default memo(function LeagueCard({data}:Data){
-    const router=useRouter()
     return(
-        <div className={`flex items-col rounded p-2 cursor-pointer w-64 gap-x-1`}
+        <Link href={`/leagues/${data._id}`} className={`flex items-col rounded p-2 cursor-pointer w-64 gap-x-1`}
         style={{background:`linear-gradient(45deg, ${data.color1} 0%, ${data.color2} 100%)`}}
-        onClick={()=>router.push(`/leagues/${data._id}`)}
         >
             <div className={`flex items-center justify-center aspect-square w-16 rounded-full `}>
                 <img src='/teamlogo.png' className="flex aspect-square w-full object-contain rounded-full"></img>
@@ -21,6 +18,6 @@ export default memo(function LeagueCard({data}:Data){
             <div className="flex flex-col flex-1 items-end bg-white backdrop-blur-sm bg-opacity-50 p-1 rounded">
                 <h3 className="font-medium whitespace-nowrap">{data.name}</h3>
             </div>
-        </div>
+        </Link>
     )
 })

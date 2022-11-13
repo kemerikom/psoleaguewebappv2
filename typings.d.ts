@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb"
+import { Int32, ObjectId } from "mongodb"
 import React, { Component } from "react"
 
 export type firebaseConfigType={
@@ -29,6 +29,44 @@ export type leagueName={
 
 export type leagueIdType={
     _id:string
+}
+
+export type seasonNameType={
+    _id:string,
+    leagueId:string,
+    seasonName:string
+}
+
+export type tableTeamType={
+    id:string,
+    teamname:string
+}
+
+export type tableScheduleType={
+    datetime:number,
+    homescore:number,
+    awayscore:number,
+    hometeam:string,
+    awayteam:string,
+    completed:boolean
+}
+
+export type tablePointsType={
+    teamname:string,
+    point:number,
+    win:number,
+    draw:number,
+    lose:number,
+    goals:number,
+    agoals:number,
+    diff:number
+}
+
+export type seasonTableType={
+    _id:string,
+    seasonId:string,
+    teams:tableTeamType[],
+    points:tablePointsType[]
 }
 
 declare global{
