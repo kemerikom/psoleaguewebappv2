@@ -51,6 +51,30 @@ export type tableScheduleType={
     completed:boolean
 }
 
+export type tableTopGoalsType={
+    playername:string,
+    playerid:string,
+    goals:number
+}
+
+export type tableTopAssistsType={
+    playername:string,
+    playerid:string,
+    assists:number
+}
+
+export type tableTopSavesType={
+    playername:string,
+    playerid:string,
+    saves:number
+}
+
+export type tableTopPlayersType={
+    topgoals:tableTopGoalsType[],
+    topassists:tableTopAssistsType[],
+    topsaves:tableTopSavesType[]
+}
+
 export type tablePointsType={
     teamname:string,
     point:number,
@@ -62,11 +86,15 @@ export type tablePointsType={
     diff:number
 }
 
+
 export type seasonTableType={
     _id:string,
     seasonId:string,
     teams:tableTeamType[],
-    points:tablePointsType[]
+    points:tablePointsType[],
+    schedule:tableScheduleType[],
+    topplayers:tableTopPlayersType[]
+
 }
 
 declare global{

@@ -7,22 +7,28 @@ import {useEffect,useState} from 'react'
 import { leagueUrl } from "../../../utils/src/leagueUrl"
 import { seasonNameType } from "../../../typings"
 import PreviousSeasonPage from "./PreviousSeasonPage"
+import LeaguePage from "./LeaguePage"
 
 
 export default function PageView({data}:{data:leagueName}){
     const [previousSeasons,setPreviousSeasons]=useState([])
     return(
         <div className="flex w-full p-2 rounded">
-            <Tab.Group as={'div'} className='flex flex-col space-y-2' defaultIndex={1}>
+            <Tab.Group as={'div'} className='flex flex-col space-y-2' defaultIndex={0}>
                 <Tab.List as={'div'} className='flex flex-row bg-white p-1 rounded space-x-2 items-center justify-center'>
-                    <Tab as='div' className={'outline-none'} onClick={()=>getSeasonsInfo()}>
+                <Tab as='div' className={'outline-none'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} transition-all p-2 rounded`}>Previous Seasons</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} transition-all p-2 rounded`}>League</button>
                         )}
                     </Tab>
                     <Tab as='div' className={'outline-none'}>
                         {({selected})=>(
                             <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} transition-all p-2 rounded`}>Current Season</button>
+                        )}
+                    </Tab>
+                    <Tab as='div' className={'outline-none'} onClick={()=>getSeasonsInfo()}>
+                        {({selected})=>(
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} transition-all p-2 rounded`}>Previous Seasons</button>
                         )}
                     </Tab>
                     <Tab as='div' className={'outline-none'}>
@@ -32,6 +38,12 @@ export default function PageView({data}:{data:leagueName}){
                     </Tab>
                 </Tab.List>
                 <Tab.Panels>
+                    <Tab.Panel>
+                        <LeaguePage></LeaguePage>
+                    </Tab.Panel>
+                    <Tab.Panel>
+                        Şimdiki sezon
+                    </Tab.Panel>
                     <Tab.Panel as='div' className={'flex flex-col bg-white rounded p-2'}>
                         {previousSeasons&&previousSeasons.map((season:seasonNameType)=>{
                             return(
@@ -50,10 +62,6 @@ export default function PageView({data}:{data:leagueName}){
                             </Disclosure>
                             )
                         })}
-
-                    </Tab.Panel>
-                    <Tab.Panel>
-                        Şimdiki sezon
                     </Tab.Panel>
                     <Tab.Panel>
                         takımlar
