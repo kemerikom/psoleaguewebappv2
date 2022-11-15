@@ -26,7 +26,7 @@ export default async function LeaguePage({params:{league}}:PageProps){
     const leagueInfo:leagueName= await getLeagueInfo({league})
     const {name,logo}=leagueInfo
     return(
-        <div className="flex flex-col items-center justify-center bg-white backdrop-blur-sm bg-opacity-70 rounded">
+        <div className="flex flex-col lg:w-[600px] xl:w-[800px] 2xl:w-[1000px] bg-white backdrop-blur-sm bg-opacity-70 rounded">
             <LeagueHeader name={name} logo={logo}></LeagueHeader>
             <hr/>
             <PageView data={leagueInfo}></PageView>

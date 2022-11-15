@@ -1,5 +1,3 @@
-
-import Script from 'next/script'
 import '../styles/globals.css'
 import MainMenu from "./MainMenu"
 
@@ -16,7 +14,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </head>
-      <body>
+      <body className='flex flex-col w-full'>
         <MainMenu/>
         {children} 
       </body>

@@ -24,7 +24,8 @@ export type leagueName={
     color2:string,
     fontcolor:string,
     shortname?:string,
-    official?:boolean
+    official?:boolean,
+    teams:string[]
 }
 
 export type leagueIdType={
@@ -86,7 +87,6 @@ export type tablePointsType={
     diff:number
 }
 
-
 export type seasonTableType={
     _id:string,
     seasonId:string,
@@ -95,6 +95,17 @@ export type seasonTableType={
     schedule:tableScheduleType[],
     topplayers:tableTopPlayersType[]
 
+}
+
+export type teamsType={
+    _id:string,
+    name:string,
+    shortname:string,
+    color1:string,
+    color2:string,
+    fontcolor:string,
+    logo:string,
+    leagues:string[]
 }
 
 declare global{

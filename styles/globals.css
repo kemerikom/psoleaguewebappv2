@@ -3,12 +3,9 @@
 @tailwind utilities;
 
 html {
-    @apply flex flex-col bg-stadium bg-fixed bg-no-repeat bg-cover bg-center
+    @apply bg-stadium bg-fixed bg-no-repeat bg-cover bg-center
 }
 
-body{
-    @apply flex flex-col w-full
-}
 
 h1{
     @apply font-semibold text-xl

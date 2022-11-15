@@ -1,8 +1,9 @@
 import {MongoClient, ObjectId} from 'mongodb'
 
-const client= new MongoClient(process.env.mongoUri)
+
 
 export async function getSeasons({leagueId}:{leagueId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
         const database=client.db('psoleague')

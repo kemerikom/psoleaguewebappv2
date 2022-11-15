@@ -4,11 +4,9 @@ import LeagueList from "./LeagueList";
 export default function RootLayout({children}:{children:React.ReactNode}){
 
     return(
-        <main className='flex flex-row p-3 container items-start justify-center'>
-            <div className='flex'>
-                <LeagueList/>
-            </div>
-            <div className='flex flex-1 rounded items-start justify-start'>
+        <main className='flex flex-row container p-3 items-start'>
+            <LeagueList/>
+            <div className='flex w-full'>
                 {children}
             </div>
         </main>

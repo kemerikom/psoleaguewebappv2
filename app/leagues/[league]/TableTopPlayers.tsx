@@ -4,7 +4,7 @@ import { tableTopGoalsType,tableTopAssistsType,tableTopSavesType } from "../../.
 
 export default function TableTopPlayers({dataGoals,dataAssists,dataSaves}:{dataGoals?:tableTopGoalsType[],dataAssists?:tableTopAssistsType[],dataSaves?:tableTopSavesType[]}){
     return(
-        <table className='flex flex-col w-full table-fixed cursor-default items-center text-center'>
+        <table className='min-w-full table-fixed cursor-default items-center text-center'>
             <tbody>
                 <tr>
                     <th className='border border-black whitespace-nowrap'>#</th>

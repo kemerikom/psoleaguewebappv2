@@ -36,7 +36,6 @@ export default function LeagueList(){
             <hr/>
             <h2 className='text-center font-medium'>Unofficial Leagues</h2>
             <hr/>
-
         </div>
     )
 }
