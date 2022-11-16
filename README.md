@@ -36,4 +36,4 @@ appPath=http://localhost:3000
 Edit /utils/src/leagueUrl.ts file for your work
 
 ## Sponsor this project
-Don't forget to sponsor this project with my [Patreon]("https://www.patreon.com/SharkmanTR") account.
+Don't forget to sponsor this project with my [Patreon](https://www.patreon.com/SharkmanTR) account.
