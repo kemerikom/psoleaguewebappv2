@@ -32,10 +32,18 @@ export type leagueIdType={
     _id:string
 }
 
+export type winnerTeamType={
+    teamname:string,
+    teamid:string,
+    teamlogo:string
+}
+
 export type seasonNameType={
     _id:string,
     leagueId:string,
-    seasonName:string
+    seasonName:string,
+    winner:winnerTeamType[],
+    alive:boolean
 }
 
 export type tableTeamType={
@@ -94,7 +102,6 @@ export type seasonTableType={
     points:tablePointsType[],
     schedule:tableScheduleType[],
     topplayers:tableTopPlayersType[]
-
 }
 
 export type teamsType={

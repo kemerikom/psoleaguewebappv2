@@ -1,15 +1,11 @@
 'use client'
+import SeasonTab from "./SeasonTab"
 import {useEffect, useState} from 'react'
 import { leagueUrl } from '../../../utils/src/leagueUrl'
 import { seasonTableType,tableTeamType,tablePointsType,tableScheduleType,tableTopGoalsType,tableTopAssistsType,tableTopSavesType } from '../../../typings'
-import { Tab } from '@headlessui/react'
-import TableTopPlayers from './TableTopPlayers'
-import TablePoints from './TablePoints'
-import TableSchedule from './TableSchedule'
-import SeasonTab from './SeasonTab'
 
 
-export default function PreviousSeasonPage({seasonId}:{seasonId:string}){
+export default function CurrenSeasonPage({seasonId}:{seasonId:string}){
     useEffect(()=>{
         if(seasonTable.length==0) getTableData()
     },[])
@@ -23,15 +19,15 @@ export default function PreviousSeasonPage({seasonId}:{seasonId:string}){
     return(
         <div className='flex flex-col space-y-2 items-center justify-center w-full p-2'>
             <SeasonTab
-                points={points}
-                schedule={schedule}
-                topGoals={topGoals}
-                topAssists={topAssists}
-                topSaves={topSaves}
+            points={points}
+            schedule={schedule}
+            topGoals={topGoals}
+            topAssists={topAssists}
+            topSaves={topSaves}
             />
         </div>
     )
-    async function getTableData() {
+    function getTableData() {
         fetch(`${leagueUrl}/api/getTableApi`,{
             method:'POST',
             body:JSON.stringify({seasonId})
