@@ -9,7 +9,15 @@ export default function TableTopPlayers({dataGoals,dataAssists,dataSaves}:{dataG
                 <tr>
                     <th className='border border-black whitespace-nowrap'>#</th>
                     <th className='border border-black whitespace-nowrap'>Player Name</th>
-                    <th className='border border-black whitespace-nowrap'>Total Assists</th>
+                    {dataGoals&&
+                            <th className='border border-black whitespace-nowrap'>Total Goals</th>
+                    }
+                    {dataAssists&&
+                            <th className='border border-black whitespace-nowrap'>Total Assists</th>
+                    }
+                    {dataSaves&&
+                            <th className='border border-black whitespace-nowrap'>Total Saves</th>
+                    }
                 </tr>
                 {dataGoals?.sort((a,b)=>b.goals-a.goals).map((goals,index)=>{
                     return(
