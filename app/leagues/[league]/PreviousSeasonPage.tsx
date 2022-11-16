@@ -2,10 +2,6 @@
 import {useEffect, useState} from 'react'
 import { leagueUrl } from '../../../utils/src/leagueUrl'
 import { seasonTableType,tableTeamType,tablePointsType,tableScheduleType,tableTopGoalsType,tableTopAssistsType,tableTopSavesType } from '../../../typings'
-import { Tab } from '@headlessui/react'
-import TableTopPlayers from './TableTopPlayers'
-import TablePoints from './TablePoints'
-import TableSchedule from './TableSchedule'
 import SeasonTab from './SeasonTab'
 
 

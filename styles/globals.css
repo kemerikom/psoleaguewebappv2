@@ -19,14 +19,6 @@ Link{
     @apply cursor-pointer
 }
 
-@keyframes gradient-animation{
-    0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+input{
+	@apply p-1 outline-none focus:outline-none
 }

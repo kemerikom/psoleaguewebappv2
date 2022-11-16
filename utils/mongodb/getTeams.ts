@@ -29,3 +29,17 @@ export async function getLeagueTeams({leagueId}:{leagueId:string}){
         await client.close()
     }
 }
+
+export async function searchTeams({term}:{term:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams= database.collection('teams')
+        const teamList=teams.find({teamname:{$in:[term]}})
+        const result = await teamList.toArray()
+        return result
+    }finally{
+        await client.close()
+    }
+}

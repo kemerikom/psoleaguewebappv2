@@ -8,7 +8,7 @@ export default function MainMenu() {
             <div className="flex flex-row h-full">
                 <Link className='flex mx-1 h-full p-2 hover:bg-blue-900 transition-all' href={'/'}>PSO League</Link>
                 <Link className='flex mx-1 h-full p-2 hover:bg-blue-900 transition-all' href={'/leagues'}>Leagues</Link>
-                <Link className='flex mx-1 h-full p-2 hover:bg-blue-900 transition-all' href={'/'}>Teams</Link>
+                <Link className='flex mx-1 h-full p-2 hover:bg-blue-900 transition-all' href={'/teams'}>Teams</Link>
                 <Link className='flex mx-1 h-full p-2 hover:bg-blue-900 transition-all' href={'/'}>Players</Link>
             </div>
             <div className='flex flex-row ml-auto h-full items-center justify-start'>
