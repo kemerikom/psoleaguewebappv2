@@ -1,27 +1,39 @@
-# Next.js + Tailwind CSS Example
+# Welcome
+Welcome to my new project. This web app developed by Sharkman for Pro Soccer Online leagues.
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
+## How to clone
+Open Git Bash
+Change the current working directory to the location where you want the cloned directory.
+Type this:
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+git clone https://github.com/FlyingTurkman/psoleaguewebappv2
 ```
 
+## How to setup
+Open your working directory
 ```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+npm init
 ```
 
+Create new firebase app and mongodb database
+
+Create .env file like this
 ```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+//firebase app config variables
+apiKey= apiKey
+authDomain= authDomain
+projectId= projectId
+storageBucket= storageBucket
+messagingSenderId= messagingSenderId
+appId= appId
+measurementId= measurementId
+//mongodb variable
+mongoUri=MongoUri
+//your hostname or website
+appPath=http://localhost:3000
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Edit /utils/src/leagueUrl.ts file for your work
+
+## Sponsor this project
+Don't forget to sponsor this project with my [Patreon]("https://www.patreon.com/SharkmanTR") account.
