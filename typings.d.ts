@@ -112,7 +112,13 @@ export type teamsType={
     color2:string,
     fontcolor:string,
     logo:string,
-    leagues:string[]
+    leagues:string[],
+    players:string[]
+}
+
+export type playerNamesType={
+    _id:string,
+    username:string
 }
 
 declare global{

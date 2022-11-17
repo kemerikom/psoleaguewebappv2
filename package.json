@@ -12,6 +12,7 @@
     "mongodb": "4.11",
     "next": "latest",
     "react": "18.2.0",
+    "react-country-flag": "^3.0.2",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0"
   },

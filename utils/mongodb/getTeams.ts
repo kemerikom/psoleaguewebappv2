@@ -2,14 +2,14 @@ import {MongoClient, ObjectId} from 'mongodb'
 
 
 
-export async function getTeams({teamId}:{teamId:string}) {
+export async function getTeam({teamId}:{teamId:string}) {
     const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
         const database=client.db('psoleague')
         const teams= database.collection('teams')
-        const teamList=teams.find({teamId})
-        const result= await teamList.toArray()
+        const teamList=teams.findOne({_id:(new ObjectId(teamId))})
+        const result= await teamList
         return result
     }finally{
         await client.close()

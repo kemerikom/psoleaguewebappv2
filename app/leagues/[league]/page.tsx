@@ -20,6 +20,9 @@ async function getLeagueInfo({league}:{league:string}) {
 }
 
 
+/* 
+FIXME:
+fetch sebepsiz yere 2 kez tekrarlanıyor yavaşlığa sebep oluyor. Bunu çözmeyi unutma */
 
 
 export default async function LeaguePage({params:{league}}:PageProps){

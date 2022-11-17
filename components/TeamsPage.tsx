@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { teamsType } from "../typings"
 
 export default function TeamsPage({teams}:{teams:teamsType[]}){
@@ -27,7 +28,7 @@ export default function TeamsPage({teams}:{teams:teamsType[]}){
                         }
                     `}
                 </style>
-                    <div className="flex flex-row space-x-2 items-center">
+                    <Link href={`/teams/${team._id}`} className="flex flex-row space-x-2 items-center">
                         <div className="flex items-center w-16 aspect-square rounded-full">
                             <img className="rounded-full" src='/teamlogo.png'></img>
                         </div>
@@ -43,7 +44,7 @@ export default function TeamsPage({teams}:{teams:teamsType[]}){
                                 <b>Team Tag:</b> {team.shortname}
                             </h3>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 )
             })}

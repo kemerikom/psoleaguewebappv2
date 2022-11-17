@@ -17,7 +17,7 @@ export default function Teams(){
         <div className="flex flex-col space-y-2">
             <SearchBar value={searchTerm} setValue={setSearchTerm} goSearch={setSearch} ></SearchBar>
             {completed&&
-                <div className="flex container bg-white rounded p-1 backdrop-blur-sm bg-opacity-70">
+                <div className="flex items-center justify-center container bg-white rounded p-1 backdrop-blur-sm bg-opacity-70">
                     <TeamsPage teams={teams}></TeamsPage>
                 </div>
             }

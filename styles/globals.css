@@ -8,7 +8,15 @@ html {
 
 
 h1{
-    @apply font-semibold text-xl
+    @apply font-semibold text-xl cursor-default
+}
+
+h2{
+    @apply cursor-default
+}
+
+h3{
+    @apply cursor-default
 }
 
 hr{
