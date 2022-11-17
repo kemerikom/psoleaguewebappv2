@@ -1,4 +1,4 @@
-import { teamsType } from "../../../typings"
+import { teamsType } from "../typings"
 
 export default function TeamsPage({teams}:{teams:teamsType[]}){
     return(

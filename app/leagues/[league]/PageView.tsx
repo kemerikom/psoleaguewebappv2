@@ -8,7 +8,7 @@ import { leagueUrl } from "../../../utils/src/leagueUrl"
 import { seasonNameType,teamsType } from "../../../typings"
 import PreviousSeasonPage from "./PreviousSeasonPage"
 import LeaguePage from "./LeaguePage"
-import TeamsPage from "./TeamsPage"
+import TeamsPage from "../../../components/TeamsPage"
 import CurrentSeasonPage from "./CurrentSeasonPage"
 
 

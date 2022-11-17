@@ -36,7 +36,7 @@ export async function searchTeams({term}:{term:string}) {
         await client.connect()
         const database=client.db('psoleague')
         const teams= database.collection('teams')
-        const teamList=teams.find({teamname:{$in:[term]}})
+        const teamList=teams.find({$or:[{name:new RegExp(term,'i')},{shortname:new RegExp(term,'i')}]})
         const result = await teamList.toArray()
         return result
     }finally{

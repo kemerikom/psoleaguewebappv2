@@ -1,22 +1,31 @@
 'use client'
 import SearchBar from "../../components/SearchBar"
-import { useState,useEffect, Dispatch, KeyboardEvent, SetStateAction } from "react"
+import { useState,useEffect } from "react"
 import { leagueUrl } from "../../utils/src/leagueUrl"
+import { teamsType } from "../../typings"
+import TeamsPage from "../../components/TeamsPage"
 
 export default function Teams(){
     const [searchTerm,setSearchTerm]=useState<string>("")
     const [search,setSearch]=useState(false)
+    const [teams,setTeams]=useState<teamsType[]>([])
+    const [completed,setCompleted]=useState<boolean>(false)
     useEffect(()=>{
         if(search) searchTeamsInfo()
     },[search])
     return(
-        <div className="flex">
+        <div className="flex flex-col space-y-2">
             <SearchBar value={searchTerm} setValue={setSearchTerm} goSearch={setSearch} ></SearchBar>
+            {completed&&
+                <div className="flex container bg-white rounded p-1 backdrop-blur-sm bg-opacity-70">
+                    <TeamsPage teams={teams}></TeamsPage>
+                </div>
+            }
+
         </div>
     )
     async function searchTeamsInfo() {
         setSearch(false)
-        console.log('searching',search)
         fetch(`${leagueUrl}/api/searchTeamsApi`,{
             method:'POST',
             body:JSON.stringify({term:searchTerm})
@@ -26,7 +35,8 @@ export default function Teams(){
             return dataRes
         })
         .then((data)=>{
-            console.log(data)
+            setTeams(data)
+            setCompleted(true)
         })
     }
 }
