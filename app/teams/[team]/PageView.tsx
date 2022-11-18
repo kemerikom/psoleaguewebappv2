@@ -5,25 +5,73 @@ import {RiVipCrown2Fill} from 'react-icons/ri'
 import Link from "next/link";
 import { Tab } from '@headlessui/react'
 import PlayerList from "./PlayerList";
+import { useEffect,useState } from "react";
+import {playerNamesType}from '../../../typings'
+import { leagueUrl } from "../../../utils/src/leagueUrl";
+import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
+import FormationPage from "../../../components/formations/FormationPage";
 
 
 export default function PageView({data}:{data:teamsType}){
+    const [captain,setCaptain]=useState<playerNamesType>()
+    const [coCaptain,setCoCaptain]=useState<playerNamesType>()
+    const [loadingCaptain,setLoadingCaptain]=useState<boolean>(true)
+    useEffect(()=>{
+        getCaptainAndCo()
+    },[data])
     return(
-        <div className="flex flex-col rounded p-2 flex-1 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
+        <div className="flex flex-col mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
             <div className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
                     <img className="h-full aspect-square rounded-full" src="/teamlogo.png"></img>
                 </div>
                 <div className="flex flex-col w-full items-start p-3 space-y-1">
                     <h1>{data.name} [{data.shortname}]</h1>
-                    <ReactCountryFlag countryCode="TR" svg title="TR" style={{width:'30px'}}/>
-                    <div className="flex flex-row items-center space-x-1">
+                    <ReactCountryFlag countryCode={data.origin} svg title={data.origin} style={{width:'30px'}}/>
+                    {loadingCaptain&&
+                    <>
+                    <div className="flex flex-row items-center space-x-1 blur-sm animate-pulse">
                         <RiVipCrown2Fill className="text-xl"/>
-                        <Link href='/'>Recarmon</Link>
+                        <h3>Captain</h3>
                     </div>
+                    <div className="flex flex-row items-center space-x-1 blur-sm animate-pulse">
+                        <RiVipCrown2Fill className="text-xl"/>
+                        <h3>Co-Captaion</h3>
+                    </div>
+                    </>
+                    }
+                    {!loadingCaptain&&captain&&
+                    <>
                     <div className="flex flex-row items-center space-x-1">
                         <RiVipCrown2Fill className="text-xl"/>
-                        <Link href='/'>AdamC</Link>
+                        <Link href='/'>{captain?.username}</Link>
+                    </div>
+                        {coCaptain&&
+                        <div className="flex flex-row items-center space-x-1">
+                            <RiVipCrown2Fill className="text-xl"/>
+                            <Link href='/'>{coCaptain?.username}</Link>
+                        </div>
+                        }
+                    </>
+                    }
+                    
+                </div>
+                <div>
+                    <div className="flex flex-row-reverse space-x-2">
+                        <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer">
+                            {data.followers?`${data.followers.length+1}`:0}
+                            <IoHeartOutline/>
+                        </label>
+                        <div className="flex flex-row space-x-2 mx-1 border border-black rounded px-1">
+                            <label className="flex flex-row items-center justify-center text-lg cursor-pointer">
+                                <IoThumbsUpOutline/>
+                                {data.upvote?`${data.upvote.length}`:0}
+                            </label>
+                            <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer">
+                                <IoThumbsDownOutline/>
+                                {data.downvote?`${data.downvote.length}`:0}
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,8 +102,8 @@ export default function PageView({data}:{data:teamsType}){
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         <PlayerList teamId={data._id}></PlayerList>
                     </Tab.Panel>
-                    <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        Formation
+                    <Tab.Panel className={'flex w-full p-2 items-center justify-center bg-white rounded'}>
+                        <FormationPage/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         Trophy Room
@@ -67,4 +115,31 @@ export default function PageView({data}:{data:teamsType}){
             </Tab.Group>
         </div>
     )
+    async function getCaptainAndCo() {
+        setLoadingCaptain(true)
+        fetch(`${leagueUrl}/api/getUserNameApi`,{
+            method:'POST',
+            body:JSON.stringify({userId:data.captain})
+        })
+        .then((res)=>{
+            const dataRes= res.json()
+            return dataRes
+        })
+        .then((data:playerNamesType)=>{
+            setCaptain(data)
+        })
+
+        fetch(`${leagueUrl}/api/getUserNameApi`,{
+            method:'POST',
+            body:JSON.stringify({userId:data.cocaptain})
+        })
+        .then((res)=>{
+            const dataRes= res.json()
+            return dataRes
+        })
+        .then((data:playerNamesType)=>{
+            setCoCaptain(data)
+        })
+        setLoadingCaptain(false)
+    }
 }

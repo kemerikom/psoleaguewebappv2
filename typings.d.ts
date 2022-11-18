@@ -113,7 +113,15 @@ export type teamsType={
     fontcolor:string,
     logo:string,
     leagues:string[],
-    players:string[]
+    players:string[],
+    captain?:string,
+    cocaptain?:string,
+    origin:string,
+    upvote?:string[],
+    downvote?:string[],
+    followers?:string[],
+    teamsize?:number,
+    roster?:string[]
 }
 
 export type playerNamesType={

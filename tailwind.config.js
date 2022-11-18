@@ -10,6 +10,10 @@ module.exports = {
     extend: {
       backgroundImage:{
         'stadium':"url(/stadium.png)"
+      },
+      aspectRatio:{
+        'stadium':'9 / 12',
+        'sixbox':'12 / 7'
       }
     },
   },

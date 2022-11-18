@@ -21,7 +21,7 @@ async function getTeamInfo({team}:{team:string}){
 export default async function TeamPage({params:{team}}:PageProps) {
     const teamInfo= await getTeamInfo({team})
     return(
-        <div className="flex w-full p-3">
+        <div className="max-w-5xl mx-auto p-3 w-full">
             <PageView data={teamInfo}></PageView>
         </div>
     )

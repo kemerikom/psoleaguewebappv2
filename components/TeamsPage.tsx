@@ -33,12 +33,12 @@ export default function TeamsPage({teams}:{teams:teamsType[]}){
                             <img className="rounded-full" src='/teamlogo.png'></img>
                         </div>
                         <div className="flex flex-col cursor-pointer">
-                            <h3
+                            <h3 className="cursor-pointer"
                             style={{color:team.fontcolor}}
                             >
                                 <b>Team Name:</b> {team.name}
                             </h3>
-                            <h3
+                            <h3 className="cursor-pointer"
                             style={{color:team.fontcolor}}
                             >
                                 <b>Team Tag:</b> {team.shortname}
