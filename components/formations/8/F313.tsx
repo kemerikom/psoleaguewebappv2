@@ -1,6 +1,8 @@
+'use client'
 import Lines from "../Lines";
+import PlayerIcon from "../../PlayerIcon";
 
-export default function F313(){
+export default function F313({color1,color2,fontcolor,roster}:{color1:string,color2:string,fontcolor:string,roster:string[]}){
     return(
         <div className="flex w-full p-2">
             <div className="flex flex-col w-full bg-green-900 relative aspect-stadium rounded p-2">
@@ -13,45 +15,77 @@ export default function F313(){
                 <div className="flex flex-1 w-full items-start justify-around z-[2] flex-row">
                     {/* forwards */}
                     <div className="flex flex-1 h-1/3 items-center justify-around">
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            LW
-                        </div>
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            CF
-                        </div>
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            RW
-                        </div>
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'LW'}
+                        playerid={roster[5]}
+                        />
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'CF'}
+                        playerid={roster[6]}
+                        />
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'RW'}
+                        playerid={roster[7]}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-1 w-full items-center justify-around z-[2] flex-row">
                     {/* mid */}
                     <div className="flex flex-1 h-1/3 items-center justify-around">
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            CM
-                        </div>
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'CM'}
+                        playerid={roster[4]}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-1 w-full items-end justify-around z-[2] flex-row">
                     {/* def */}
                     <div className="flex flex-1 h-1/3 items-center justify-around">
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            LB
-                        </div>
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            CM
-                        </div>
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            RB
-                        </div>
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'LB'}
+                        playerid={roster[1]}
+                        />
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'CB'}
+                        playerid={roster[2]}
+                        />
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'RB'}
+                        playerid={roster[3]}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-1 w-full items-end justify-around z-[2] flex-row">
                     {/* gk */}
                     <div className="flex flex-1 h-1/3 items-center justify-around">
-                        <div className="flex h-full aspect-square items-center justify-center rounded-full bg-white">
-                            GK
-                        </div>
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'GK'}
+                        playerid={roster[0]}
+                        />
                     </div>
                 </div>
             </div>
