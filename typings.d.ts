@@ -121,7 +121,8 @@ export type teamsType={
     downvote?:string[],
     followers?:string[],
     teamsize?:number,
-    roster?:string[]
+    roster?:string[],
+    formation?:string
 }
 
 export type playerNamesType={

@@ -108,6 +108,7 @@ export default function PageView({data}:{data:teamsType}){
                         color2={data.color2}
                         fontcolor={data.fontcolor}
                         roster={data.roster}
+                        formation={data.formation}
                         />
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
