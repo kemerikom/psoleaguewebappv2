@@ -1,8 +1,8 @@
 'use client'
-import Lines from "../Lines";
-import PlayerIcon from "../../PlayerIcon";
+import Lines from "../Lines"
+import PlayerIcon from "../../PlayerIcon"
 
-export default function F421({color1,color2,fontcolor,roster}:{color1:string,color2:string,fontcolor:string,roster:string[]}){
+export default function F412({color1,color2,fontcolor,roster}:{color1:string,color2:string,fontcolor:string,roster:string[]}){
     return(
         <div className="flex w-full p-2">
             <div className="flex flex-col w-full bg-green-900 relative aspect-stadium rounded p-2">
@@ -16,6 +16,13 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                     
                     {/* forwards */}
                     <div className="flex flex-1 h-1/3 items-center justify-around">
+                        <PlayerIcon
+                        color1={color1}
+                        color2={color2}
+                        fontcolor={fontcolor}
+                        position={'RCM'}
+                        playerid={roster[6]}
+                        />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
@@ -35,13 +42,6 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                         fontcolor={fontcolor}
                         position={'LCM'}
                         playerid={roster[5]}
-                        />
-                        <PlayerIcon
-                        color1={color1}
-                        color2={color2}
-                        fontcolor={fontcolor}
-                        position={'RCM'}
-                        playerid={roster[6]}
                         />
                     </div>
                 </div>

@@ -32,7 +32,6 @@ export default function PlayerIcon({color1,color2,fontcolor,position,playerid}:{
     )
     async function getPlayerName(){
         if(playerid){
-
             fetch(`${leagueUrl}/api/getUserNameApi`,{
                 method:'POST',
                 body:JSON.stringify({userId:playerid})
@@ -42,10 +41,8 @@ export default function PlayerIcon({color1,color2,fontcolor,position,playerid}:{
                 return dataRes
             })
             .then((data)=>{
-                console.log(position,data)
                 if(data) setPlayerName(data.username)
             })
         }
-
     }
 }

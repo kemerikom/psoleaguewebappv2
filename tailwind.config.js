@@ -14,8 +14,11 @@ module.exports = {
       aspectRatio:{
         'stadium':'9 / 12',
         'sixbox':'12 / 7'
+      },
+      colors:{
+        'gold':'#ffd700'
       }
-    },
+    }
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

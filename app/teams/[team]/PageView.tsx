@@ -10,6 +10,7 @@ import {playerNamesType}from '../../../typings'
 import { leagueUrl } from "../../../utils/src/leagueUrl";
 import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
 import FormationPage from "../../../components/formations/FormationPage";
+import TrophyRoom from "./TrophyRoom";
 
 
 export default function PageView({data}:{data:teamsType}){
@@ -112,7 +113,7 @@ export default function PageView({data}:{data:teamsType}){
                         />
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        Trophy Room
+                        <TrophyRoom color1={data.color1} color2={data.color2}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         Last Matches
