@@ -137,6 +137,22 @@ export type trophyType={
     leagueid:string
 }
 
+export type matchType={
+    _id:string,
+    hometeamid:string,
+    hometeamname:string,
+    hometeamlogo:string,
+    hometeamscore:number,
+    refreeid:string,
+    refreename:string,
+    awayteamid:string,
+    awayteamname:string,
+    awayteamlogo:string,
+    awayteamscore:number,
+    datetime:number,
+    completed:boolean
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{

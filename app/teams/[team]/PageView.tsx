@@ -11,6 +11,7 @@ import { leagueUrl } from "../../../utils/src/leagueUrl";
 import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
 import FormationPage from "../../../components/formations/FormationPage";
 import TrophyRoom from "./TrophyRoom";
+import LastMatches from "./LastMatches";
 
 
 export default function PageView({data}:{data:teamsType}){
@@ -116,7 +117,7 @@ export default function PageView({data}:{data:teamsType}){
                         <TrophyRoom teamId={data._id} color1={data.color1} color2={data.color2}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        Last Matches
+                        <LastMatches teamId={data._id}/>
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
