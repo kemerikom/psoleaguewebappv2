@@ -113,7 +113,7 @@ export default function PageView({data}:{data:teamsType}){
                         />
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        <TrophyRoom color1={data.color1} color2={data.color2}/>
+                        <TrophyRoom teamId={data._id} color1={data.color1} color2={data.color2}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         Last Matches

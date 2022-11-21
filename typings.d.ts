@@ -130,6 +130,13 @@ export type playerNamesType={
     username:string
 }
 
+export type trophyType={
+    _id:string,
+    title:string,
+    teamid:string,
+    leagueid:string
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{
