@@ -153,6 +153,12 @@ export type matchType={
     completed:boolean
 }
 
+export type playerType={
+    _id:string,
+    username:string,
+    teamid:string
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{

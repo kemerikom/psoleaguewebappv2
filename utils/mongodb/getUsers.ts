@@ -21,6 +21,21 @@ export async function getPlayersName({teamId}:{teamId:string[]}) {
     }
 }
 
+export async function getPlayer({playerId}:{playerId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const users= database.collection('users')
+        const userList=users.findOne({_id:(new ObjectId(playerId))})
+        const result= await userList
+        return result
+    }finally{
+        await client.close()
+    }
+    
+}
+
 export async function getPlayerName({userId}:{userId:string}) {
     const client = new MongoClient(process.env.mongoUri)
     try{
