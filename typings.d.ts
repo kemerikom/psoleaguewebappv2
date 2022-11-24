@@ -156,7 +156,8 @@ export type matchType={
 export type playerType={
     _id:string,
     username:string,
-    teamid:string
+    teamid:string,
+    pp:string
 }
 
 declare global{

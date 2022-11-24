@@ -22,7 +22,7 @@ async function getPlayerInfo({playerId}:{playerId:string}) {
 export default async function Page({params:{player}}:PageProps){
     const playerInfo= await getPlayerInfo({playerId:player})
     return(
-        <div>
+        <div className="max-w-5xl mx-auto p-3 w-full">
             <PageView data={playerInfo}/>
         </div>
     )

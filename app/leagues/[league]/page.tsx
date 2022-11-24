@@ -37,7 +37,7 @@ export default async function LeaguePage({params:{league}}:PageProps){
     )
 }
 
-export async function generateStaticParams() {
+/* export async function generateStaticParams() {
     const res = await fetch(`${leagueUrl}/api/getLeagueIds`)
     const result = await res.json()
     const paths= result.map((path:any)=>{
@@ -46,4 +46,4 @@ export async function generateStaticParams() {
         }
     })
     return paths
-}
+} */
