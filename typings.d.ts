@@ -157,7 +157,22 @@ export type playerType={
     _id:string,
     username:string,
     teamid:string,
-    pp:string
+    pp:string,
+    country:string,
+    followers?:string[],
+    upvote?:string[],
+    downvote?:string[],
+    mainpos:string,
+    secondpos:string
+}
+
+export type medalType={
+    _id:string,
+    title:string,
+    teamid:string,
+    leagueid:string,
+    color1:string,
+    color2:string
 }
 
 declare global{

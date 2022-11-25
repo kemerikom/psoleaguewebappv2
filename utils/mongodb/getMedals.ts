@@ -1,17 +1,16 @@
 import { MongoClient } from "mongodb";
 
 
-export async function getTeamTrophies({teamId}:{teamId:string}) {
+export async function getUserMedals({userId}:{userId:string}) {
     const client = new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
         const database=client.db('psoleague')
-        const trophies= database.collection('trophies')
-        const trophyList= trophies.find({teamid:teamId})
-        const result = await trophyList.toArray()
+        const medals= database.collection('medals')
+        const medalList=medals.find({userid:userId})
+        const result = await medalList.toArray()
         return result
     }finally{
         await client.close()
     }
-    
 }
