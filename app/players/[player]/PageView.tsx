@@ -66,7 +66,6 @@ export default function PageView({data}:{data:playerType}){
                     </div>
                 </div>
             </div>
-
             <Tab.Group>
                 <Tab.List className={'flex w-full bg-white p-1 items-center justify-center rounded outline-none'}>
                     <Tab className={'outline-none'}>
