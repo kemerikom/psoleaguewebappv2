@@ -7,7 +7,8 @@ import ReactCountryFlag from "react-country-flag";
 import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
 import { Tab } from '@headlessui/react'
 import MedalRoom from "./MedalRoom"
-
+import TeamHistory from "./TeamHistory"
+import { BiTransferAlt } from "react-icons/bi"
 
 export default function PageView({data}:{data:playerType}){
     const [team,setTeam]=useState<teamsType>()
@@ -59,11 +60,20 @@ export default function PageView({data}:{data:playerType}){
                                 {data.downvote?`${data.downvote.length}`:0}
                             </label>
                         </div>
+                        <button className="btnPrimary">
+                            <BiTransferAlt className="text-lg"/>
+                        </button>
                     </div>
                 </div>
             </div>
+
             <Tab.Group>
                 <Tab.List className={'flex w-full bg-white p-1 items-center justify-center rounded outline-none'}>
+                    <Tab className={'outline-none'}>
+                        {({selected})=>(
+                            <div className={`${selected?'bg-blue-600 text-white':'text-black'} p-2 rounded`}>Team History</div>
+                        )}
+                    </Tab>
                     <Tab className={'outline-none'}>
                         {({selected})=>(
                             <div className={`${selected?'bg-blue-600 text-white':'text-black'} p-2 rounded`}>Medals</div>
@@ -71,6 +81,9 @@ export default function PageView({data}:{data:playerType}){
                     </Tab>
                 </Tab.List>
                 <Tab.Panels className={'outline-none'}>
+                    <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
+                        <TeamHistory userId={data._id}/>
+                    </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         <MedalRoom userId={data._id}/>
                     </Tab.Panel>

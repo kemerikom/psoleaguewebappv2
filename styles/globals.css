@@ -30,3 +30,7 @@ Link{
 input{
 	@apply p-1 outline-none focus:outline-none
 }
+
+.btnPrimary{
+    @apply py-1 px-2 outline-none bg-blue-600 text-white rounded items-center justify-center
+}

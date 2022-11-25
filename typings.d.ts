@@ -175,6 +175,20 @@ export type medalType={
     color2:string
 }
 
+export type transferType={
+    _id:string,
+    userid:string,
+    from:{
+        teamid:string,
+        teamname:string
+    },
+    to:{
+        teamid:string,
+        teamname:string,
+    },
+    datetime:number
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{
