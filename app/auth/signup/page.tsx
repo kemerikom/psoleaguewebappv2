@@ -17,6 +17,7 @@ type posType={
     pos:string
 }
 
+
 export default function SignUp() {
     const [userName,setUserName]=useState<string>("")
     const [userNameValid,setUserNameValid]=useState<boolean>(true)
@@ -38,7 +39,7 @@ export default function SignUp() {
     })
     const filteredSecPos=
     qSecPos==''?positionList:positionList.filter((pos)=>{
-        return pos.pos.toLocaleLowerCase().includes(qMainPos.toLocaleLowerCase())
+        return pos.pos.toLocaleLowerCase().includes(qSecPos.toLocaleLowerCase())
     })
     return(
         <div className="flex flex-row">
