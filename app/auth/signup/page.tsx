@@ -5,17 +5,29 @@ import CountryList from '../../../utils/src/countryList.json'
 import { Combobox } from '@headlessui/react'
 import positionList from '../../../utils/src/positionList.json'
 import WorldMap from "../../../components/WorldMap"
+import Link from 'next/link'
+import { leagueUrl } from "../../../utils/src/leagueUrl"
 
+type countryType={
+    name:string,
+    code:string
+}
+
+type posType={
+    pos:string
+}
 
 export default function SignUp() {
     const [userName,setUserName]=useState<string>("")
     const [userNameValid,setUserNameValid]=useState<boolean>(true)
-    const [country,setCountry]=useState([])
+    const [country,setCountry]=useState<countryType>({name:'',code:''})
     const [query,setQuery]=useState<string>('')
-    const [mainPos,setMainPos]=useState([])
-    const [secPos,setSecPos]=useState([])
+    const [mainPos,setMainPos]=useState<posType>({pos:''})
+    const [secPos,setSecPos]=useState<posType>({pos:''})
     const [qMainPos,setQMainPos]=useState('')
     const [qSecPos,setQSecPos]=useState('')
+    const [email,setEmail]=useState<string>('')
+    const [password,setPassword]=useState<string>('')
     const filteredCountry=
     query==''?CountryList:CountryList.filter((ct)=>{
         return ct.name.toLocaleLowerCase().includes(query.toLowerCase())
@@ -35,18 +47,18 @@ export default function SignUp() {
                 <hr/>
                 <div className="flex flex-col space-y-2 px-3 w-full">
                     <div className="flex flex-col space-y-1">
-                        <input className="inputSignUp peer" value={userName} onChange={(e)=>userNameCheck(e.target.value)} minLength={4} maxLength={20} placeholder="Username"/>
+                        <input className="inputSignUp peer" defaultValue={userName} onChange={(e)=>userNameCheck(e.target.value)} minLength={4} maxLength={20} placeholder="Username"/>
                         <label className="peer-invalid:flex hidden text-gray-300">Username must more than 3 characters</label>
                         {!userNameValid&&
                             <label className="text-gray-300">Username must only contain letters and numbers</label>
                         }
                     </div>
                     <div className="flex flex-col space-y-1">
-                        <input className="inputSignUp peer" type={'email'} maxLength={100} placeholder="E-mail"/>
+                        <input className="inputSignUp peer" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} type={'email'} maxLength={100} placeholder="E-mail"/>
                         <label className="peer-invalid:flex hidden text-gray-300">Invalid e-mail adress</label>
                     </div>
                     <div className="flex flex-col space-y-1">
-                        <input className="inputSignUp peer" type={'password'} minLength={6} maxLength={30} placeholder="Password"/>
+                        <input className="inputSignUp peer" value={password} onChange={(e)=>setPassword(e.target.value)} type={'password'} minLength={6} maxLength={30} placeholder="Password"/>
                         <label className="peer-invalid:flex hidden text-gray-300">Password must more than 6 characters</label>
                     </div>
                     <div className="flex flex-col space-y-1">
@@ -94,7 +106,11 @@ export default function SignUp() {
                     </div>
                 </div>
                 <hr/>
-                <button className="bg-green-900 py-2 px-4 rounded">Sign Up</button>
+                <button className="bg-green-900 py-2 px-4 rounded" onClick={createUser}>Sign Up</button>
+                <div className="flex flex-row w-full items-center justify-between">
+                    <Link href={'/'} className='hover:underline transition-all'>Already have an account?</Link>
+                    <Link href={'/'} className='hover:underline transition-all'>Forgot my password</Link>
+                </div>
             </div>
             <div className="flex flex-col w-full max-h-[calc(100vh-40px)] items-center justify-center">
                 <h1 className="text-2xl mt-2">Official Leagues</h1>
@@ -116,5 +132,21 @@ export default function SignUp() {
         }
         setUserName(e)
     }
-
+    async function createUser(){
+        const data={
+            email:email,
+            password:password,
+            username:userName,
+            country:country.code||'XX',
+            mainpos:mainPos.pos,
+            secpos:secPos.pos
+        }
+        const req = await fetch(`${leagueUrl}/api/createUserApi`,{
+            method:'POST',
+            body:JSON.stringify({
+                data
+            })
+        })
+        const res= await req.json()
+    }
 }

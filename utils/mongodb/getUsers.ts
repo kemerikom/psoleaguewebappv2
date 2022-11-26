@@ -49,3 +49,37 @@ export async function getPlayerName({userId}:{userId:string}) {
         await client.close()
     }
 }
+
+export async function findPlayerByUserName({username}:{username:string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const users=database.collection('users')
+        const userList=users.findOne({username})
+        const result= await userList
+        return result
+    }finally{
+        await client.close()
+    }
+}
+
+export async function createUserData({id,username,country,mainpos,secpos}:{id:string,username:string,country:string,mainpos:string,secpos:string}) {
+    const client = new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const users=database.collection('users')
+        const user = await users.insertOne({
+            uid:id,
+            username,
+            country,
+            mainpos,
+            secpos,
+            teamid:'free'
+        })
+        return user
+    }finally{
+        await client.close()
+    }
+}
