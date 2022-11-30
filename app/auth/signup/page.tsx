@@ -4,7 +4,7 @@ import ReactCountryFlag from "react-country-flag"
 import CountryList from '../../../utils/src/countryList.json'
 import { Combobox } from '@headlessui/react'
 import positionList from '../../../utils/src/positionList.json'
-import WorldMap from "../../../components/WorldMap"
+//import WorldMap from "../../../components/WorldMap"
 import Link from 'next/link'
 import { leagueUrl } from "../../../utils/src/leagueUrl"
 
@@ -115,7 +115,7 @@ export default function SignUp() {
             </div>
             <div className="flex flex-col w-full max-h-[calc(100vh-40px)] items-center justify-center">
                 <h1 className="text-2xl mt-2">Official Leagues</h1>
-                <WorldMap/>
+                {/* <WorldMap/> */}
             </div>
         </div>
     )
@@ -149,5 +149,6 @@ export default function SignUp() {
             })
         })
         const res= await req.json()
+        //here devam et
     }
 }

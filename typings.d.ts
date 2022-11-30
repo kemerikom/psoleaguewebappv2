@@ -11,6 +11,14 @@ export type firebaseConfigType={
     measurementId:string
 }
 
+export type siteDataType={
+    uid:string,
+    setUid:any,
+    user:any,
+    setUser:any
+}
+
+
 export type mongoType={
     uri:string
 }

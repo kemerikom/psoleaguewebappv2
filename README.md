@@ -33,6 +33,31 @@ mongoUri=MongoUri
 appPath=http://localhost:3000
 ```
 
+Create new file next.config.js like this
+
+```bash
+/** @type {import('next').NextConfig} */
+module.exports = {
+  reactStrictMode: true,
+  experimental:{
+    appDir:true
+  },
+  env:{
+    apiKey: 'apiKey',
+    authDomain: 'authDomain',
+    projectId: 'projectId',
+    storageBucket: 'storageBucket',
+    messagingSenderId: 'messagingSenderId',
+    appId: 'appId',
+    measurementId: 'measurementId',
+    mongoUri:" mongoUri",
+    appPath:'http://localhost:3000',
+  }
+}
+
+```
+
+
 Edit /utils/src/leagueUrl.ts file for your work
 
 ## Sponsor this project
