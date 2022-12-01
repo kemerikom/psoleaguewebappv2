@@ -83,3 +83,18 @@ export async function createUserData({id,username,country,mainpos,secpos}:{id:st
         await client.close()
     }
 }
+
+
+export async function getUserByUid({uid}:{uid:string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const users=database.collection('users')
+        const user =  users.findOne({uid})
+        const result = await user
+        return result
+    }finally{
+        await client.close()
+    }
+}
