@@ -10,7 +10,7 @@ type countryType={
 }
 
 
-export default function CountryInput({value,setValue}:{value:countryType,setValue:Dispatch<SetStateAction<countryType>>}){
+export default function CountryInput({value,setValue,cCode}:{value:countryType,setValue:Dispatch<SetStateAction<countryType>>,cCode:string}){
     const [query,setQuery]=useState<string>('')
     const filteredCountry=
     query==''?CountryList:CountryList.filter((ct)=>{

@@ -38,12 +38,26 @@ export default function Login(){
             </div>
         </div>
     )
-    async function loginBtn() {
+    /* async function loginBtn() {
         const result = await loginUser({email,password})
         if(!result){
             alert("Hatalı şifre")
         }else{
             router.push('/')
         }
+    } */
+
+    async function loginBtn() {
+        const result = await loginUser({email,password})
+        if(!result){
+            alert("Hatalı şifre")
+        }else{
+            fetch(`${process.env.appPath}/api/loginUserApi`,{
+                method:'POST',
+                body:JSON.stringify({email,password})
+            })
+            router.push('/')
+        }
+        
     }
 }

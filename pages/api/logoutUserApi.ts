@@ -1,28 +1,26 @@
 import { NextApiRequest,NextApiResponse } from "next";
 import {loginUser} from '../../utils/firebase/loginUser'
 import {withIronSession,Session} from 'next-iron-session'
+import {logoutUser} from '../../utils/firebase/logoutUser'
 
 type NextIronRequest=NextApiRequest&{session:Session}
 
-
-async function loginUserApi(req:NextIronRequest,res:NextApiResponse):Promise<void> {
-    if(req.method='POST'){
-        const body=JSON.parse(req.body)
-        const {email,password}=body
-        const result = await loginUser({email,password})
+async function LogoutUserApi(req:NextIronRequest,res:NextApiResponse):Promise<void> {
+    if(req.method=='POST'){
+        const result = await logoutUser()
         if(result){
-            req.session.set('user',{
-                uid:result.user.uid
-            })
-            await req.session.save()
+            req.session.destroy()
+            res.status(200).json(true)
+        }else{
+            res.status(400).json('Connection failed')
         }
-        res.status(200).json(result)
     }else{
         res.status(400).json('Connection failed')
     }
 }
 
-export default withIronSession(loginUserApi,{
+
+export default withIronSession(LogoutUserApi,{
     password:process.env.ironPassword||'',
     cookieName:process.env.ironCookie||'',
     cookieOptions:{

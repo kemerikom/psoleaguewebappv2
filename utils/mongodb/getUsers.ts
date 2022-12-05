@@ -1,4 +1,5 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId, WithId } from "mongodb";
+import { playerType } from "../../typings";
 
 
 export async function getPlayersName({teamId}:{teamId:string[]}) {
@@ -93,6 +94,27 @@ export async function getUserByUid({uid}:{uid:string}) {
         const users=database.collection('users')
         const user =  users.findOne({uid})
         const result = await user
+        return result
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function updateAccount({uid,mainpos,secondpos,country}:{uid:string,mainpos:string,secondpos:string,country:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const users=database.collection('users')
+        const user = await  users.updateOne({uid},{
+            $set:{
+                mainpos,
+                secondpos,
+                country
+            }
+        })
+        const result = user
         return result
     }finally{
         await client.close()

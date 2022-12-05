@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { Menu } from '@headlessui/react'
 import { useContext, useEffect, useState } from 'react'
 import { SiteContext } from '../context/SiteContext'
-import {auth} from '../utils/firebase/config'
-import { onAuthStateChanged } from 'firebase/auth'
 import {IoPersonCircle,IoPeopleCircle,IoSettingsSharp,IoLogOut,IoLogIn,IoFootball} from 'react-icons/io5'
+import { logoutUser } from '../utils/firebase/logoutUser'
+
+
 
 export default function MainMenu() {
-    const [user,setUser]=useState()
-    const [login,setLogin]=useState<boolean>(true)
+    const siteData:any=useContext(SiteContext)
     return(
         <div className="flex flex-row group h-10 sticky top-0 left-0 z-50 w-full items-center bg-black bg-opacity-10 backdrop-blur-sm justify-start hover:bg-blue-800 text-white px-2 transition-all">
             <div className="flex flex-row h-full">
@@ -26,7 +26,7 @@ export default function MainMenu() {
                             <div className='absolute bottom-2 right-2 w-2 aspect-square rounded-full bg-red-600'></div>
                         </Menu.Button>
                         <Menu.Items as='div' className={'absolute bg-black bg-opacity-10 backdrop-blur-sm group-hover:bg-blue-800 hover:bg-blue-800 transition-all top-10 right-2 flex flex-col items-end gap-y-2 p-2 rounded-b outline-none'}>
-                            {login&&
+                            {siteData.login&&
                             <>
                             <Menu.Item>
                                 <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-4 w-full' href={'/'}>
@@ -51,17 +51,17 @@ export default function MainMenu() {
                             </Menu.Item>
                             <hr/>
                             <Menu.Item>
-                                <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-4 w-full' href={'/'}>
+                                <button onClick={logOutButton} className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-4 w-full'>
                                     <IoLogOut className='text-2xl'/>
                                     <label className='cursor-pointer'>Log Out</label>
-                                </Link>
+                                </button>
                             </Menu.Item>
                             </>
                             }
-                            {!login&&
+                            {!siteData.login&&
                             <>
                             <Menu.Item>
-                                <Link className='flex flex-row items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-4 w-full' href={'/'}>
+                                <Link className='flex flex-row items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-4 w-full' href={'/auth/login'}>
                                     <IoLogIn className='text-2xl'/>
                                     <label className='cursor-pointer'>Login</label>
                                 </Link>
@@ -81,5 +81,8 @@ export default function MainMenu() {
             </div>
         </div>
     )
-
+    async function logOutButton(){
+        await logoutUser()
+        fetch(`${process.env.appPath}/api/logoutUserApi`,{method:'POST'})
+    }
 }
