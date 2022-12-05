@@ -33,7 +33,8 @@ export type leagueName={
     fontcolor:string,
     shortname?:string,
     official?:boolean,
-    teams:string[]
+    teams:string[],
+    region?:string
 }
 
 export type leagueIdType={
@@ -195,6 +196,18 @@ export type transferType={
         teamname:string,
     },
     datetime:number
+}
+
+export type regionType={
+    _id:string,
+    name:string,
+    logo:string,
+    color1:string,
+    color2:string,
+    fontcolor:string,
+    region:string,
+    admins:string[],
+    mods:string[]
 }
 
 declare global{

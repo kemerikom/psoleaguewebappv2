@@ -26,17 +26,18 @@ export default function TableSchedule({schedule}:{schedule:tableScheduleType[]})
                             onMouseEnter={()=>setHoverTeam(s.hometeam)}
                             onMouseLeave={()=>setHoverTeam("")}
                             //here my team olduğunda bg-blue-600 yapmayı unutma
-                            className={`${(index+1)%2==0?'bg-blue-300':''} ${hoverTeam==s.hometeam?'bg-green-600 text-white':''} border font-normal transition-all border-black whitespace-nowrap`}>
+                            className={`${hoverTeam==s.hometeam?'bg-green-600 text-white':(index+1)%2==0?'bg-blue-300':''}  border font-normal transition-all border-black whitespace-nowrap`}>
                                 <Link href='/' className='font-semibold'>
                                     {s.hometeam}
                                 </Link>
                             </td>
                             <td className={`${(index+1)%2==0?'bg-blue-300':''} ${!s.completed?'':s.homescore>s.awayscore?'bg-green-100':s.homescore<s.awayscore?'bg-red-100':'bg-yellow-100'} border font-normal transition-all border-black whitespace-nowrap`}>{s.completed?`${s.homescore}`:`?`}</td>
                             <td className={`${(index+1)%2==0?'bg-blue-300':''} ${!s.completed?'':s.homescore<s.awayscore?'bg-green-100':s.homescore>s.awayscore?'bg-red-100':'bg-yellow-100'} border font-normal transition-all border-black whitespace-nowrap`}>{s.completed?`${s.awayscore}`:`?`}</td>
-                            <td
+                            <td 
                             onMouseEnter={()=>setHoverTeam(s.awayteam)}
                             onMouseLeave={()=>setHoverTeam("")}
-                            className={`${(index+1)%2==0?'bg-blue-300':''} ${hoverTeam==s.awayteam?'bg-green-600 text-white':''} border font-normal transition-all border-black whitespace-nowrap`}>
+                            //here my team olduğunda bg-blue-600 yapmayı unutma
+                            className={`${hoverTeam==s.awayteam?'bg-green-600 text-white':(index+1)%2==0?'bg-blue-300':''} border font-normal transition-all border-black whitespace-nowrap`}>
                                 <Link href='/' className='font-semibold'>
                                     {s.awayteam}
                                 </Link>

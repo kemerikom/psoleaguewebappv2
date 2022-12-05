@@ -21,7 +21,7 @@ export default function TablePoints({points}:{points:tablePointsType[]}){
                     <tr key={point.teamname} className='w-full group'>
                         <td className='border group-hover:bg-blue-600 group-hover:text-white transition-all border-black whitespace-nowrap font-normal items-center justify-center text-center'>{index+1}</td>
                         <td className='border group-hover:bg-blue-600 group-hover:text-white transition-all bg-blue-300 border-black whitespace-nowrap font-normal items-center justify-center text-center'>
-                            <Link href='/' className='hover:font-semibold'>{point.teamname}</Link>
+                            <Link href={`/teams/${point.teamname}`} className='hover:font-semibold'>{point.teamname}</Link>
                         </td>
                         <td className='border group-hover:bg-blue-600 group-hover:text-white transition-all border-black whitespace-nowrap font-normal items-center justify-center text-center'>{point.point}</td>
                         <td className='border group-hover:bg-blue-600 group-hover:text-white transition-all bg-blue-300 border-black whitespace-nowrap font-normal items-center justify-center text-center'>{point.win}</td>

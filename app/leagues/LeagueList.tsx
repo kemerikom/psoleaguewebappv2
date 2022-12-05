@@ -1,4 +1,3 @@
-import { leagueName } from "../../typings"
 import LeagueCard from './LeagueCard'
 import {getLeagues} from '../../utils/mongodb/getLeagues'
 import {use} from 'react'
