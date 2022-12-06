@@ -1,9 +1,10 @@
 import {MongoClient, ObjectId} from 'mongodb'
 import { leagueName } from '../../typings'
 
-const client= new MongoClient(process.env.mongoUri)
+
 
 export async function getLeagues() {
+    const client= new MongoClient(process.env.mongoUri)
     try {
         await client.connect()
         const database=client.db('psoleague')
@@ -18,6 +19,7 @@ export async function getLeagues() {
 
 
 export async function getIds() {
+    const client= new MongoClient(process.env.mongoUri)
     try {
         await client.connect()
         const database=client.db('psoleague')
@@ -36,6 +38,7 @@ export async function getIds() {
 }
 
 export async function getLeague({league}:{league:string}) {
+    const client= new MongoClient(process.env.mongoUri)
     try {
         await client.connect()
         const database=client.db('psoleague')
@@ -45,5 +48,29 @@ export async function getLeague({league}:{league:string}) {
         return data
     }finally{
         await client.close()
+    }
+}
+
+export async function getLeagueNameById({_id}:{_id:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const leagueInfo= leagues.find({$or:[
+            {admins:_id},
+            {mods:_id}
+        ]})
+        const data = await leagueInfo.toArray()
+        const result= data.map((d)=>{
+            return{
+                _id:d._id,
+                name:d.name,
+                logo:d.logo
+            }
+        })
+        return result
+    }finally{
+
     }
 }
