@@ -1,4 +1,3 @@
-import '../../styles/globals.css'
 import LeagueList from "./LeagueList";
 
 export default function RootLayout({children}:{children:React.ReactNode}){

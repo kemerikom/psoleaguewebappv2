@@ -7,11 +7,17 @@ type NextIronRequest=NextApiRequest&{session:Session}
 
 
 async function getLeaguesByUidApi(req:NextIronRequest,res:NextApiResponse):Promise<void> {
-    const cookie= await req.session.get('user')
-    const {uid}=cookie
-    const user:any=await getUserByUid({uid})
-    const leagues= await getLeagueNameById({_id:user._id.toString()})
-    res.status(200).json(leagues)
+    try {
+        const cookie= await req.session.get('user')
+        const {uid}=await cookie
+        const user:any=await getUserByUid({uid})
+        const leagues= await getLeagueNameById({_id:user._id.toString()})
+        res.status(200).json(leagues)
+    } catch (error) {
+        res.status(200).json(false)
+    }
+
+
 }
 
 
