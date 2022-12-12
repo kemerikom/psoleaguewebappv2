@@ -6,7 +6,7 @@ type teamType={
 }
 
 
-export default function createSchedule({teams,oneLeg,minDelay,dailyMatch,startDate}:{teams:teamType[],oneLeg?:boolean}){
+export default function createSchedule({teams,oneLeg,minDelay,dailyMatch,startDate}:{teams:teamType[],oneLeg?:boolean,minDelay?:number,dailyMatch?:number,startDate:any}){
     if(teams.length==3){
 
     }else if(teams.length==4){
