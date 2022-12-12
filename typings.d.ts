@@ -25,7 +25,6 @@ export type mongoType={
 
 export type leagueName={
     _id:string,
-    id?:string,
     name:string,
     logo:string,
     color1:string,

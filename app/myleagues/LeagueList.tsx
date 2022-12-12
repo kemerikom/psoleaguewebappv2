@@ -14,13 +14,13 @@ export default function LeagueList() {
         getLeagueNames()
     },[])
     return(
-        <div className="flex flex-col p-2 bg-white backdrop-blur-sm bg-opacity-70 rounded space-y-2 w-64">
+        <div className="flex flex-col flex-shrink-0 p-2 bg-white backdrop-blur-sm bg-opacity-70 rounded space-y-2 w-64">
             <h3 className="font-semibold text-center">Divisions</h3>
             {leagues.map((league)=>{
                 return(
-                    <Link key={league._id} href={`/`} className='flex flex-row py-2 px-4 items-center justify-between w-full bg-blue-600 rounded text-white hover:bg-blue-800 transition-all'>
+                    <Link key={league._id} href={`/myleagues/${league._id}`} className='flex flex-row py-2 px-4 items-center justify-between w-full bg-blue-600 rounded text-white hover:bg-blue-800 transition-all'>
                         <div className="flex items-center justify-center w-8 aspect-square rounded-full">
-                            <img src='teamlogo.png' className="flex object-contain items-center justify-center rounded-full"></img>
+                            <img src='/teamlogo.png' className="flex object-contain items-center justify-center rounded-full"></img>
                         </div>
                         <h4 className="flex cursor-pointer line-clamp-1">{league.name}</h4>
                     </Link>

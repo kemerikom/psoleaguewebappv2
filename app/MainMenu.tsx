@@ -69,7 +69,7 @@ export default function MainMenu() {
                             {leagues.map((league)=>{
                                 return(
                                 <Menu.Item key={league._id}>
-                                    <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/'}>
+                                    <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={`/myleagues/${league._id}`}>
                                         <div className='flex items-center justify-center w-8 aspect-square rounded-full'>
                                             <img src='teamlogo.png' className='flex w-full aspect-square rounded-full object-contain'></img>
                                         </div>

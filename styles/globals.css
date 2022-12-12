@@ -38,3 +38,7 @@ input{
 .inputSignUp{
     @apply bg-blue-900 rounded p-2 w-full placeholder:text-gray-300
 }
+
+*{
+    @apply select-none appearance-none
+}
