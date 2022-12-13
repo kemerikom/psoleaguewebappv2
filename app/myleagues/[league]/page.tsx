@@ -1,6 +1,6 @@
 import {leagueName} from '../../../typings'
 import Link from 'next/link'
-import {IoCloseCircleOutline} from 'react-icons/io5'
+import {IoCloseCircle} from 'react-icons/io5'
 import PageView from './PageView'
 
 type PagePros={
@@ -29,11 +29,9 @@ export default async function Page({params:{league}}:PagePros){
                     <img src='/teamlogo.png' className="flex w-16 aspect-square object-contain rounded-full"></img>
                 </div>
                 <h1>{leagueInfo.name}</h1>
-                <div className='flex flex-shrink-0 items-start w-4 aspect-square justify-start'>
-                    <Link href='/myleagues' className='flex flex-shrink-0 items-center p-2 bg-blue-600 w-4 aspect-square rounded-full text-white'>
-                        <IoCloseCircleOutline className='text-2xl aspect-square'/>
-                    </Link>
-                </div>
+                <Link href={'/myleagues'} className='items-start justify-start'>
+                    <IoCloseCircle className='text-blue-600 text-3xl'/>
+                </Link>
             </div>
             <hr/>
             <PageView data={leagueInfo}/>

@@ -2,7 +2,7 @@
 import { Tab } from '@headlessui/react'
 import { seasonTableType,tableTeamType,tablePointsType,tableScheduleType,tableTopGoalsType,tableTopAssistsType,tableTopSavesType } from '../../../typings'
 import TablePoints from './TablePoints'
-import TableSchedule from './TableSchedule'
+import TableSchedule from '../../../components/TableSchedule'
 import TableTopPlayers from './TableTopPlayers'
 
 export default function SeasonTab({points,schedule,topGoals,topAssists,topSaves}:{points:tablePointsType[],schedule:tableScheduleType[],topGoals:tableTopGoalsType[],topAssists:tableTopAssistsType[],topSaves:tableTopSavesType[]}){

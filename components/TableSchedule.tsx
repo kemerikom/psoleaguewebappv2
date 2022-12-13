@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link"
-import { tableScheduleType } from "../../../typings"
+import { tableScheduleType } from "../typings"
 import {useState} from 'react'
 
 
