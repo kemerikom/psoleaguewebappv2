@@ -3,7 +3,7 @@ import { leagueName } from "../../../typings"
 import { Tab } from '@headlessui/react'
 import CreateSchedule from "./CreateSchedule"
 
-export default function PageView({data}:{data:leagueName}){
+export default function PageView({leagueId}:{leagueId:string}){
     return(
         <div className="flex flex-col">
             <Tab.Group as={'div'} className='flex flex-col w-full space-y-2' defaultIndex={0}>
@@ -26,7 +26,7 @@ export default function PageView({data}:{data:leagueName}){
                 </Tab.List>
                 <Tab.Panels as='div' className={'overflow-auto w-full'}>
                     <Tab.Panel>
-                        <CreateSchedule/>
+                        <CreateSchedule leagueId={leagueId}/>
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>

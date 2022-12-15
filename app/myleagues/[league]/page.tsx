@@ -34,7 +34,7 @@ export default async function Page({params:{league}}:PagePros){
                 </Link>
             </div>
             <hr/>
-            <PageView data={leagueInfo}/>
+            <PageView leagueId={league}/>
         </div>
     )
 }

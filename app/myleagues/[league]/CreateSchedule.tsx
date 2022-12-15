@@ -1,10 +1,11 @@
 'use client'
 import SwitchToggle from "../../../components/SwitchToggle"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import createSchedule from "../../../utils/src/createSchedule"
 import { Listbox } from "@headlessui/react"
-import { tableScheduleType } from "../../../typings"
+import { leagueName, tableScheduleType, teamsType } from "../../../typings"
 import TableSchedule from "../../../components/TableSchedule"
+
 const weekOfDays=[
     'Monday',
     'Tuesday',
@@ -16,13 +17,17 @@ const weekOfDays=[
     'No Free Day'
 ]
 
-export default function CreateSchedule(){
+export default function CreateSchedule({leagueId}:{leagueId:string}){
     const [oneLeg,setOneLeg]=useState<boolean>(true)
     const [minDelay,setMinDelay]=useState<number>(45)
     const [dailyMatch,setDailyMatch]=useState<number>(3)
     const [startDate,setStartDate]=useState<any>()
     const [freeDays,setFreeDays]=useState<string[]>([weekOfDays[7]])
     const [schedule,setSchedule]=useState<tableScheduleType[]>([])
+    const [teams,setTeams]=useState<teamsType[]>([])
+    useEffect(()=>{
+        if(leagueId!=undefined)getTeams()
+    },[leagueId])
     return(
         <div className="flex flex-col p-2 space-y-2 bg-white rounded items-center">
             <h2>Create Schedule</h2>
@@ -56,25 +61,50 @@ export default function CreateSchedule(){
                         </Listbox.Options>
                     </Listbox>
                 </div>
-                <button onClick={test} className="btnPrimary h-10">Generate Schedule</button>
+                <button onClick={generateSchedule} className="btnPrimary h-10">Generate Schedule</button>
             </div>
             <hr/>
-            <div className="flex flex-col w-full items-center justify-center space-y-2">
-                <h2>Schedule</h2>
-                <hr/>
-                <TableSchedule schedule={schedule}/>
-            </div>
+            {schedule.length>0 &&
+                <div className="flex flex-col w-full items-center justify-center space-y-2">
+                    <h2>Schedule</h2>
+                    <hr/>
+                    <TableSchedule schedule={schedule}/>
+                    <hr/>
+                    <p className="text-gray-600">This schedule is temporary. You should complete all steps for saving.</p>
+                    <hr/>
+                    <div className="flex flex-row w-full items-center justify-between">
+                        <button className="btnSecondary">Cancel</button>
+                        <button className="btnPrimary">Next</button>
+                    </div>
+                </div>
+            }
         </div>
     )
-    function test(){
-        const teams=[
-            {id:'asdasdasda',teamname:'LaSisX'},
-            {id:'asdasdasdd',teamname:'Aederd'},
-            {id:'asdasdasdf',teamname:'Esperion'},
-            {id:'asdasdasdg',teamname:'Gullit Gang'},
-            {id:'asdasdasdg',teamname:'Ronins'},
-        ]
-        const res:tableScheduleType[] = createSchedule({teams,oneLeg,minDelay,dailyMatch,startDate})
+    async function getTeams() {
+        fetch(`${process.env.appPath}/api/getLeagueTeamsApi`,{
+            method:'POST',
+            body:JSON.stringify({leagueId})
+        })
+        .then((res)=>{
+            const resData=res.json()
+            return resData
+        })
+        .then((data)=>{
+            console.log('data',data)
+            setTeams(data)
+        })
+    }
+    function generateSchedule(){
+        const teamsNames=teams.map((team)=>{
+            return{
+                id:team._id,
+                teamname:team.name
+            }
+        })
+        const res:tableScheduleType[] = createSchedule({teams:teamsNames,oneLeg,minDelay,dailyMatch,startDate})
         setSchedule(res)
+    }
+    function uploadSchedule(){
+        
     }
 }
