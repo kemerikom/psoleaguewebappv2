@@ -23,6 +23,11 @@ export type mongoType={
     uri:string
 }
 
+export type userNameIdType ={
+    id:string,
+    username:string
+}
+
 export type leagueName={
     _id:string,
     name:string,
@@ -33,7 +38,10 @@ export type leagueName={
     shortname?:string,
     official?:boolean,
     teams:string[],
-    region?:string
+    region?:string,
+    alive?:boolean,
+    admins:userNameIdType[],
+    refrees:userNameIdType[]
 }
 
 export type leagueIdType={
@@ -147,6 +155,7 @@ export type trophyType={
 
 export type matchType={
     _id:string,
+    leagueId:string,
     hometeamid:string,
     hometeamname:string,
     hometeamlogo:string,

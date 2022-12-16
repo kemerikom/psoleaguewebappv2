@@ -5,6 +5,7 @@ import createSchedule from "../../../utils/src/createSchedule"
 import { Listbox } from "@headlessui/react"
 import { leagueName, tableScheduleType, teamsType } from "../../../typings"
 import TableSchedule from "../../../components/TableSchedule"
+import { useRouter } from "next/navigation"
 
 const weekOfDays=[
     'Monday',
@@ -18,6 +19,7 @@ const weekOfDays=[
 ]
 
 export default function CreateSchedule({leagueId}:{leagueId:string}){
+    const router=useRouter()
     const [oneLeg,setOneLeg]=useState<boolean>(true)
     const [minDelay,setMinDelay]=useState<number>(45)
     const [dailyMatch,setDailyMatch]=useState<number>(3)
@@ -74,7 +76,7 @@ export default function CreateSchedule({leagueId}:{leagueId:string}){
                     <hr/>
                     <div className="flex flex-row w-full items-center justify-between">
                         <button className="btnSecondary">Cancel</button>
-                        <button className="btnPrimary">Next</button>
+                        <button onClick={uploadSchedule} className="btnPrimary">Next</button>
                     </div>
                 </div>
             }
@@ -90,7 +92,6 @@ export default function CreateSchedule({leagueId}:{leagueId:string}){
             return resData
         })
         .then((data)=>{
-            console.log('data',data)
             setTeams(data)
         })
     }
@@ -104,7 +105,23 @@ export default function CreateSchedule({leagueId}:{leagueId:string}){
         const res:tableScheduleType[] = createSchedule({teams:teamsNames,oneLeg,minDelay,dailyMatch,startDate})
         setSchedule(res)
     }
-    function uploadSchedule(){
-        
+    async function uploadSchedule(){
+        fetch(`${process.env.appPath}/api/createScheduleApi`,{
+            method:'POST',
+            body:JSON.stringify({
+                leagueId,
+                schedule,
+                teams
+            })
+        })
+        .then((res)=>{
+            const resData= res.json()
+            return resData
+        })
+        .then((data)=>{
+            if(data){
+                router.refresh()
+            }
+        })
     }
 }

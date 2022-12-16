@@ -7,6 +7,10 @@ html {
 }
 
 
+*{
+    @apply select-none appearance-none
+}
+
 h1{
     @apply font-semibold text-xl cursor-default
 }
@@ -28,7 +32,7 @@ Link{
 }
 
 input{
-	@apply p-1 outline-none focus:outline-none
+	@apply p-1 outline-none focus:outline-none w-auto
 }
 
 .btnPrimary{
@@ -43,6 +47,6 @@ input{
     @apply bg-blue-900 rounded p-2 w-full placeholder:text-gray-300
 }
 
-*{
-    @apply select-none appearance-none
+select{
+    @apply outline-none hover:outline-none
 }

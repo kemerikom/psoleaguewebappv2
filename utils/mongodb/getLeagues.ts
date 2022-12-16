@@ -58,8 +58,8 @@ export async function getLeagueNameById({_id}:{_id:string}) {
         const database=client.db('psoleague')
         const leagues=database.collection('leagues')
         const leagueInfo= leagues.find({$or:[
-            {admins:_id},
-            {mods:_id}
+            {'admins.id':_id},
+            {'mods.id':_id}
         ]})
         const data = await leagueInfo.toArray()
         const result= data.map((d)=>{
@@ -71,6 +71,6 @@ export async function getLeagueNameById({_id}:{_id:string}) {
         })
         return result
     }finally{
-
+        await client.close()
     }
 }
