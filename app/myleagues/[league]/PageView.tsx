@@ -42,7 +42,7 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     }
                     {data.alive&&
                     <Tab.Panel>
-                        <EditSchedule leagueId={leagueId}/>
+                        <EditSchedule leagueId={leagueId} data={data}/>
                     </Tab.Panel>
                     }
                 </Tab.Panels>

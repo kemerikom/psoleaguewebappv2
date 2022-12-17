@@ -69,3 +69,22 @@ export async function getLeagueMatches({leagueId}:{leagueId:string}) {
         await client.close()
     }
 }
+
+export async function updateRefreeAndDate({matchId,refreeId,refreeName,dateTime}:{matchId:string,refreeId:string|null,refreeName:string|null,dateTime:number|null}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const matches=database.collection('matches')
+        const match= await matches.updateOne({_id:new ObjectId(matchId)},{
+            $set:{
+                refreeid:refreeId,
+                refreename:refreeName,
+                datetime:dateTime
+            }
+        })
+        return match
+    }finally{
+        await client.close()
+    }
+}

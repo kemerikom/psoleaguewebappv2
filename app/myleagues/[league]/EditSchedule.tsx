@@ -1,10 +1,10 @@
 'use client'
 import {useEffect,useState} from 'react'
 import TableScheduleEditable from '../../../components/TableScheduleEditable'
-import { matchType } from '../../../typings'
+import { leagueName, matchType } from '../../../typings'
 
 
-export default function EditSchedule({leagueId}:{leagueId:string}){
+export default function EditSchedule({leagueId,data}:{leagueId:string,data:leagueName}){
     const [matches,setMatches]=useState<matchType[]>([])
     useEffect(()=>{
         if(leagueId!=undefined)getMatches()
@@ -14,7 +14,7 @@ export default function EditSchedule({leagueId}:{leagueId:string}){
             <h2>Edit Schedule</h2>
             <hr/>
             <div className='flex w-full flex-col'>
-                <TableScheduleEditable matches={matches}/>
+                <TableScheduleEditable matches={matches} refrees={data.refrees}/>
             </div>    
         </div>
     )
