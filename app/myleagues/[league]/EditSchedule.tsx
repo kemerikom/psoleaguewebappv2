@@ -13,7 +13,7 @@ export default function EditSchedule({leagueId}:{leagueId:string}){
         <div className="flex flex-col p-2 space-y-2 bg-white rounded items-center">
             <h2>Edit Schedule</h2>
             <hr/>
-            <div className='flex flex-col'>
+            <div className='flex w-full flex-col'>
                 <TableScheduleEditable matches={matches}/>
             </div>    
         </div>
