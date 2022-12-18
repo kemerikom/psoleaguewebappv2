@@ -3,6 +3,7 @@ import { leagueName } from "../../../typings"
 import { Tab } from '@headlessui/react'
 import CreateSchedule from "./CreateSchedule"
 import EditSchedule from "./EditSchedule"
+import TeamList from "./TeamList"
 
 export default function PageView({leagueId,data}:{leagueId:string,data:leagueName}){
     return(
@@ -25,7 +26,7 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     }
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>League</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Teams</button>
                         )}
                     </Tab>
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
@@ -45,6 +46,9 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                         <EditSchedule leagueId={leagueId} data={data}/>
                     </Tab.Panel>
                     }
+                    <Tab.Panel>
+                        <TeamList leagueId={leagueId}/>
+                    </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
         </div>
