@@ -40,8 +40,10 @@ export type leagueName={
     teams:string[],
     region?:string,
     alive?:boolean,
+    owner:string,
     admins:userNameIdType[],
-    refrees:userNameIdType[]
+    mods?:userNameIdType[],
+    refrees?:userNameIdType[]
 }
 
 export type leagueIdType={
@@ -216,6 +218,18 @@ export type regionType={
     region:string,
     admins:string[],
     mods:string[]
+}
+
+export type banType={
+    _id:string,
+    username:string,
+    userid:string,
+    leagueid?:string,
+    regionid?:string,
+    perma:boolean,
+    datetime?:number,
+    reason?:string,
+    bannedtime:number
 }
 
 declare global{

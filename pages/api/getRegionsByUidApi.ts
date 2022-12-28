@@ -7,11 +7,16 @@ type NextIronRequest=NextApiRequest&{session:Session}
 
 
 async function getRegionsByUidApi(req:NextIronRequest,res:NextApiResponse) {
-    const cookie= await req.session.get('user')
-    const {uid}=cookie
-    const user:any=await getUserByUid({uid})
-    const regions= await getRegionNamesById({_id:user._id.toString()})
-    res.status(200).json(regions)
+    try{
+        const cookie= await req.session.get('user')
+        const {uid}=cookie
+        const user:any=await getUserByUid({uid})
+        const regions= await getRegionNamesById({_id:user._id.toString()})
+        res.status(200).json(regions)
+    }catch(error){
+        res.status(200).json(false)
+    }
+
 }
 
 

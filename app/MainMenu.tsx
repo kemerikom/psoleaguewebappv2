@@ -22,10 +22,12 @@ export default function MainMenu() {
     const siteData:any=useContext(SiteContext)
     const [regions,setRegions]=useState<regionNames[]>([])
     const [leagues,setLeagues]=useState<leagueNames[]>([])
-    useEffect(()=>{
-        getLeagues()
-        getRegions()
-    },[])
+    /* useEffect(()=>{
+        if(siteData.login){
+            getLeagues()
+            getRegions()
+        }
+    },[siteData.login]) */
     return(
         <div className="flex flex-row group h-10 sticky top-0 left-0 z-50 w-full items-center bg-black bg-opacity-10 backdrop-blur-sm justify-start hover:bg-blue-800 text-white px-2 transition-all">
             <div className="flex flex-row h-full">

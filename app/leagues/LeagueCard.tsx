@@ -13,7 +13,7 @@ export default function LeagueCard({data}:{data:leagueName}){
                 <img src='/teamlogo.png' className="flex aspect-square w-full object-contain rounded-full"></img>
             </div>
             <div className="flex flex-col flex-1 items-end bg-white backdrop-blur-sm bg-opacity-50 p-1 rounded">
-                <h3 className="font-medium whitespace-nowrap">{data.name}</h3>
+                <h3 className="font-medium whitespace-nowrap cursor-pointer">{data.name}</h3>
             </div>
         </Link>
     )

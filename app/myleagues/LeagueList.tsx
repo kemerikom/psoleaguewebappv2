@@ -1,6 +1,7 @@
 'use client'
 import { useEffect,useState } from "react"
 import Link from 'next/link'
+import { leagueName } from "../../typings"
 
 type leagueNameType={
     _id:string,
@@ -8,11 +9,14 @@ type leagueNameType={
     logo:string
 }
 
+
+
 export default function LeagueList() {
     const [leagues,setLeagues]=useState<leagueNameType[]>([])
     useEffect(()=>{
         getLeagueNames()
     },[])
+
     return(
         <div className="flex flex-col flex-shrink-0 p-2 bg-white backdrop-blur-sm bg-opacity-70 rounded space-y-2 w-64">
             <h3 className="font-semibold text-center">Divisions</h3>
@@ -29,15 +33,8 @@ export default function LeagueList() {
         </div>
     )
     async function getLeagueNames(){
-        fetch(`${process.env.appPath}/api/getLeaguesByUidApi`,{
-            next:{revalidate:60}
-        })
-        .then((res)=>{
-            const resData = res.json()
-            return resData
-        })
-        .then((data)=>{
-            setLeagues(data)
-        })
+        const res = await fetch(`${process.env.appPath}/api/getLeaguesByUidApi`)
+        const leagues=await res.json()
+        setLeagues(leagues)
     }
 }

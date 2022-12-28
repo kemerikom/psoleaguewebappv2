@@ -13,7 +13,9 @@ async function getLeaguesData(){
             fontcolor:league.fontcolor,
             official:league.official,
             logo:league.logo,
-            teams:league.teams
+            teams:league.teams,
+            admins:league.admins,
+            refrees:league.refrees
         }
     })
     return leagueNames

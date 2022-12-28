@@ -12,13 +12,18 @@ export default function TeamList({leagueId}:{leagueId:string}){
     return(
         <div className="flex flex-col p-2 space-y-2 bg-white rounded items-center">
             <div className='flex flex-col w-full items-center justify-center'>
-                <div className='flex flex-row w-full items-start justify-start p-2 rounded'>
-                    <Link href={`/teams/`}>Lasisx</Link>
-                    <button className='flex ml-auto bg-red-600'>
-                        <label>Kick Team</label>
-                        <TbBan className='text-2xl text-white'/>
-                    </button>
-                </div>
+                {teams.map((team)=>{
+                    return(
+                    <div key={team._id} className='flex flex-row w-full items-center justify-start p-2 rounded hover:bg-blue-600 hover:text-white transition-all'>
+                        <Link href={`/teams/${team._id}`}>{team.name}</Link>
+                        <button className='flex ml-auto bg-red-600 rounded p-3 text-white space-x-2'>
+                            <label className='cursor-pointer'>Kick Team</label>
+                            <TbBan className='text-2xl'/>
+                        </button>
+                    </div>
+                    )
+                })}
+
             </div>
         </div>
     )

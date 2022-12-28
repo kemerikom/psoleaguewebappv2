@@ -16,8 +16,6 @@ async function getLeaguesByUidApi(req:NextIronRequest,res:NextApiResponse):Promi
     } catch (error) {
         res.status(200).json(false)
     }
-
-
 }
 
 

@@ -4,6 +4,8 @@ import { Tab } from '@headlessui/react'
 import CreateSchedule from "./CreateSchedule"
 import EditSchedule from "./EditSchedule"
 import TeamList from "./TeamList"
+import StaffList from "./StaffList"
+import BanList from "./BanList"
 
 export default function PageView({leagueId,data}:{leagueId:string,data:leagueName}){
     return(
@@ -31,7 +33,12 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     </Tab>
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>League</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Staff</button>
+                        )}
+                    </Tab>
+                    <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
+                        {({selected})=>(
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Banned Players</button>
                         )}
                     </Tab>
                 </Tab.List>
@@ -48,6 +55,12 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     }
                     <Tab.Panel>
                         <TeamList leagueId={leagueId}/>
+                    </Tab.Panel>
+                    <Tab.Panel className={'flex justify-center'}>
+                        <StaffList admins={data.admins} mods={data.mods} refrees={data.refrees} owner={data.owner}/>
+                    </Tab.Panel>
+                    <Tab.Panel className={'flex justify-center'}>
+                        <BanList data={data}/>
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
