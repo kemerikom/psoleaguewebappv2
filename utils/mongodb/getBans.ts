@@ -7,7 +7,7 @@ export async function getRegionOrLeagueBans({regionId,leagueId}:{leagueId:string
         await client.connect()
         const database=client.db('psoleague')
         const bans = database.collection('bans')
-        const ban = bans.find({$or:[{leagueid:leagueId},{regionid:regionId}]}).sort({username:-1})
+        const ban = bans.find({$or:[{leagueid:leagueId},{regionid:regionId}]}).sort({username:1})
         const result = await ban.toArray()
         return result
     }catch{

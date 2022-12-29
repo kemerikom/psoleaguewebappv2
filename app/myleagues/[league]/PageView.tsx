@@ -6,6 +6,7 @@ import EditSchedule from "./EditSchedule"
 import TeamList from "./TeamList"
 import StaffList from "./StaffList"
 import BanList from "./BanList"
+import SettingsList from "./SettingsList"
 
 export default function PageView({leagueId,data}:{leagueId:string,data:leagueName}){
     return(
@@ -15,30 +16,35 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     {!data.alive&&
                         <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                             {({selected})=>(
-                                <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Create Schedule</button>
+                                <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Create Schedule</button>
                             )}
                         </Tab>
                     }
                     {data.alive&&
                         <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                             {({selected})=>(
-                                <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Edit Schedule</button>
+                                <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Edit Schedule</button>
                             )}
                         </Tab>
                     }
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Teams</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Teams</button>
                         )}
                     </Tab>
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Staff</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Staff</button>
                         )}
                     </Tab>
                     <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
                         {({selected})=>(
-                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded`}>Banned Players</button>
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Banned Players</button>
+                        )}
+                    </Tab>
+                    <Tab as='div' className={'outline-none flex flex-1 items-center justify-center'}>
+                        {({selected})=>(
+                            <button className={`${selected?'bg-blue-600 text-white':'bg-white text-black'} w-full transition-all p-2 rounded whitespace-nowrap overflow-hidden text-ellipsis`}>Settings</button>
                         )}
                     </Tab>
                 </Tab.List>
@@ -61,6 +67,9 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                     </Tab.Panel>
                     <Tab.Panel className={'flex justify-center'}>
                         <BanList data={data}/>
+                    </Tab.Panel>
+                    <Tab.Panel className={'flex justify-center'}>
+                        <SettingsList data={data}/>
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>

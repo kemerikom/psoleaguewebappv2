@@ -43,7 +43,12 @@ export type leagueName={
     owner:string,
     admins:userNameIdType[],
     mods?:userNameIdType[],
-    refrees?:userNameIdType[]
+    refrees?:userNameIdType[],
+    transferend?:number,
+    minteamsize?:number,
+    maxteamsize?:number,
+    teaminsize:string,
+    invite?:boolean
 }
 
 export type leagueIdType={
