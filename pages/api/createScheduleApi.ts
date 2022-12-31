@@ -20,7 +20,6 @@ async function createScheduleApi(req:NextIronRequest,res:NextApiResponse) {
         }else{
             res.status(200).json('Connection failed')
         }
-
     }else{
         res.status(400).json('Connection failed')
     }

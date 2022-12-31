@@ -12,10 +12,9 @@ export type firebaseConfigType={
 }
 
 export type siteDataType={
-    uid:string,
-    setUid:any,
+    uid:string|null,
     user:any,
-    setUser:any
+    login:boolean
 }
 
 

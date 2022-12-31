@@ -63,7 +63,7 @@ export default function PageView({leagueId,data}:{leagueId:string,data:leagueNam
                         <TeamList leagueId={leagueId}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex justify-center'}>
-                        <StaffList admins={data.admins} mods={data.mods} refrees={data.refrees} owner={data.owner}/>
+                        <StaffList admins={data.admins} mods={data.mods} refrees={data.refrees} owner={data.owner} leagueId={data._id.toString()}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex justify-center'}>
                         <BanList data={data}/>

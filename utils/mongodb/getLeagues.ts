@@ -74,3 +74,86 @@ export async function getLeagueNameById({_id}:{_id:string}) {
         await client.close()
     }
 }
+
+export async function addLeagueAdmin({leagueId,userId,userName}:{leagueId:string,userId:string,userName:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $push:{
+                admins:{
+                    id:userId,
+                    username:userName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+    
+}
+
+export async function removeLeagueAdmin({leagueId,adminUserName,adminId}:{leagueId:string,adminUserName:string,adminId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $pull:{
+                admins:{
+                    id:adminId,
+                    username:adminUserName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function addLeagueModerator({leagueId,userId,userName}:{leagueId:string,userId:string,userName:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $push:{
+                mods:{
+                    id:userId,
+                    username:userName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function removeLeagueModerator({leagueId,moderatorUserName,moderatorId}:{leagueId:string,moderatorUserName:string,moderatorId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $pull:{
+                mods:{
+                    id:moderatorId,
+                    username:moderatorUserName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+}

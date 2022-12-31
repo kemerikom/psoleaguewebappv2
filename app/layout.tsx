@@ -15,11 +15,8 @@ export default function RootLayout({children}:{children: React.ReactNode}) {
 
   const siteData ={
     user,
-    setUser,
     uid,
-    setUid,
-    login,
-    setLogin
+    login
   }
 /*   try {
     onAuthStateChanged(auth,(user)=>{
