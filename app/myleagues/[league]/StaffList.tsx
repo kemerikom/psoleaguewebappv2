@@ -85,7 +85,7 @@ export default function StaffList({admins,mods,refrees,owner,leagueId}:{admins:u
                     return(
                         <>
                             <Disclosure.Button className={'flex flex-row items-center justify-between bg-blue-600 text-white p-2 rounded'}>
-                                <label className="cursor-pointer">Refrees</label>
+                                <label className="cursor-pointer">Referees</label>
                                 <IoChevronDownOutline className={`${open?'rotate-180':''} text-2xl transition-all`}/>
                             </Disclosure.Button>
                             <Disclosure.Panel className={'flex flex-col bg-blue-300 p-2 rounded space-y-2'}>
@@ -100,7 +100,7 @@ export default function StaffList({admins,mods,refrees,owner,leagueId}:{admins:u
                                     return(
                                         <div key={refree.id} className="flex flex-row items-center justify-between p-1 rounded hover:bg-blue-600 hover:text-white transition-all">
                                             <Link href={`/players/${refree.id}`} className='hover:underline'>{refree.username}</Link>
-                                            <div className="flex py-1 px-2 bg-red-600 rounded text-white cursor-pointer">
+                                            <div className="flex py-1 px-2 bg-red-600 rounded text-white cursor-pointer" onClick={()=>{refreeRemove({refreeId:refree.id,refreeUserName:refree.username})}}>
                                                 <label className="cursor-pointer">Remove</label>
                                                 <TbBan className="text-2xl"/>
                                             </div>
@@ -154,11 +154,28 @@ export default function StaffList({admins,mods,refrees,owner,leagueId}:{admins:u
         }else{
             alert('This user already moderator')
         }
-
     }
 
     async function refreeAdd() {
-        
+        let exist = false
+        refrees?.forEach((refree)=>{
+            if(refree.username==refreeUserName){
+                exist=true
+            }
+        })
+        if(!exist){
+            const res = await fetch(`${process.env.appPath}/api/addRefreeToLeagueApi`,{
+                method:'POST',
+                body:JSON.stringify({
+                    leagueId,
+                    userName:refreeUserName
+                })
+            })
+            const result= await res.json()
+            console.log(result)
+        }else{
+            alert('This user alread referee')
+        }
     }
 
     async function adminRemove({adminUserName,adminId}:{adminUserName:string,adminId:string}){
@@ -185,7 +202,15 @@ export default function StaffList({admins,mods,refrees,owner,leagueId}:{admins:u
         const result= await res.json()
     }
 
-    async function refreeRemove() {
-        
+    async function refreeRemove({refreeUserName,refreeId}:{refreeUserName:string,refreeId:string}) {
+        const res = await fetch(`${process.env.appPath}/api/removeLeagueRefreeApi`,{
+            method:'POST',
+            body:JSON.stringify({
+                leagueId,
+                refreeUserName,
+                refreeId
+            })
+        })
+        const result= await res.json()
     }
 }

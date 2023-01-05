@@ -1,5 +1,4 @@
 import {MongoClient, ObjectId} from 'mongodb'
-import { leagueName } from '../../typings'
 
 
 
@@ -149,6 +148,48 @@ export async function removeLeagueModerator({leagueId,moderatorUserName,moderato
                 mods:{
                     id:moderatorId,
                     username:moderatorUserName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function addLeagueRefree({leagueId,refreeUserName,refreeId}:{leagueId:string,refreeUserName:string,refreeId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $push:{
+                refrees:{
+                    id:refreeId,
+                    username:refreeUserName
+                }
+            }
+        })
+        return league
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function removeLeagueRefree({leagueId,refreeUserName,refreeId}:{leagueId:string,refreeUserName:string,refreeId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const leagues=database.collection('leagues')
+        const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
+            $pull:{
+                refrees:{
+                    id:refreeId,
+                    username:refreeUserName
                 }
             }
         })
