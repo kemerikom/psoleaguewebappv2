@@ -8,7 +8,7 @@ html {
 
 
 *{
-    @apply select-none appearance-none
+    @apply select-none appearance-none outline-none hover:outline-none focus:outline-none
 }
 
 h1{
@@ -49,4 +49,8 @@ input{
 
 select{
     @apply outline-none hover:outline-none
+}
+
+.link{
+    @apply hover:underline transition-all
 }

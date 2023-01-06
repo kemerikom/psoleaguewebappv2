@@ -135,7 +135,7 @@ export type teamsType={
     fontcolor:string,
     logo:string,
     leagues:string[],
-    players:string[],
+    players:userNameIdType[],
     captain?:string,
     cocaptain?:string,
     origin:string,
@@ -143,7 +143,7 @@ export type teamsType={
     downvote?:string[],
     followers?:string[],
     teamsize?:number,
-    roster?:string[],
+    roster?:number[],
     formation?:string
 }
 
@@ -240,7 +240,17 @@ declare global{
     namespace NodeJS{
         interface ProcessEnv{
             mongoUri:string,
-            appPath:string
+            appPath:string,
+            ironCookie:string,
+            ironPassword:string
+        }
+    }
+}
+
+declare module "iron-session"{
+    interface IronSessionData{
+        user?:{
+            uid:string|undefined
         }
     }
 }

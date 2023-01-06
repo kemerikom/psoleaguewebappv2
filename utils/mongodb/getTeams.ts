@@ -43,3 +43,18 @@ export async function searchTeams({term}:{term:string}) {
         await client.close()
     }
 }
+
+
+export async function getTeamByUserId({userId}:{userId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams= database.collection('teams')
+        const teamList=teams.findOne({$or:[{captain:userId},{cocaptain:userId}]})
+        const result= await teamList
+        return result
+    }finally{
+        await client.close()
+    }
+}

@@ -1,8 +1,9 @@
 'use client'
 import Lines from "../Lines";
 import PlayerIcon from "../../PlayerIcon";
+import { userNameIdType } from "../../../typings";
 
-export default function F421({color1,color2,fontcolor,roster}:{color1:string,color2:string,fontcolor:string,roster:string[]}){
+export default function F421({color1,color2,fontcolor,roster,players}:{color1:string,color2:string,fontcolor:string,roster:number[],players:userNameIdType[]}){
     return(
         <div className="flex w-full p-2">
             <div className="flex flex-col w-full bg-green-900 relative aspect-stadium rounded p-2">
@@ -21,7 +22,7 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'CF'}
-                        playerid={roster[7]}
+                        player={players[roster[7]]}
                         />
                     </div>
                 </div>
@@ -34,14 +35,14 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'LCM'}
-                        playerid={roster[5]}
+                        player={players[roster[5]]}
                         />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'RCM'}
-                        playerid={roster[6]}
+                        player={players[roster[6]]}
                         />
                     </div>
                 </div>
@@ -54,28 +55,28 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'LB'}
-                        playerid={roster[1]}
+                        player={players[roster[1]]}
                         />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'LCB'}
-                        playerid={roster[2]}
+                        player={players[roster[2]]}
                         />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'RCB'}
-                        playerid={roster[3]}
+                        player={players[roster[3]]}
                         />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'RB'}
-                        playerid={roster[4]}
+                        player={players[roster[4]]}
                         />
                     </div>
                 </div>
@@ -88,7 +89,7 @@ export default function F421({color1,color2,fontcolor,roster}:{color1:string,col
                         color2={color2}
                         fontcolor={fontcolor}
                         position={'GK'}
-                        playerid={roster[0]}
+                        player={players[roster[0]]}
                         />
                     </div>
                 </div>
