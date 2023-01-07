@@ -12,7 +12,7 @@ export default function PlayerList({players}:{players?:userNameIdType[]}){
                 return(
                     <div key={player.id} className="flex h-10 flex-row group items-center justify-between w-full p-1 rounded hover:bg-blue-300 transition-all">
                         <Link href={`/players${player.id}`} className='link'>{player.username}</Link>
-                        <div className="hidden group-hover:flex flex-row space-x-1">
+                        <div className="hidden invisible group-hover:flex group-hover:visible flex-row space-x-1 transition-all">
                             <button className="flex rounded bg-blue-600 hover:bg-blue-800 text-white py-1 px-2 space-x-1 font-medium transition-all">
                                 <FaCrown className="text-2xl"/>
                                 <label className="cursor-pointer">Co-Captain</label>

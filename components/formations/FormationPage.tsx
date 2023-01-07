@@ -5,10 +5,10 @@ import F322 from './8/F322'
 import F412 from "./8/F412";
 import { userNameIdType } from "../../typings";
 
-export default function FormationPage({color1,color2,fontcolor,roster,formation='322',players}:{color1:string,color2:string,fontcolor:string,roster?:number[],formation?:string,players:userNameIdType[]}){
+export default function FormationPage({color1,color2,fontcolor,roster,formation='313',players}:{color1:string,color2:string,fontcolor:string,roster?:number[],formation?:string,players:userNameIdType[]}){
     return(
         <div className="flex items-center justify-center w-full">
-            {formation=="313"||!formation&&
+            {formation=="313"&&
                 <F313 color1={color1} color2={color2} fontcolor={fontcolor} roster={roster?roster:[]} players={players}/>
             }
             {formation=="52"&&

@@ -21,14 +21,14 @@ export default function F412({color1,color2,fontcolor,roster,players}:{color1:st
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
-                        position={'RCM'}
+                        position={'LST'}
                         player={players[roster[6]]}
                         />
                         <PlayerIcon
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
-                        position={'CF'}
+                        position={'RST'}
                         player={players[roster[7]]}
                         />
                     </div>
@@ -41,7 +41,7 @@ export default function F412({color1,color2,fontcolor,roster,players}:{color1:st
                         color1={color1}
                         color2={color2}
                         fontcolor={fontcolor}
-                        position={'LCM'}
+                        position={'CM'}
                         player={players[roster[5]]}
                         />
                     </div>
