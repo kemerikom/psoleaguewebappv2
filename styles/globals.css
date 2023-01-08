@@ -36,11 +36,11 @@ input{
 }
 
 .btnPrimary{
-    @apply py-1 px-2 outline-none bg-blue-600 text-white rounded items-center justify-center
+    @apply py-2 px-4 outline-none bg-blue-600 text-white rounded items-center justify-center font-medium
 }
 
 .btnSecondary{
-    @apply py-1 px-2 outline-none bg-red-600 text-white rounded items-center justify-center
+    @apply py-2 px-4 outline-none bg-red-600 text-white rounded items-center justify-center
 }
 
 .inputSignUp{

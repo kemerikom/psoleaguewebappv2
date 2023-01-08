@@ -58,3 +58,20 @@ export async function getTeamByUserId({userId}:{userId:string}) {
         await client.close()
     }
 }
+
+
+export async function updateTeamRoster({teamId,roster,formation}:{teamId:string,roster:number[],formation:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const result=await teams.findOneAndUpdate({_id:new ObjectId(teamId)},{$set:{
+            formation,
+            roster
+        }})
+        return result
+    }finally{
+        await client.close()
+    }
+}
