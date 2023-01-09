@@ -10,11 +10,19 @@ import { FaCrown } from "react-icons/fa";
 import FormationPage from "../../components/formations/FormationPage";
 import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
+import Head from "next/head";
 
 
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
     return(
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
+            <Head>
+                <meta property="og:type" content="website"></meta>
+                <meta property="og:url"  content={`https://prosoccerleague.vercel.app/teams/${team._id.toString()}`}></meta>
+                <meta property="og:title" content={`${team.name}`}></meta>
+                <meta property="og:description" content={`${team.name} looking for new members`}></meta>
+                <meta property="og:image" content="https://prosoccerleague.vercel.app/teamlogo.png"></meta>
+            </Head>
             <div className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
                     <img className="h-full aspect-square rounded-full" src="/teamlogo.png"></img>
