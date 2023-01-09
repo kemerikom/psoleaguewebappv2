@@ -22,6 +22,9 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 <meta property="og:title" content={`${team.name}`}></meta>
                 <meta property="og:description" content={`${team.name} looking for new members`}></meta>
                 <meta property="og:image" content="https://prosoccerleague.vercel.app/teamlogo.png"></meta>
+                <meta name="og:country-name" content={`${team.origin}`}></meta>
+                <meta property="og:type" content="game.achievement"></meta>
+                <meta property="og:points" content="POINTS_FOR_ACHIEVEMENT"></meta>
             </Head>
             <div className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
