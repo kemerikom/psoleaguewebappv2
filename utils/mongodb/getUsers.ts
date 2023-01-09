@@ -135,3 +135,19 @@ export async function getPlayerIds() {
         await client.close()
     }
 }
+
+
+export async function searchPlayers({term}:{term:string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const players=database.collection('users')
+        const playerList= players.find({username:new RegExp(term,'i')})
+        const result = await playerList.toArray()
+        return result
+    }finally{
+        await client.close()
+    }
+    
+}
