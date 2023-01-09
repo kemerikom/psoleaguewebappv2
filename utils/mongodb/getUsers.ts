@@ -120,3 +120,18 @@ export async function updateAccount({uid,mainpos,secondpos,country}:{uid:string,
         await client.close()
     }
 }
+
+
+export async function getPlayerIds() {
+    const client = new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const users=database.collection('users')
+        const userList=users.find()
+        const result= await userList.toArray()
+        return result
+    }finally{
+        await client.close()
+    }
+}

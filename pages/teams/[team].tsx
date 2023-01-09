@@ -18,7 +18,7 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
             <Head>
                 <meta property="og:type" content="website"></meta>
-                <meta property="og:url"  content={`https://prosoccerleague.vercel.app/teams/${team._id.toString()}`}></meta>
+                <meta property="og:url"  content={`${process.env.appPath}/teams/${team._id.toString()}`}></meta>
                 <meta property="og:title" content={`${team.name}`}></meta>
                 <meta property="og:description" content={`${team.name} looking for new members`}></meta>
                 <meta property="og:image" content="https://prosoccerleague.vercel.app/teamlogo.png"></meta>
