@@ -34,8 +34,8 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 <meta property="og:type" content="website"></meta>
                 <meta property="og:url"  content={`${process.env.appPath}/teams/${team._id.toString()}`}></meta>
                 <meta property="og:title" content={`${team.name}`}></meta>
-                <meta property="og:description" content={`${team.name} looking for new members asdasdsad`}></meta>
-                <meta property="og:image" content={imgUrl}></meta>
+                <meta property="og:description" content={`${team.name} looking for new members`}></meta>
+                <meta property="og:image" content={`${process.env.appPath}/teams/${team._id.toString()}}]`}></meta>
                 <meta name="og:country-name" content="TR"></meta>
             </Head>
             <div id='header' className="flex flex-row h-40">
