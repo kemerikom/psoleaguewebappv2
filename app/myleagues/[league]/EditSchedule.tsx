@@ -14,7 +14,7 @@ export default function EditSchedule({leagueId,data}:{leagueId:string,data:leagu
             <h2>Edit Schedule</h2>
             <hr/>
             <div className='flex w-full flex-col'>
-                <TableScheduleEditable matches={matches} refrees={data.refrees}/>
+                {/* <TableScheduleEditable matches={matches} refrees={data.refrees}/> */}
             </div>    
         </div>
     )
