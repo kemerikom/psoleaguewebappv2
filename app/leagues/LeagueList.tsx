@@ -32,7 +32,7 @@ export default function LeagueList(){
             <hr/>
             {leagueNames.map((league)=>{
                 return(
-                    <LeagueCard key={league.name} data={league}/>
+                    {/* <LeagueCard key={league.name} data={league}/> */}
                 )
             })}
             <hr/>
