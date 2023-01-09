@@ -1,4 +1,5 @@
 import {MongoClient, ObjectId} from 'mongodb'
+import { teamsType } from '../../typings'
 
 
 
@@ -45,15 +46,37 @@ export async function searchTeams({term}:{term:string}) {
 }
 
 
-export async function getTeamByUserId({userId}:{userId:string}) {
+export async function getTeamByUserId({userId}:{userId:string}):Promise<teamsType|null> {
     const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
         const database=client.db('psoleague')
         const teams= database.collection('teams')
         const teamList=teams.findOne({$or:[{captain:userId},{cocaptain:userId}]})
-        const result= await teamList
-        return result
+        const data= await teamList
+        if(data){
+            const result:teamsType={
+                _id:data._id.toString(),
+                name:data.name,
+                shortname:data.shortname,
+                color1:data.color1,
+                color2:data.color2,
+                fontcolor:data.fontcolor,
+                logo:data.logo,
+                leagues:data?.leagues,
+                players:data?.players,
+                origin:data.origin,
+                formation:data?.formation,
+                roster:data?.roster,
+                captain:data.captain,
+                cocaptain:data?.cocaptain
+            }
+            return result
+        }else{
+            return null
+        }
+
+
     }finally{
         await client.close()
     }

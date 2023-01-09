@@ -6,6 +6,8 @@ import { Tab } from '@headlessui/react'
 import PlayerList from '../components/myteam/PlayerList'
 import FormationPage from '../components/formations/FormationPage'
 import FormationEdit from '../components/myteam/FormationEdit'
+import { getUserByUid } from '../utils/mongodb/getUsers'
+import { getTeamByUserId } from '../utils/mongodb/getTeams'
 
 export default function MyTeam({data}:{data:teamsType}){
     return(
@@ -68,16 +70,24 @@ export default function MyTeam({data}:{data:teamsType}){
 
 export const getServerSideProps=withIronSessionSsr(
     async function getServerSideProps({req}) {
-        const user=req.session.user
-        let data=false
-        if(user){
-            const {uid}=user
-            const res = await fetch(`${process.env.appPath}/api/getTeamByUidApi`,{
+        const userUid=req.session.user
+        let data=null
+        if(userUid){
+            const {uid}=userUid
+
+            /* const res = await fetch(`${process.env.appPath}/api/getTeamByUidApi`,{
                 method:'POST',
                 body:JSON.stringify({uid})
             })
             const result = await res.json()
-            data=result
+            data=result */
+
+            const user = await getUserByUid({uid:uid||'null'})
+            if(user){
+                const team = await getTeamByUserId({userId:user?._id.toString()})
+                if(team)data=team
+            }
+
         } 
         return{
             props:{
