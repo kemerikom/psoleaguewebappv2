@@ -13,7 +13,7 @@ import FormationPage from "../../components/formations/FormationPage";
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
     return(
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
-            {/* <div className="flex flex-row h-40">
+            <div className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
                     <img className="h-full aspect-square rounded-full" src="/teamlogo.png"></img>
                 </div>
@@ -77,7 +77,7 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 </Tab.List>
                 <Tab.Panels className={'outline-none'}>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        <PlayerList teamId={team._id}></PlayerList>
+                        {/* <PlayerList teamId={team._id}></PlayerList> */}
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 items-center justify-center bg-white rounded'}>
                         <FormationPage
@@ -90,19 +90,19 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                         />
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        <TrophyRoom teamId={data._id} color1={data.color1} color2={data.color2}/>
+                        {/* <TrophyRoom teamId={data._id} color1={data.color1} color2={data.color2}/> */}
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         <LastMatches matches={matches}/>
                     </Tab.Panel>
                 </Tab.Panels>
-            </Tab.Group> */}
+            </Tab.Group>
         </div>
     )
 }
 
 
-/* export async function getStaticProps({params}:{params:{team:string}}) {
+export async function getStaticProps({params}:{params:{team:string}}) {
     const resTeam = await fetch(`${process.env.appPath}/api/getTeamApi`,{
         method:'POST',
         body:JSON.stringify({teamId:params.team})
@@ -132,4 +132,4 @@ export async function getStaticPaths() {
         paths,
         fallback:false
     }
-} */
+}
