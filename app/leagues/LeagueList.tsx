@@ -29,13 +29,13 @@ export default function LeagueList(){
     return(
         <div className='flex flex-col p-2 mx-2 rounded bg-white backdrop-blur-sm bg-opacity-70 gap-y-2 overflow-y-auto flex-shrink-0'>
             <h2 className='text-center font-medium'>Official Leagues</h2>
-            <hr/>
+            {/* <hr/>
             {leagueNames.map((league)=>{
                 return(
-                    {/* <LeagueCard key={league.name} data={league}/> */}
+                    <LeagueCard key={league.name} data={league}/>
                 )
             })}
-            <hr/>
+            <hr/> */}
             <h2 className='text-center font-medium'>Unofficial Leagues</h2>
             <hr/>
         </div>
