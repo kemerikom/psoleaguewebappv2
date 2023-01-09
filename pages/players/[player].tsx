@@ -7,7 +7,7 @@ import ReactCountryFlag from "react-country-flag";
 import { getPlayerCard } from "../../utils/firebase/getImages";
 
 
-export default function Player({data,playerCard}:{data:playerType,playerCard:any}){
+export default function Player({data}:{data:playerType}){
     return(
         <div className="container mx-auto p-3">
             <Head>
@@ -15,7 +15,8 @@ export default function Player({data,playerCard}:{data:playerType,playerCard:any
                 <meta property="og:url"  content={`${process.env.appPath}/teams/${data._id.toString()}`}></meta>
                 <meta property="og:title" content={`${data.username}`}></meta>
                 <meta property="og:description" content={`Playing at ${data.mainpos} and ${data.secondpos}`}></meta>
-                <meta property="og:image" content={`${playerCard}`}></meta>
+                
+                <meta property="og:image" content={`https://storage.googleapis.com/psoleaguev2.appspot.com/players/cards/${data.card}`}></meta>
                 <meta property="og:image:width" content="512"></meta>
                 <meta property="og:image:height" content="144"></meta>
             </Head>
@@ -55,13 +56,8 @@ export default function Player({data,playerCard}:{data:playerType,playerCard:any
 export async function getStaticProps({params}:{params:{player:string}}){
     const resPlayer = await getPlayer({playerId:params.player})
     const player = JSON.parse(JSON.stringify(resPlayer))
-    let playerCard:any=''
-    if(player.card!=undefined){
-        playerCard=await getPlayerCard({url:player.card})
-    }
-    console.log('playercard',playerCard)
     return{
-        props:{data:player,playerCard},
+        props:{data:player},
         revalidate:60
     }
 }
