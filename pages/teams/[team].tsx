@@ -8,7 +8,7 @@ import ReactCountryFlag from "react-country-flag";
 import LastMatches from "../../components/teams/LastMatches";
 import { FaCrown } from "react-icons/fa";
 import FormationPage from "../../components/formations/FormationPage";
-import { getTeamIds } from "../../utils/mongodb/getTeams";
+import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 
 
@@ -115,7 +115,7 @@ export async function getStaticProps({params}:{params:{team:string}}) {
     })
     const team = await resTeam.json()
     const matches= await resMatches.json() */
-    const team=await getTeamIds()
+    const team=await getTeam({teamId:params.team})
     const matches= await getMatchByTeamId({teamId:params.team})
     return{
         props:{team,matches},
@@ -125,8 +125,9 @@ export async function getStaticProps({params}:{params:{team:string}}) {
 
 
 export async function getStaticPaths() {
-    const res = await fetch(`${process.env.appPath}/api/getTeamIdsApi`)
-    const result = await res.json()
+    /* const res = await fetch(`${process.env.appPath}/api/getTeamIdsApi`)
+    const result = await res.json() */
+    const result = await getTeamIds()
     const paths=result.map((r:any)=>{
         return{
             params:{team:r._id}
