@@ -55,7 +55,11 @@ export default function Player({data,playerCard}:{data:playerType,playerCard:str
 export async function getStaticProps({params}:{params:{player:string}}){
     const resPlayer = await getPlayer({playerId:params.player})
     const player = JSON.parse(JSON.stringify(resPlayer))
-    const playerCard=await getPlayerCard({url:player.card})
+    let playerCard=''
+    if(player.card){
+        playerCard=await getPlayerCard({url:player.card})
+    }
+    
     console.log('playercard',playerCard)
     return{
         props:{data:player,playerCard},
