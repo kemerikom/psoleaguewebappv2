@@ -11,9 +11,23 @@ import FormationPage from "../../components/formations/FormationPage";
 import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 import Head from "next/head";
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
+    const [imgUrl,setImgUrl]=useState<string>('')
+    useEffect(()=>{
+        const header = document.getElementById('header')
+        if(header){
+            htmlToImage.toPng(header)
+            .then(function (dataUrl){
+                console.log('dataUrl',dataUrl)
+                setImgUrl(dataUrl)
+            })
+        }
+
+    },[])
     return(
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
             <Head>
@@ -21,10 +35,10 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 <meta property="og:url"  content={`${process.env.appPath}/teams/${team._id.toString()}`}></meta>
                 <meta property="og:title" content={`${team.name}`}></meta>
                 <meta property="og:description" content={`${team.name} looking for new members asdasdsad`}></meta>
-                <meta property="og:image" content="https://prosoccerleague.vercel.app/teamlogo.png"></meta>
+                <meta property="og:image" content={imgUrl}></meta>
                 <meta name="og:country-name" content="TR"></meta>
             </Head>
-            <div className="flex flex-row h-40">
+            <div id='header' className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
                     <img className="h-full aspect-square rounded-full" src="/teamlogo.png"></img>
                 </div>
@@ -42,7 +56,6 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                         <FaCrown className="text-xl"/>
                         <Link href={`/players/${team.cocaptain}`} className='link'>{team.players.find((player)=>player.id==team.cocaptain)?.username}</Link>
                     </div>
-
                 </div>
                 <div>
                     <div className="flex flex-row-reverse space-x-2">
