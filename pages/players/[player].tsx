@@ -11,9 +11,9 @@ export default function Player({data}:{data:playerType}){
                 <meta property="og:title" content={`${data.username}`}></meta>
                 <meta property="og:description" content={`${data.username} looking for team. Playing at ${data.mainpos} and ${data.secondpos}`}></meta>
                 <meta property="og:image" content="https://prosoccerleague.vercel.app/teamlogo.png"></meta>
-                <meta name="og:country-name" content={`${data.country}`}/>
-                <meta property="og:type" content="game.achievement"/>
-                <meta property="og:points" content="POINTS_FOR_ACHIEVEMENT"/>
+                <meta name="og:country-name" content={`${data.country}`}></meta>
+                <meta property="og:type" content="game.achievement"></meta>
+                <meta property="og:points" content="POINTS_FOR_ACHIEVEMENT"></meta>
             </Head>
 
         </div>
