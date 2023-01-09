@@ -104,7 +104,7 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
 }
 
 
-export async function getStaticProps({params}:{params:{team:string}}) {
+/* export async function getStaticProps({params}:{params:{team:string}}) {
     const resTeam = await fetch(`${process.env.appPath}/api/getTeamApi`,{
         method:'POST',
         body:JSON.stringify({teamId:params.team})
@@ -134,4 +134,4 @@ export async function getStaticPaths() {
         paths,
         fallback:false
     }
-}
+} */
