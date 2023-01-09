@@ -8,6 +8,8 @@ import ReactCountryFlag from "react-country-flag";
 import LastMatches from "../../components/teams/LastMatches";
 import { FaCrown } from "react-icons/fa";
 import FormationPage from "../../components/formations/FormationPage";
+import { getTeamIds } from "../../utils/mongodb/getTeams";
+import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 
 
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
@@ -103,7 +105,7 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
 
 
 export async function getStaticProps({params}:{params:{team:string}}) {
-    const resTeam = await fetch(`${process.env.appPath}/api/getTeamApi`,{
+    /* const resTeam = await fetch(`${process.env.appPath}/api/getTeamApi`,{
         method:'POST',
         body:JSON.stringify({teamId:params.team})
     })
@@ -112,7 +114,9 @@ export async function getStaticProps({params}:{params:{team:string}}) {
         body:JSON.stringify({teamId:params.team})
     })
     const team = await resTeam.json()
-    const matches= await resMatches.json()
+    const matches= await resMatches.json() */
+    const team=await getTeamIds()
+    const matches= await getMatchByTeamId({teamId:params.team})
     return{
         props:{team,matches},
         revalidate:60
