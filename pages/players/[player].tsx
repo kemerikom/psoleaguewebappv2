@@ -15,8 +15,8 @@ export default function Player({data}:{data:playerType}){
                 <meta property="og:url"  content={`${process.env.appPath}/teams/${data._id.toString()}`}></meta>
                 <meta property="og:title" content={`${data.username}`}></meta>
                 <meta property="og:image" content={`https://storage.googleapis.com/psoleaguev2.appspot.com/players/cards/${data.card}`}></meta>
-                <meta property="og:image:width" content="512"></meta>
-                <meta property="og:image:height" content="144"></meta>
+                <meta property="og:image:width" content="1024"></meta>
+                <meta property="og:image:height" content="288"></meta>
             </Head>
             <div id="card" className="flex flex-row items-start justify-start bg-blue-600 p-2 rounded text-white max-w-lg w-full space-x-2">
                 <div className="flex w-32 h-32 rounded-full aspect-square">
