@@ -11,23 +11,9 @@ import FormationPage from "../../components/formations/FormationPage";
 import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 import Head from "next/head";
-import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
-    const [imgUrl,setImgUrl]=useState<string>('')
-    useEffect(()=>{
-        const header = document.getElementById('header')
-        if(header){
-            htmlToImage.toPng(header)
-            .then(function (dataUrl){
-                console.log('dataUrl',dataUrl)
-                setImgUrl(dataUrl)
-            })
-        }
-
-    },[])
     return(
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
             <Head>

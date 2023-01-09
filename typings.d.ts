@@ -186,7 +186,8 @@ export type playerType={
     upvote?:string[],
     downvote?:string[],
     mainpos:string,
-    secondpos:string
+    secondpos:string,
+    card?:string
 }
 
 export type medalType={
