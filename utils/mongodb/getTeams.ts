@@ -75,3 +75,22 @@ export async function updateTeamRoster({teamId,roster,formation}:{teamId:string,
         await client.close()
     }
 }
+
+
+export async function getTeamIds() {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const data = await teams.find().toArray()
+        const result = data.map((d)=>{
+            return{
+                _id:d._id.toString()
+            }
+        })
+        return result
+    }finally{
+        await client.close()
+    }
+}
