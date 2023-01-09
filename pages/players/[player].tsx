@@ -14,8 +14,6 @@ export default function Player({data}:{data:playerType}){
                 <meta property="og:type" content="website"></meta>
                 <meta property="og:url"  content={`${process.env.appPath}/teams/${data._id.toString()}`}></meta>
                 <meta property="og:title" content={`${data.username}`}></meta>
-                <meta property="og:description" content={`Playing at ${data.mainpos} and ${data.secondpos}`}></meta>
-                
                 <meta property="og:image" content={`https://storage.googleapis.com/psoleaguev2.appspot.com/players/cards/${data.card}`}></meta>
                 <meta property="og:image:width" content="512"></meta>
                 <meta property="og:image:height" content="144"></meta>
