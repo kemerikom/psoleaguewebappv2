@@ -105,13 +105,13 @@ export default function PageView({data}:{data:teamsType}){
                         <PlayerList teamId={data._id}></PlayerList>
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 items-center justify-center bg-white rounded'}>
-                        <FormationPage
+                        {/* <FormationPage
                         color1={data.color1}
                         color2={data.color2}
                         fontcolor={data.fontcolor}
                         roster={data.roster}
                         formation={data.formation}
-                        />
+                        /> */}
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
                         <TrophyRoom teamId={data._id} color1={data.color1} color2={data.color2}/>
