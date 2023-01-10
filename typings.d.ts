@@ -50,6 +50,30 @@ export type leagueName={
     invite?:boolean
 }
 
+
+export type leagueType={
+    _id:string,
+    name:string,
+    logo:string,
+    color1:string,
+    color2:string,
+    fontcolor:string,
+    shortname?:string,
+    official?:boolean,
+    teams:string[],
+    region?:string,
+    alive?:boolean,
+    owner:string,
+    admins:userNameIdType[],
+    mods?:userNameIdType[],
+    refrees?:userNameIdType[],
+    transferend?:number,
+    minteamsize?:number,
+    maxteamsize?:number,
+    teaminsize:string,
+    invite?:boolean
+}
+
 export type leagueIdType={
     _id:string
 }
