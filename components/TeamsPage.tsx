@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { teamsType } from "../typings"
+import { teamNameIdType, teamsType } from "../typings"
 
-export default function TeamsPage({teams}:{teams:teamsType[]}){
+export default function TeamsPage({teams}:{teams:teamNameIdType[]}){
     return(
         <div className="flex flex-row flex-wrap justify-center">
             {teams?.map((team)=>{

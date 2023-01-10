@@ -2,6 +2,7 @@ import SearchBar from "../../components/SearchBar"
 import { useState,useEffect } from "react"
 import { playerType } from "../../typings"
 import Link from "next/link"
+import ReactCountryFlag from "react-country-flag"
 
 
 export default function Index(){
@@ -27,7 +28,20 @@ export default function Index(){
                                     <div className="flex h-10 w-10 aspect-square rounded-full">
                                         <img src="/teamlogo.png" className="rounded-full object-contain"></img>
                                     </div>
-                                    <label className="cursor-pointer">{player.username}</label>
+                                    <div className="flex flex-col">
+                                        <label className="cursor-pointer">{player.username}</label>
+                                        
+                                        <div className="flex flex-row space-x-1 items-center">
+                                            <ReactCountryFlag countryCode={player.country} svg/>
+                                            <div className="flex h6 w-6 aspect-square rounded-full bg-green-800 font-normal text-sm items-center justify-center">
+                                                {player.mainpos}
+                                            </div>
+                                            <div className="flex h6 w-6 aspect-square rounded-full bg-green-800 font-normal text-sm items-center justify-center">
+                                                {player.secondpos}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </Link>
                             )
                         })}

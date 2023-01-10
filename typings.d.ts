@@ -27,6 +27,16 @@ export type userNameIdType ={
     username:string
 }
 
+export type teamNameIdType={
+    _id:string,
+    name:string,
+    shortname:string,
+    color1:string,
+    color2:string,
+    fontcolor:string,
+    logo:string
+}
+
 export type leagueName={
     _id:string,
     name:string,
@@ -60,7 +70,7 @@ export type leagueType={
     fontcolor:string,
     shortname?:string,
     official?:boolean,
-    teams:string[],
+    teams:teamNameIdType[],
     region?:string,
     alive?:boolean,
     owner:string,

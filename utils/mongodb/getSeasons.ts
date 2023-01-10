@@ -17,7 +17,7 @@ export async function getSeasons({leagueId}:{leagueId:string}) {
 }
 
 
-export async function getCurrenSeasons({leagueId}:{leagueId:string}) {
+export async function getCurrentSeasons({leagueId}:{leagueId:string}) {
     const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
