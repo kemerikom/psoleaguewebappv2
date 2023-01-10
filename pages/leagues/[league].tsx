@@ -8,10 +8,11 @@ import PreviousSeasonPage from "../../components/leagues/PreviousSeasonPage"
 import CurrentSeasonPage from "../../components/leagues/CurrentSeasonPage"
 import TeamsPage from "../../components/TeamsPage"
 import { getCurrentSeasons, getSeasons } from '../../utils/mongodb/getSeasons'
+import { getLeaguePreviousTables } from "../../utils/mongodb/getTables"
 
-export default function League({league,currentSeasons,previousSeasons}:{league:leagueType,currentSeasons:seasonNameType[],previousSeasons:seasonNameType[]}){
+export default function League({league,currentSeasons,previousSeasons}:{league:leagueType,currentSeasons:seasonNameType[],previousSeasons:seasonTableType[]}){
     return(
-        <div className="flex flex-col container mx-auto my-3 p-3 bg-white backdrop-blur-sm bg-opacity-70 rounded">
+        <div className="flex flex-col max-w-5xl w-full mx-auto my-3 p-3 bg-white backdrop-blur-sm bg-opacity-70 rounded">
             <LeagueHeader name={league.name} logo={league.logo}/>
             <hr/>
             <div className="flex flex-1 !w-full p-2 rounded">
@@ -62,17 +63,17 @@ export default function League({league,currentSeasons,previousSeasons}:{league:l
                             })}
                         </Tab.Panel>
                         <Tab.Panel as='div' className={'flex flex-col bg-white rounded p-2'}>
-                            {previousSeasons?.map((season:seasonNameType)=>{
+                            {previousSeasons?.map((season)=>{
                                 return(
                                 <Disclosure as='div' key={season._id} className={'w-full items-center justify-center'}>
                                     {({open})=>(
                                         <div className="flex flex-col w-full space-y-2">
                                             <Disclosure.Button as='button' className={`${open?'bg-blue-600 text-white':'bg-blue-100 text-black'} flex flex-row items-center justify-between w-full p-1 rounded transition-all outline-none`}>
-                                                {season.seasonName}
+                                                {season.seasonname}
                                                 <IoChevronDown className={`text-2xl ${open?'rotate-180':'rotate-0'} transition-all`}></IoChevronDown>
                                             </Disclosure.Button>
                                             <Disclosure.Panel as='div' className={`flex bg-blue-100 p-1 rounded transition-all`}>
-                                                <PreviousSeasonPage seasonId={season._id}></PreviousSeasonPage>
+                                                <PreviousSeasonPage season={season}></PreviousSeasonPage>
                                             </Disclosure.Panel>
                                         </div>
                                     )}
@@ -97,8 +98,9 @@ export async function getStaticProps({params}:{params:{league:string}}) {
     const league = JSON.parse(JSON.stringify(resLeague))
     const resCurrentSeason = await getCurrentSeasons({leagueId:league._id.toString()})
     const currentSeasons = JSON.parse(JSON.stringify(resCurrentSeason))
-    const resSeasons = await getSeasons({leagueId:league._id.toString()})
+    const resSeasons = await getLeaguePreviousTables({leagueId:league._id.toString()})
     const previousSeasons = JSON.parse(JSON.stringify(resSeasons))
+    console.log(previousSeasons)
     return{
         props:{league,currentSeasons,previousSeasons}
     }

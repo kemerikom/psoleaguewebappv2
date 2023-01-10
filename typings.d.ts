@@ -151,13 +151,21 @@ export type tablePointsType={
     diff:number
 }
 
+
+
 export type seasonTableType={
     _id:string,
+    seasonname:string,
     seasonId:string,
+    leagueId:string,
     teams:tableTeamType[],
     points:tablePointsType[],
     schedule:tableScheduleType[],
-    topplayers:tableTopPlayersType[]
+    topplayers:{
+        topgoals:tableTopGoalsType[],
+        topassists:tableTopAssistsType[],
+        topsaves:tableTopSavesType[],
+    }
 }
 
 export type teamsType={

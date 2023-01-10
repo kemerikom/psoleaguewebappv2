@@ -1,8 +1,8 @@
 import Link from "next/link"
-import { leagueName } from "../../typings"
+import { leagueName, leagueType } from "../../typings"
 import ReactCountryFlag from "react-country-flag"
 
-export default function LeagueCard({data}:{data:leagueName}){
+export default function LeagueCard({data}:{data:leagueType}){
     return(
         <Link href={`/leagues/${data._id}`} className={`flex items-col rounded p-2 cursor-pointer w-64 gap-x-1`}
         style={{background:`linear-gradient(45deg, ${data.color1} 0%, ${data.color2} 100%)`}}
