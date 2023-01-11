@@ -12,7 +12,7 @@ async function updateAccountApi(req:NextIronRequest,res:NextApiResponse) {
             const result = await updateAccount({uid,mainpos,secondpos,country})
             res.status(200).json(result)
         }else{
-            res.status(400).json('Connection failed')
+            res.status(400).json('You are not logged in')
         }
     }else{
         res.status(400).json('Connection failed')

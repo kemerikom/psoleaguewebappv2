@@ -100,7 +100,6 @@ export async function getStaticProps({params}:{params:{league:string}}) {
     const currentSeasons = JSON.parse(JSON.stringify(resCurrentSeason))
     const resSeasons = await getLeaguePreviousTables({leagueId:league._id.toString()})
     const previousSeasons = JSON.parse(JSON.stringify(resSeasons))
-    console.log(previousSeasons)
     return{
         props:{league,currentSeasons,previousSeasons}
     }

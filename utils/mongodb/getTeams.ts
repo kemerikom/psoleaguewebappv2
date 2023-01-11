@@ -117,3 +117,17 @@ export async function getTeamIds() {
         await client.close()
     }
 }
+
+
+export async function getTeamByPlayer({userId}:{userId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const data = await teams.findOne({'players.id':userId})
+        return data        
+    }finally{
+        await client.close()
+    }
+}

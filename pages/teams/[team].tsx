@@ -1,7 +1,5 @@
 import { matchType, teamsType } from "../../typings"
 import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
-import { useEffect,useState } from "react";
-import { playerNamesType } from "../../typings";
 import Link from "next/link";
 import { Tab } from '@headlessui/react'
 import ReactCountryFlag from "react-country-flag";
@@ -113,16 +111,6 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
 
 
 export async function getStaticProps({params}:{params:{team:string}}) {
-    /* const resTeam = await fetch(`${process.env.appPath}/api/getTeamApi`,{
-        method:'POST',
-        body:JSON.stringify({teamId:params.team})
-    })
-    const resMatches= await fetch(`${process.env.appPath}/api/getMatchesByTeamIdApi`,{
-        method:'POST',
-        body:JSON.stringify({teamId:params.team})
-    })
-    const team = await resTeam.json()
-    const matches= await resMatches.json() */
     const resTeam=await getTeam({teamId:params.team})
     const team=JSON.parse(JSON.stringify(resTeam))
     const resMatches= await getMatchByTeamId({teamId:params.team})
@@ -135,8 +123,6 @@ export async function getStaticProps({params}:{params:{team:string}}) {
 
 
 export async function getStaticPaths() {
-    /* const res = await fetch(`${process.env.appPath}/api/getTeamIdsApi`)
-    const result = await res.json() */
     const result = await getTeamIds()
     const paths=result.map((r:any)=>{
         return{

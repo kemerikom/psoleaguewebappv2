@@ -74,20 +74,12 @@ export const getServerSideProps=withIronSessionSsr(
         let data=null
         if(userUid){
             const {uid}=userUid
-
-            /* const res = await fetch(`${process.env.appPath}/api/getTeamByUidApi`,{
-                method:'POST',
-                body:JSON.stringify({uid})
-            })
-            const result = await res.json()
-            data=result */
-
             const user = await getUserByUid({uid:uid||'null'})
             if(user){
                 const team = await getTeamByUserId({userId:user?._id.toString()})
                 if(team)data=team
             }
-
+            
         } 
         return{
             props:{
