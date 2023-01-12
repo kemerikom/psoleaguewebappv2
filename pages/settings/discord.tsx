@@ -26,14 +26,14 @@ export default function Discord({user,userTeam}:{user:playerType,userTeam:teamsT
                                     <FaDiscord className='text-2xl'/>
                                     {user?.discordname}
                                 </div>
-                                <Link href={process.env.discordGeneratedUrl} className='flex flex-row bg-blue-600 text-white p-2 rounded indent-2 font-medium hover:bg-blue-800 transition-all'>
+                                <Link href={`${process.env.discordGeneratedUrl}`} className='flex flex-row bg-blue-600 text-white p-2 rounded indent-2 font-medium hover:bg-blue-800 transition-all'>
                                     <FaDiscord className='text-2xl'/>
                                     Update Your Discord Link
                                 </Link>
                             </>
                         }
                         {!user||!user.discordid&&
-                            <Link href={process.env.discordGeneratedUrl} className='flex flex-row bg-blue-600 text-white p-2 rounded indent-2 font-medium hover:bg-blue-800 transition-all'>
+                            <Link href={`${process.env.discordGeneratedUrl}`} className='flex flex-row bg-blue-600 text-white p-2 rounded indent-2 font-medium hover:bg-blue-800 transition-all'>
                                 <FaDiscord className='text-2xl'/>
                                 Link Your Discord Account
                             </Link>
