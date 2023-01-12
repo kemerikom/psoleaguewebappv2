@@ -26,7 +26,7 @@ export default function Index(){
                                 href={`/players/${player._id.toString()}`}
                                 className='flex p-2 rounded bg-blue-600 text-white m-1 space-x-2 items-center font-medium hover:bg-blue-800 transition-all'>
                                     <div className="flex h-10 w-10 aspect-square rounded-full">
-                                        <img src="/teamlogo.png" className="rounded-full object-contain"></img>
+                                        <img src={player.avatar?.medium||'/defaultAvatar.svg'} className="rounded-full object-contain"></img>
                                     </div>
                                     <div className="flex flex-col">
                                         <label className="cursor-pointer">{player.username}</label>

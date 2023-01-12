@@ -26,7 +26,7 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
             <div className="flex flex-col mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
                 <div className="flex flex-row h-40">
                     <div className="flex items-center h-full aspect-square">
-                        <img className="h-full aspect-square rounded-full" src="/teamlogo.png"></img>
+                        <img src={`${data.avatar?.large||'/defaultAvatar.svg'}`} className="h-full aspect-square rounded-full" ></img>
                     </div>
                     <div className="flex flex-col w-full items-start p-3 space-y-2">
                         <h1>{data.username} <Link href={`/teams/${team?._id}`} className={`${team?'visible':'invisible'} hover:underline transition-all`}>[{team?.shortname||''}]</Link></h1>
