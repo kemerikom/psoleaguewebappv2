@@ -13,6 +13,10 @@ module.exports = {
       appPath:process.env.appPath,
       ironPassword:process.env.ironPassword,
       ironCookie:process.env.ironCookie,
-      steamApiKey:process.env.steamApiKey
+      steamApiKey:process.env.steamApiKey,
+      discordClientId:process.env.discordClientId,
+      discordClientSecret:process.env.discordClientSecret,
+      discordApiEndpoint:process.env.discordApiEndpoint,
+      discordGeneratedUrl:process.env.discordGeneratedUrl
     }
   }

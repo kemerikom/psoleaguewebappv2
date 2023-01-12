@@ -168,3 +168,20 @@ export async function updatePlayerSteamId({uid,steamId,avatar}:{uid:string,steam
         await client.close()
     }
 }
+
+
+export async function updatePlayerDiscordId({uid,discordId,discordName}:{uid:string,discordId:string,discordName:string}){
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const players=database.collection('users')
+        const result = await players.findOneAndUpdate({uid},{$set:{
+            discordid:discordId,
+            discordname:discordName
+        }})
+        return result
+    }finally{
+        await client.close()
+    }
+}

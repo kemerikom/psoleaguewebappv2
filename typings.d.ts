@@ -228,6 +228,8 @@ export type playerType={
         medium?:string,
         large?:string
     },
+    discordid?:string,
+    discordname?:string,
     pp:string,
     country:string,
     followers?:string[],
@@ -292,7 +294,11 @@ declare global{
             appPath:string,
             ironCookie:string,
             ironPassword:string,
-            steamApiKey:string
+            steamApiKey:string,
+            discordClientId:string,
+            discordClientSecret:string,
+            discordApiEndpoint:string,
+            discordGeneratedUrl:string
         }
     }
 }
