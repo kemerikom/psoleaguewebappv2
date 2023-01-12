@@ -5,10 +5,9 @@ import Link from "next/link"
 import SettingsList from "../../components/settings/SettingList"
 import Header from "../../components/settings/Header"
 import { playerType, teamsType } from "../../typings"
-import {useEffect} from 'react'
-import { FaDiscord, FaSteam } from "react-icons/fa"
-import { auth } from "../../utils/firebase/config"
-import { onAuthStateChanged,updateProfile } from "firebase/auth"
+import { FaDiscord } from "react-icons/fa"
+
+
 
 
 export default function Discord({user,userTeam}:{user:playerType,userTeam:teamsType}){
