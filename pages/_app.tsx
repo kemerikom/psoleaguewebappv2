@@ -6,9 +6,10 @@ import {auth} from '../utils/firebase/config'
 import { onAuthStateChanged} from 'firebase/auth'
 import {logoutUser} from '../utils/firebase/logoutUser'
 import MainMenu from '../components/MainMenu'
+import { playerType } from '../typings'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [user,setUser]=useState<boolean>(false)
+  const [user,setUser]=useState<any>()
   const [uid,setUid]=useState<string|null>(null)
   const [login,setLogin]=useState<boolean>(false)
   const siteData ={
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     uid,
     login
   }
-  onAuthStateChanged(auth,(user)=>{
+  onAuthStateChanged(auth,async(user)=>{
     if(user){
       fetch(`${process.env.appPath}/api/getUserUidApi`)
       .then((res)=>{
@@ -28,6 +29,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       })
       setLogin(true)
       setUid(user.uid)
+      setUser(user)
+      /* const res=await fetch(`${process.env.appPath}/api/getUserByUidApi`,{
+        method:'POST',
+        body:JSON.stringify({uid:user.uid})
+      })
+      const userData=await res.json()
+      if(!user)setUser(userData) */
     }else{
       setLogin(false)
       setUid(null)
@@ -43,3 +51,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
+

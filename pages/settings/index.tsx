@@ -7,7 +7,7 @@ import { getTeamByPlayer } from "../../utils/mongodb/getTeams"
 
 export default function Index({user,userTeam}:{user:playerType,userTeam:teamsType}){
     return(
-        <div className='flex flex-row container p-3 items-start'>
+        <div className='flex flex-row max-w-5xl w-full p-3 items-start'>
             <SettingsList/>
             <div className='flex w-full flex-col'>
                 <Header user={user} userTeam={userTeam}/>

@@ -222,6 +222,12 @@ export type playerType={
     _id:string,
     username:string,
     teamid:string,
+    steamid?:string,
+    avatar?:{
+        small?:string,
+        medium?:string,
+        large?:string
+    },
     pp:string,
     country:string,
     followers?:string[],
@@ -285,7 +291,8 @@ declare global{
             mongoUri:string,
             appPath:string,
             ironCookie:string,
-            ironPassword:string
+            ironPassword:string,
+            steamApiKey:string
         }
     }
 }

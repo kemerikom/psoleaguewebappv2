@@ -149,5 +149,22 @@ export async function searchPlayers({term}:{term:string}) {
     }finally{
         await client.close()
     }
-    
+   
+}
+
+
+export async function updatePlayerSteamId({uid,steamId,avatar}:{uid:string,steamId:string,avatar:{small:string,medium:string,large:string}}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const players=database.collection('users')
+        const result = await players.findOneAndUpdate({uid},{$set:{
+            steamid:steamId,
+            avatar
+        }})
+        return result
+    }finally{
+        await client.close()
+    }
 }

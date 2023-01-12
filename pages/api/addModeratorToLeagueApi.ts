@@ -21,19 +21,19 @@ async function addModeratorToLeagueApi(req:NextIronRequest,res:NextApiResponse){
                         const result = await addLeagueModerator({leagueId,userId:newMod._id.toString(),userName:newMod.username})
                         res.status(200).json(result)
                     }else{
-                        res.status(200).json('Connection failed')
+                        res.status(400).json('Connection failed. Please try again later.')
                     }
                 }else{
-                    res.status(200).json('Connection failed')
+                    res.status(400).json('You have no permission.')
                 }
             }else{
-                res.status(200).json('Connection failed')
+                res.status(400).json('League or user not found.')
             }
         }else{
-            res.status(200).json('Connection failed')
+            res.status(400).json('You are not logged in.')
         }
     }else{
-        res.status(400).json('Connection failed')
+        res.status(400).json('Connection failed.')
     }
 }
 

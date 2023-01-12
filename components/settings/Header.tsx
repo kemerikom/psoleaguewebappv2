@@ -6,7 +6,7 @@ export default function Header({user,userTeam}:{user:playerType,userTeam:teamsTy
     return(
         <div className="flex flex-row w-full space-x-2 bg-white backdrop-blur-sm bg-opacity-70 p-2 rounded">
             <div className="flex items-center justify-center w-32 aspect-square rounded-full">
-                <img src='/teamlogo.png' className="w-full aspect-square rounded-full object-contain"></img>
+                <img src={`${user.avatar?.large||'/defaultAvatar.svg'}`} className="w-full aspect-square rounded-full object-contain"></img>
             </div>
             <div className="flex flex-col space-y-1">
                 <h1>

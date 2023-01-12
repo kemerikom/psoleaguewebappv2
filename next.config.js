@@ -12,6 +12,7 @@ module.exports = {
       mongoUri:process.env.mongoUri,
       appPath:process.env.appPath,
       ironPassword:process.env.ironPassword,
-      ironCookie:process.env.ironCookie
+      ironCookie:process.env.ironCookie,
+      steamApiKey:process.env.steamApiKey
     }
   }
