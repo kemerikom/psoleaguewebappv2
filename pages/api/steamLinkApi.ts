@@ -15,7 +15,7 @@ async function steamLinkApi(req:NextApiRequest,res:NextApiResponse){
         const redirectUrl= await steam.getRedirectUrl()
         res.redirect(redirectUrl)
     }else{
-        
+        res.redirect('/auth/login')
     }
 
 
