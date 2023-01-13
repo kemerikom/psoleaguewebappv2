@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { IoFootball } from 'react-icons/io5'
+import {withSessionSsr} from '../../utils/src/ironSessionHandlers'
 
 
 type countryType={
@@ -177,3 +178,23 @@ export default function SignUp(){
         //here devam et
     }
 }
+
+
+
+export const getServerSideProps = withSessionSsr (
+    async function getServerSideProps({req}) {
+        const user = req.session.user
+        if(user){
+            return{
+                redirect:{
+                    permanent: false,
+                    destination: '/'
+                }
+            }
+        }
+        return{
+            props:{}
+        }
+        
+    }
+)

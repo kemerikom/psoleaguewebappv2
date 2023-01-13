@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoFootball } from "react-icons/io5";
+import { withSessionSsr } from "../../utils/src/ironSessionHandlers";
 
 export default function Login(){
     const router = useRouter()
@@ -76,3 +77,22 @@ export default function Login(){
         setLoading(false)
     }
 }
+
+
+export const getServerSideProps = withSessionSsr (
+    async function getServerSideProps({req}) {
+        const user = req.session.user
+        if(user){
+            return{
+                redirect:{
+                    permanent: false,
+                    destination: '/'
+                }
+            }
+        }
+        return{
+            props:{}
+        }
+        
+    }
+)

@@ -78,8 +78,6 @@ export async function getTeamByUserId({userId}:{userId:string}):Promise<teamsTyp
         }else{
             return null
         }
-
-
     }finally{
         await client.close()
     }

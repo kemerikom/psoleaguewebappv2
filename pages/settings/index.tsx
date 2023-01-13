@@ -1,9 +1,11 @@
 import SettingsList from "../../components/settings/SettingList"
-import { withIronSessionSsr } from "iron-session/next"
+import { withIronSessionSsr, withIronSessionApiRoute } from "iron-session/next"
+import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiHandler } from "next"
 import { getUserByUid } from "../../utils/mongodb/getUsers"
 import Header from "../../components/settings/Header"
 import { playerType, teamsType } from "../../typings"
 import { getTeamByPlayer } from "../../utils/mongodb/getTeams"
+import { withSessionSsr } from "../../utils/src/ironSessionHandlers"
 
 export default function Index({user,userTeam}:{user:playerType,userTeam:teamsType}){
     return(
@@ -22,7 +24,7 @@ export default function Index({user,userTeam}:{user:playerType,userTeam:teamsTyp
 
 
 
-export const getServerSideProps=withIronSessionSsr(
+export const getServerSideProps = withSessionSsr (
     async function getServerSideProps({req}) {
         const userUid=req.session.user
         let userData=null
@@ -34,6 +36,20 @@ export const getServerSideProps=withIronSessionSsr(
                 userData=user
                 const team = await getTeamByPlayer({userId:user._id.toString()})
                 if(team)userTeam=team
+            }else{
+                return{
+                    redirect:{
+                        permanent: false,
+                        destination: '/auth/login'
+                    }
+                }
+            }
+        }else{
+            return{
+                redirect:{
+                    permanent: false,
+                    destination: '/auth/login'
+                }
             }
         }
         return{
@@ -41,12 +57,7 @@ export const getServerSideProps=withIronSessionSsr(
                 user:JSON.parse(JSON.stringify(userData)),
                 userTeam:JSON.parse(JSON.stringify(userTeam))
             }
-        }
-    },{
-        cookieName:process.env.ironCookie,
-        password:process.env.ironPassword,
-        cookieOptions:{
-            secure:process.env.NODE_ENV==='production'
-        }
+        } 
     }
 )
+
