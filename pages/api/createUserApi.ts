@@ -8,17 +8,16 @@ export default async function createuserApi(req:NextApiRequest,res:NextApiRespon
         const {username,email,password,country,mainpos,secpos}=body.data
         const usernameCheck= await findPlayerByUserName({username})
         if(usernameCheck){
-            res.status(200).json(1)
+            res.status(400).json('This username already taken')
         }else{
             const userCheck= await createUser({email,password})
             if(!userCheck){
-                res.status(200).json(2)
+                res.status(400).json('Something went wrong.')
             }else{
                 const userId=userCheck.user.uid
                 const result = await createUserData({id:userId,username,country,mainpos,secpos})
                 res.status(200).json(result)
             }
-            
         }
     }else{
         res.status(400).json('Connection failed')

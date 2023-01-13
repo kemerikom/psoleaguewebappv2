@@ -30,12 +30,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       setLogin(true)
       setUid(user.uid)
       setUser(user)
-      /* const res=await fetch(`${process.env.appPath}/api/getUserByUidApi`,{
-        method:'POST',
-        body:JSON.stringify({uid:user.uid})
-      })
-      const userData=await res.json()
-      if(!user)setUser(userData) */
     }else{
       setLogin(false)
       setUid(null)

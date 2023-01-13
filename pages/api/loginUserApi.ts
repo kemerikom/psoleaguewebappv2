@@ -15,8 +15,11 @@ async function loginUserApi(req:NextIronRequest,res:NextApiResponse):Promise<voi
                 uid:result.user.uid
             })
             await req.session.save()
+            res.status(200).json(result)
+        }else{
+            res.status(400).json('Wrong credentials')
         }
-        res.status(200).json(result)
+
     }else{
         res.status(400).json('Connection failed')
     }

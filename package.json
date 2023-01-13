@@ -8,6 +8,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "discord.js": "^14.7.1",
     "firebase": "^9.13.0",
     "html-to-image": "^1.11.4",
     "iron-session": "^6.3.1",

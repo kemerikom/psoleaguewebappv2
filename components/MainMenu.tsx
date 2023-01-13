@@ -86,14 +86,15 @@ export default function MainMenu() {
                     </Menu>
                     <Menu>
                         <Menu.Button as='div' className={'hover:bg-blue-900 relative transition-all h-full mx-2 p-2 cursor-pointer'}>
-                            {siteData.user&&siteData.user.photoURL&&
+                            {siteData.user!=null&&siteData.user.photoURL&&
                                 <img src={siteData.user.photoURL} className='aspect-square rounded-full w-6 h-6'></img>
                             }
-                            {!siteData.user||!siteData.user.photoURL&&
-                            <IoPersonCircle className='text-2xl'/>
+                            {!siteData.user&&
+                                <IoPersonCircle className='text-2xl'/>
                             }
-
-
+                            {siteData.user!=null&&!siteData.user.photoURL&&
+                                <IoPersonCircle className='text-2xl'/>
+                            }
                             <div className='absolute bottom-2 right-2 w-2 aspect-square rounded-full bg-red-600'></div>
                         </Menu.Button>
                         <Menu.Items as='div' className={'absolute bg-black bg-opacity-10 backdrop-blur-sm group-hover:bg-blue-800 hover:bg-blue-800 transition-all top-10 right-2 flex flex-col items-end gap-y-2 p-2 rounded-b outline-none'}>
@@ -138,7 +139,7 @@ export default function MainMenu() {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link className='flex flex-row items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/'}>
+                                <Link className='flex flex-row items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/auth/signup'}>
                                     <IoFootball className='text-2xl'/>
                                     <label className='cursor-pointer'>Sign Up</label>
                                 </Link>

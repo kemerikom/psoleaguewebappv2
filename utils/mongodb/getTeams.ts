@@ -12,6 +12,9 @@ export async function getTeam({teamId}:{teamId:string}) {
         const teamList=teams.findOne({_id:(new ObjectId(teamId))})
         const result= await teamList
         return result
+    }
+    catch (err){
+        return false
     }finally{
         await client.close()
     }
