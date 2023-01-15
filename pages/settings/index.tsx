@@ -1,6 +1,4 @@
 import SettingsList from "../../components/settings/SettingList"
-import { withIronSessionSsr, withIronSessionApiRoute } from "iron-session/next"
-import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiHandler } from "next"
 import { getUserByUid } from "../../utils/mongodb/getUsers"
 import Header from "../../components/settings/Header"
 import { playerType, teamsType } from "../../typings"
@@ -13,10 +11,6 @@ export default function Index({user,userTeam}:{user:playerType,userTeam:teamsTyp
             <SettingsList/>
             <div className='flex w-full flex-col'>
                 <Header user={user} userTeam={userTeam}/>
-                <div className="p-2 bg-white backdrop-blur-sm bg-opacity-70 rounded my-2">
-                    
-                </div>
-
             </div>
         </div>
     )

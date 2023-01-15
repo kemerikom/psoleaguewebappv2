@@ -287,6 +287,32 @@ export type banType={
     bannedtime:number
 }
 
+export type offerType = {
+    _id:string,
+    fromteam: {
+        id:string,
+        teamname:string,
+        logo:string
+    },
+    toteam?: {
+        id: string,
+        teamname: string,
+        logo: string
+    },
+    toplayer: {
+        id: string,
+        username: string,
+        avatar: string
+    },
+    acceptplayer: boolean,
+    rejectplayer: boolean,
+    acceptteam: boolean,
+    rejectteam: boolean,
+
+    datetime: number,
+    bot: boolean
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{
