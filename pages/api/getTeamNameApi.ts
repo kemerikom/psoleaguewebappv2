@@ -7,12 +7,17 @@ export default async function getTeamNameApi(req:NextApiRequest,res:NextApiRespo
         const body= JSON.parse(req.body)
         const {teamId}=body
         const team = await getTeam({teamId})
-        const result= {
-            _id:team?._id,
-            name:team?.name,
-            shortname:team?.shortname
+        if (team){
+            const result= {
+                _id:team?._id,
+                name:team?.name,
+                shortname:team?.shortname
+            }
+            res.status(200).json(result)
+        }else{
+            res.status(400).json('Team not found')
         }
-        res.status(200).json(result)
+        
     }else{
         res.status(400).json('Connection failed')
     }
