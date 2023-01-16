@@ -70,7 +70,7 @@ export default function Answer({offer}: {offer:offerType}){
                     <label>{offer.toteam?.teamname}:</label>
                     {!acceptTeam && !rejectTeam &&
                     <>
-                        <button className="btnPrimary">
+                        <button className="btnPrimary" onClick={teamAccept}>
                             {loading &&
                                 <Loading/>
                             }
@@ -78,7 +78,7 @@ export default function Answer({offer}: {offer:offerType}){
                                 'Accept'
                             }
                         </button>
-                        <button className="btnSecondary">
+                        <button className="btnSecondary" onClick={teamReject}>
                             {loading &&
                                 <Loading/>
                             }
@@ -134,11 +134,35 @@ export default function Answer({offer}: {offer:offerType}){
     }
 
     async function teamAccept() {
-        
+        setLoading(true)
+        const res = await fetch(`${process.env.appPath}/api/teamAcceptOfferApi`,{
+            method: 'POST',
+            body: JSON.stringify({offerId: offer._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status==200){
+            setAcceptTeam(true)
+            toast.success('You rejected a transfer offer')
+        }else{
+            toast.error(result)
+        }
+        setLoading(false)
     }
 
     async function teamReject() {
-        
+        setLoading(true)
+        const res = await fetch(`${process.env.appPath}/api/teamRejectOfferApi`,{
+            method: 'POST',
+            body: JSON.stringify({offerId: offer._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status==200){
+            setRejectTeam(true)
+            toast.success('You rejected a transfer offer')
+        }else{
+            toast.error(result)
+        }
+        setLoading(false)
     }
 }
 

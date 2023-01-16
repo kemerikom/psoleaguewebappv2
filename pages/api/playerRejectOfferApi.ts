@@ -15,7 +15,7 @@ async function playerRejectOfferApi(req: NextApiRequest, res: NextApiResponse) {
             if (user){
                 const offer = await getOfferById({offerId})
                 if (offer){
-                    if(offer.toplayer){
+                    if(offer.toplayer.id==user._id.toString()){
                         if (!offer.acceptplayer){
                             const result = await playerRejectOffer({offerId})
                             res.status(200).json(result)
