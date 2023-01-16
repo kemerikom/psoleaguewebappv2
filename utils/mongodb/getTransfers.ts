@@ -15,3 +15,4 @@ export async function getTransferByUserId({userId}:{userId:string}) {
         await client.close()
     }
 }
+

@@ -49,7 +49,7 @@ export async function searchTeams({term}:{term:string}) {
 }
 
 
-export async function getTeamByUserId({userId}:{userId:string}):Promise<teamsType|null> {
+export async function getTeamByUserId({userId}:{userId:string}):Promise<teamsType | null> {
     const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()

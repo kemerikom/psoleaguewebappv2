@@ -66,7 +66,7 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                                     {data.downvote?`${data.downvote.length}`:0}
                                 </label>
                             </div>
-                            <button className="btnPrimary">
+                            <button className="btnPrimary" onClick={sendTransferOffer}>
                                 <BiTransferAlt className="text-lg"/>
                             </button>
                         </div>
@@ -97,6 +97,10 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
             </div>
         </div>
     )
+
+    async function sendTransferOffer(){
+
+    }
 
 }
 
