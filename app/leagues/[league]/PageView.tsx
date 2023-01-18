@@ -84,7 +84,7 @@ export default function PageView({data}:{data:leagueName}){
                         })}
                     </Tab.Panel>
                     <Tab.Panel as='div' className={'flex flex-col bg-white rounded p-2'}>
-                        <TeamsPage teams={teams}></TeamsPage>
+                        {/* <TeamsPage teams={teams}></TeamsPage> */}
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
