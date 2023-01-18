@@ -18,10 +18,10 @@ export default function Transfer({data}:{data:transferType}){
                 <label className="text-center">{new Date(data.datetime).toLocaleString()}</label>
             </div>
             <div className="flex flex-1 justify-start">
-                {data.to.teamid!="free"&&
-                    <Link href={`/teams/${data.to.teamid}`} className="flex hover:underline transition-all">{data.to.teamname}</Link>
+                {data.to?.teamid!="free"&&
+                    <Link href={`/teams/${data.to?.teamid}`} className="flex hover:underline transition-all">{data.to?.teamname}</Link>
                 }
-                {data.to.teamid=="free"&&
+                {data.to?.teamid=="free"&&
                     <label className="flex">Free</label>
                 }
             </div>
