@@ -27,8 +27,8 @@ export async function transferPlyerToTeam({offer}:{offer: offerType}) {
         const transfers=database.collection('transfers')
         await transfers.insertOne({
             user: offer.toplayer,
-            from: offer.fromteam,
-            to: offer.toteam,
+            from: offer.toteam,
+            to: offer.fromteam,
             datetime
         })
         await addPlayerToTeam({offer})
