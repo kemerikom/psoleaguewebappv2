@@ -175,7 +175,7 @@ export type teamsType={
     color1:string,
     color2:string,
     fontcolor:string,
-    logo:string,
+    teamlogo:string,
     leagues:string[],
     players:userNameIdType[],
     captain?:string,

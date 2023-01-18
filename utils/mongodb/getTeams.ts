@@ -181,3 +181,23 @@ export async function removePlayerToTeam({offer}: {offer: offerType}) {
         await client.close()
     }
 }
+
+
+export async function updateTeamLogo({teamId}: {teamId:string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({
+            _id: new ObjectId(teamId)
+        },{
+            $set: {
+                teamlogo: `${teamId}.png`
+            }
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}

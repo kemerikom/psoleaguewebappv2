@@ -108,9 +108,9 @@ export default function MainMenu() {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/'}>
+                                <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/myteam'}>
                                     <IoPeopleCircle className='text-2xl'/>
-                                    <label className='cursor-pointer'>Team</label>
+                                    <label className='cursor-pointer'>My Team</label>
                                     <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full bg-red-600'></div>
                                 </Link>
                             </Menu.Item>
