@@ -256,7 +256,7 @@ export type transferType={
         username:string,
         avatar?:string
     },
-    from:{
+    from?:{
         teamid:string,
         teamname:string,
         logo?:string
