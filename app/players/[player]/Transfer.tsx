@@ -7,10 +7,10 @@ export default function Transfer({data}:{data:transferType}){
     return(
         <div className="flex flex-row w-full items-center justify-center space-x-2 hover:bg-blue-300 rounded transition-all">
             <div className="flex flex-1 justify-end">
-                {data.from.teamid!="free"&&
-                    <Link href={`/teams/${data.from.teamid}`} className="flex hover:underline transition-all">{data.from.teamname}</Link>
+                {data.from?.teamid!="free"&&
+                    <Link href={`/teams/${data.from?.teamid}`} className="flex hover:underline transition-all">{data.from?.teamname}</Link>
                 }
-                {data.from.teamid=="free"&&
+                {data.from?.teamid=="free"&&
                     <label className="flex">Free</label>
                 }
             </div>
