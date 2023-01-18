@@ -185,3 +185,19 @@ export async function updatePlayerDiscordId({uid,discordId,discordName}:{uid:str
         await client.close()
     }
 }
+
+export async function updatePlayerTeamId ({userId, teamId}: {userId: string, teamId: string}){
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const players=database.collection('users')
+        const player = await players.updateOne({
+            _id: new ObjectId(userId)
+        },{
+            $set:{ teamid: teamId}
+        })
+    }finally{
+        await client.close()
+    }
+}

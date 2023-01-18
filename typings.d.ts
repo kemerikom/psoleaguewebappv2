@@ -251,14 +251,20 @@ export type medalType={
 
 export type transferType={
     _id:string,
-    userid:string,
+    user: {
+        id:string,
+        username:string,
+        avatar?:string
+    },
     from:{
         teamid:string,
-        teamname:string
+        teamname:string,
+        logo?:string
     },
-    to:{
+    to?:{
         teamid:string,
         teamname:string,
+        logo?:string
     },
     datetime:number
 }

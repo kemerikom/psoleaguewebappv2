@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { sendTransferOffer } from "../../utils/mongodb/getOffers";
 import { getTeam, getTeamByUserId } from "../../utils/mongodb/getTeams";
 import { getPlayer, getUserByUid } from "../../utils/mongodb/getUsers";
 import { withSessionRouter } from "../../utils/src/ironSessionHandlers";
@@ -32,16 +33,18 @@ async function sendTransferOfferApi(req: NextApiRequest, res: NextApiResponse) {
                                 let toTeam = {
                                     id: toTeamData._id.toString(),
                                     name: toTeamData.name,
-                                    logo: toTeamData.logo
+                                    logo: toTeamData.logo || 'default'
                                 }
-                                nonFreeAgent({toPlayer, toTeam, fromTeam})
+                                const result = await nonFreeAgent({toPlayer, toTeam, fromTeam})
+                                res.status(200).json(result)
                             }else{
                                 let toTeam = {
                                     id: 'free',
                                     name: 'free',
                                     logo: 'free',
                                 }
-                                freeAgent({toPlayer, toTeam, fromTeam})
+                                const result = await freeAgent({toPlayer, toTeam, fromTeam})
+                                res.status(200).json(result)
                             }
 
                         }else{
@@ -50,7 +53,8 @@ async function sendTransferOfferApi(req: NextApiRequest, res: NextApiResponse) {
                                 name: 'free',
                                 logo: 'free',
                             }
-                            freeAgent({toPlayer, toTeam, fromTeam})
+                            const result = await freeAgent({toPlayer, toTeam, fromTeam})
+                            res.status(200).json(result)
                         }
                     }else{
                         res.status(400).json('Player not found')
@@ -71,11 +75,13 @@ async function sendTransferOfferApi(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function freeAgent({toPlayer, toTeam, fromTeam}: {toPlayer: {id:string, username:string, avatar?:string}, toTeam:{id:string, name: string, logo?:string}, fromTeam: {id:string, name:string, logo?:string}}) {
-    
+    const result = await sendTransferOffer ({toPlayer,toTeam,fromTeam,acceptTeam:true})
+    return result
 }
 
 async function nonFreeAgent({toPlayer, toTeam, fromTeam}: {toPlayer: {id:string, username:string, avatar?:string}, toTeam:{id:string, name: string, logo?:string}, fromTeam: {id:string, name:string, logo?:string}}) {
-    
+    const result = await sendTransferOffer ({toPlayer, toTeam, fromTeam})
+    return result
 }
 
 

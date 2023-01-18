@@ -1,5 +1,6 @@
 import {MongoClient, ObjectId} from 'mongodb'
-import { teamsType } from '../../typings'
+import { offerType, teamsType, transferType } from '../../typings'
+import { updatePlayerTeamId } from './getUsers'
 
 
 
@@ -128,6 +129,54 @@ export async function getTeamByPlayer({userId}:{userId:string}) {
         const teams=database.collection('teams')
         const data = await teams.findOne({'players.id':userId})
         return data        
+    }finally{
+        await client.close()
+    }
+}
+
+export async function addPlayerToTeam({offer}: {offer: offerType}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        await teams.updateOne({
+            _id: new ObjectId(offer.fromteam.id)
+        },{
+            $push:{
+                players:{
+                    id: offer.toplayer.id,
+                    username: offer.toplayer.username
+                }
+            }
+        })
+    }finally{
+        await client.close()
+    }
+    await updatePlayerTeamId({userId: offer.toplayer.id, teamId:offer.fromteam.id})
+    if(offer.toteam){
+        if (offer.toteam.id!='free'){
+            await removePlayerToTeam({offer})
+        }
+    }
+}
+
+export async function removePlayerToTeam({offer}: {offer: offerType}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        await teams.updateOne({
+            _id: new ObjectId(offer.toteam?.id||'free')
+        },{
+            $pull:{
+                players:{
+                    id: offer.toplayer.id,
+                    username: offer.toplayer.username
+                }
+            }
+        })
     }finally{
         await client.close()
     }

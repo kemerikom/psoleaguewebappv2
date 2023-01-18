@@ -9,12 +9,16 @@ import { getTransferByUserId } from "../../utils/mongodb/getTransfers"
 import ReactCountryFlag from "react-country-flag";
 import { Tab } from "@headlessui/react"
 import Link from "next/link"
-import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
+import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoFootball} from 'react-icons/io5'
 import { BiTransferAlt } from "react-icons/bi"
 import { getUserMedals } from "../../utils/mongodb/getMedals"
+import { ToastContainer, toast } from 'react-toastify'
+import { useState} from 'react'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Player({data,team,transfers,medals}:{data:playerType,team:teamsType,transfers:transferType[],medals:medalType[]}){
+    const [loading, setLoading] = useState<boolean>(false)
     return(
         <div className="max-w-5xl mx-auto p-3 w-full">
             <Head>
@@ -23,6 +27,18 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                 <meta property="og:title" content={`${data.username}`}></meta>
                 <meta property="og:image" content={`https://storage.googleapis.com/psoleaguev2.appspot.com/players/cards/${data.card}`}></meta>
             </Head>
+            <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
             <div className="flex flex-col mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
                 <div className="flex flex-row h-40">
                     <div className="flex items-center h-full aspect-square">
@@ -67,7 +83,13 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                                 </label>
                             </div>
                             <button className="btnPrimary" onClick={sendTransferOffer}>
-                                <BiTransferAlt className="text-lg"/>
+                                {loading &&
+                                    <IoFootball className="text-lg animate-spin"/>
+                                }
+                                {!loading &&
+                                    <BiTransferAlt className="text-lg"/>
+                                }
+                                
                             </button>
                         </div>
                     </div>
@@ -99,7 +121,20 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
     )
 
     async function sendTransferOffer(){
-
+        setLoading(true)
+        const res = await fetch(`${process.env.appPath}/api/sendTransferOfferApi`,{
+            method:'POST',
+            body:JSON.stringify({
+                userId: data._id.toString()
+            })
+        })
+        const result = await res.json()
+        if(res.status == 200){
+            toast.success('Transfer offer succesfully sended')
+        }else{
+            toast.error(result)
+        }
+        setLoading(false)
     }
 
 }

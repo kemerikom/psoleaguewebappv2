@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getOfferById, playerAcceptOffer } from "../../utils/mongodb/getOffers";
+import { getOfferById, playerAcceptOffer, checkTransfer } from "../../utils/mongodb/getOffers";
 import { getUserByUid } from "../../utils/mongodb/getUsers";
 import { withSessionRouter } from "../../utils/src/ironSessionHandlers";
 
@@ -17,6 +17,7 @@ async function playerAcceptOfferApi(req: NextApiRequest, res: NextApiResponse) {
                     if(offer.toplayer.id==user._id.toString()){
                         if (!offer.rejectplayer){
                             const result = await playerAcceptOffer({offerId})
+                            await checkTransfer({offerId})
                             res.status(200).json(result)
                         }else{
                             res.status(400).json('Offer already rejected')
