@@ -1,5 +1,5 @@
 import { matchType, teamsType } from "../../typings"
-import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline} from 'react-icons/io5'
+import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoPeopleCircle} from 'react-icons/io5'
 import Link from "next/link";
 import { Tab } from '@headlessui/react'
 import ReactCountryFlag from "react-country-flag";
@@ -24,7 +24,18 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
             </Head>
             <div id='header' className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
-                    <img className="h-full aspect-square rounded-full" src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${team.logo}`}></img>
+                    {team.logo && 
+                        <img className="h-full aspect-square rounded-full" src={`${process.env.storagePath}/teamlogos/${team.logo}`}></img>
+                    }
+                    {!team.logo &&
+                        <div className="flex h-full aspect-square rounded-full items-center justify-center"
+                        style={{backgroundColor: team.color1}}>
+                            <IoPeopleCircle className="text-9xl"
+                            style={{color: team.color2}}
+                            />
+                        </div>
+                        
+                    }
                 </div>
                 <div className="flex flex-col w-full items-start p-3 space-y-1">
                     <h1>{team.name} [{team.shortname}]</h1>

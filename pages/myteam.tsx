@@ -16,7 +16,7 @@ export default function MyTeam({data}:{data:teamsType}){
         <div className='flex flex-col space-y-2 max-w-4xl w-full my-3 mx-auto p-3 bg-white backdrop-blur-sm bg-opacity-70 rounded'>
             <div className='flex flex-row space-x-2'>
                 <div className='flex w-32 aspect-square rounded-full'>
-                    <img src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${data.logo}`} className='flex w-full aspect-square rounded-full'></img>
+                    <img src={`${process.env.storagePath}/teamlogos/${data.logo}`} className='flex w-full aspect-square rounded-full'></img>
                 </div>
                 <div className='flex-col'>
                     <h1 className='flex space-x-1'>
@@ -58,7 +58,7 @@ export default function MyTeam({data}:{data:teamsType}){
                 </Tab.List>
                 <Tab.Panels>
                     <Tab.Panel className={'flex p-2'}>
-                        <PlayerList players={data.players}/>
+                        <PlayerList players={data.players} team={data}/>
                     </Tab.Panel>
                     <Tab.Panel className={'flex p-2'}>
                         <FormationEdit data={data}/>
@@ -126,30 +126,3 @@ export const getServerSideProps= withSessionSsr(
     }
 )
 
-
-/* export const getServerSideProps=withIronSessionSsr(
-    async function getServerSideProps({req}) {
-        const userUid=req.session.user
-        let data=null
-        if(userUid){
-            const {uid}=userUid
-            const user = await getUserByUid({uid:uid||'null'})
-            if(user){
-                const team = await getTeamByUserId({userId:user?._id.toString()})
-                if(team)data=team
-            }
-            
-        } 
-        return{
-            props:{
-                data
-            }
-        }
-    },{
-        cookieName:process.env.ironCookie,
-        password:process.env.ironPassword,
-        cookieOptions:{
-            secure:process.env.NODE_ENV==='production'
-        }
-    }
-) */

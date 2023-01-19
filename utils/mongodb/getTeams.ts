@@ -1,6 +1,7 @@
 import {MongoClient, ObjectId} from 'mongodb'
-import { offerType, teamsType, transferType } from '../../typings'
+import { offerType, teamsType, transferType, userNameIdType } from '../../typings'
 import { updatePlayerTeamId } from './getUsers'
+
 
 
 
@@ -197,6 +198,47 @@ export async function updateTeamLogo({teamId}: {teamId:string}) {
             }
         })
         return team
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function updateCoCaptain({teamId, userId}: {teamId: string, userId: string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({
+            _id: new ObjectId(teamId)
+        },{
+            $set: {
+                cocaptain: userId
+            }
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function kickPlayerFromTeam({teamId, player}: {teamId:string, player: userNameIdType}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const teams=database.collection('teams')
+        const res = await teams.updateOne({
+            _id: new ObjectId(teamId)
+        },{
+            $pull: {
+                players:player
+            }
+        })
+        const result = await updatePlayerTeamId({userId: player.id, teamId: 'free'})
+        return result
     }finally{
         await client.close()
     }

@@ -9,14 +9,15 @@ module.exports = {
       messagingSenderId: process.env.storageBucket,
       appId: process.env.appId,
       measurementId: process.env.measurementId,
-      mongoUri:process.env.mongoUri,
-      appPath:process.env.appPath,
-      ironPassword:process.env.ironPassword,
-      ironCookie:process.env.ironCookie,
-      steamApiKey:process.env.steamApiKey,
-      discordClientId:process.env.discordClientId,
-      discordClientSecret:process.env.discordClientSecret,
-      discordApiEndpoint:process.env.discordApiEndpoint,
-      discordGeneratedUrl:process.env.discordGeneratedUrl
+      mongoUri: process.env.mongoUri,
+      appPath: process.env.appPath,
+      ironPassword: process.env.ironPassword,
+      ironCookie: process.env.ironCookie,
+      steamApiKey: process.env.steamApiKey,
+      discordClientId: process.env.discordClientId,
+      discordClientSecret: process.env.discordClientSecret,
+      discordApiEndpoint: process.env.discordApiEndpoint,
+      discordGeneratedUrl: process.env.discordGeneratedUrl,
+      storagePath: process.env.storagePath
     }
   }

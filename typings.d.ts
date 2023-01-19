@@ -175,7 +175,7 @@ export type teamsType={
     color1:string,
     color2:string,
     fontcolor:string,
-    logo:string,
+    logo?:string,
     leagues:string[],
     players:userNameIdType[],
     captain?:string,
@@ -322,15 +322,16 @@ export type offerType = {
 declare global{
     namespace NodeJS{
         interface ProcessEnv{
-            mongoUri:string,
-            appPath:string,
-            ironCookie:string,
-            ironPassword:string,
-            steamApiKey:string,
-            discordClientId:string,
-            discordClientSecret:string,
-            discordApiEndpoint:string,
-            discordGeneratedUrl:string
+            mongoUri: string,
+            appPath: string,
+            ironCookie: string,
+            ironPassword: string,
+            steamApiKey: string,
+            discordClientId: string,
+            discordClientSecret: string,
+            discordApiEndpoint: string,
+            discordGeneratedUrl: string,
+            storagePath: string
         }
     }
 }

@@ -197,6 +197,7 @@ export async function updatePlayerTeamId ({userId, teamId}: {userId: string, tea
         },{
             $set:{ teamid: teamId}
         })
+        return player
     }finally{
         await client.close()
     }

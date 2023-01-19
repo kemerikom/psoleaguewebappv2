@@ -1,7 +1,8 @@
 import Link from "next/link"
-import { teamNameIdType, teamsType } from "../typings"
+import { IoPeopleCircle } from "react-icons/io5"
+import { teamsType } from "../typings"
 
-export default function TeamsPage({teams}:{teams:teamNameIdType[]}){
+export default function TeamsPage({teams}:{teams:teamsType[]}){
     return(
         <div className="flex flex-row flex-wrap justify-center">
             {teams?.map((team)=>{
@@ -29,8 +30,19 @@ export default function TeamsPage({teams}:{teams:teamNameIdType[]}){
                     `}
                 </style>
                     <Link href={`/teams/${team._id}`} className="flex flex-row space-x-2 items-center">
-                        <div className="flex items-center w-16 aspect-square rounded-full">
-                            <img className="rounded-full" src='/teamlogo.png'></img>
+                        <div className="flex items-center w-16 h-16 aspect-square rounded-full">
+                            {team.logo && 
+                                <img className="rounded-full" src={`${process.env.storagePath}/teamlogos/${team.logo}`}></img>
+                            }
+                            {!team.logo &&
+                            <div className="flex w-16 h-16 items-center justify-center rounded-full"
+                            style={{backgroundColor: team.color1}}
+                            >
+                                <IoPeopleCircle className="text-4xl"
+                                style={{color: team.color2}}
+                                />
+                            </div>
+                            }
                         </div>
                         <div className="flex flex-col cursor-pointer">
                             <h3 className="cursor-pointer"
