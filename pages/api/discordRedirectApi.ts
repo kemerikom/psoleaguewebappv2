@@ -36,8 +36,10 @@ async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
                     })
                     const resData= await result.json()
                     const resUpdate= await updatePlayerDiscordId({uid,discordId:resData.id,discordName:`${resData.username}#${resData.discriminator}`})
+                    console.log(resUpdate)
                     res.status(200).redirect('/settings/discord')
                 }else{
+                    console.log('false')
                     res.status(400).redirect('/settings/discord')
                 }
             } catch (error) {
