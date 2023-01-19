@@ -160,7 +160,7 @@ export default function SignUp(){
             username:userName,
             country:country.code||'XX',
             mainpos:mainPos.pos,
-            secpos:secPos.pos
+            secondpos:secPos.pos
         }
         const res = await fetch(`${process.env.appPath}/api/createUserApi`,{
             method:'POST',

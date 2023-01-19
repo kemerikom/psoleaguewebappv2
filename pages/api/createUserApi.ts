@@ -5,7 +5,7 @@ import { findPlayerByUserName,createUserData } from "../../utils/mongodb/getUser
 export default async function createuserApi(req:NextApiRequest,res:NextApiResponse) {
     if(req.method=='POST'){
         const body=JSON.parse(req.body)
-        const {username,email,password,country,mainpos,secpos}=body.data
+        const {username,email,password,country,mainpos,secondpos}=body.data
         const usernameCheck= await findPlayerByUserName({username})
         if(usernameCheck){
             res.status(400).json('This username already taken')
@@ -15,7 +15,7 @@ export default async function createuserApi(req:NextApiRequest,res:NextApiRespon
                 res.status(400).json('Something went wrong.')
             }else{
                 const userId=userCheck.user.uid
-                const result = await createUserData({id:userId,username,country,mainpos,secpos})
+                const result = await createUserData({id:userId,username,country,mainpos,secondpos})
                 res.status(200).json(result)
             }
         }

@@ -65,7 +65,7 @@ export async function findPlayerByUserName({username}:{username:string}) {
     }
 }
 
-export async function createUserData({id,username,country,mainpos,secpos}:{id:string,username:string,country:string,mainpos:string,secpos:string}) {
+export async function createUserData({id,username,country,mainpos,secondpos}:{id:string,username:string,country:string,mainpos:string,secondpos:string}) {
     const client = new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
@@ -76,7 +76,7 @@ export async function createUserData({id,username,country,mainpos,secpos}:{id:st
             username,
             country,
             mainpos,
-            secpos,
+            secondpos,
             teamid:'free'
         })
         return user
