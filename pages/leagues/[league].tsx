@@ -101,7 +101,8 @@ export async function getStaticProps({params}:{params:{league:string}}) {
     const resSeasons = await getLeaguePreviousTables({leagueId:league._id.toString()})
     const previousSeasons = JSON.parse(JSON.stringify(resSeasons))
     return{
-        props:{league,currentSeasons,previousSeasons}
+        props:{league,currentSeasons,previousSeasons},
+        revalidate: 30
     }
 }
 
@@ -110,8 +111,7 @@ export async function getStaticPaths() {
     const resultLeague = await getLeagueIds()
     const paths=resultLeague.map((league)=>{
         return{
-            params:{league:league._id.toString()},
-            revalidate: 10
+            params:{league:league._id.toString()}
         }
     })
     return{

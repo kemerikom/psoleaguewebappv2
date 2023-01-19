@@ -9,6 +9,7 @@ import FormationPage from "../../components/formations/FormationPage";
 import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 import Head from "next/head";
+import PlayerList from "../../components/teams/PlayerList";
 
 
 export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
@@ -95,8 +96,8 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                     </Tab>
                 </Tab.List>
                 <Tab.Panels className={'outline-none'}>
-                    <Tab.Panel className={'flex w-full p-2 bg-white rounded'}>
-                        {/* <PlayerList teamId={team._id}></PlayerList> */}
+                    <Tab.Panel className={'flex w-full p-2 rounded items-center justify-center'}>
+                        <PlayerList players={team.players} />
                     </Tab.Panel>
                     <Tab.Panel className={'flex w-full p-2 items-center justify-center bg-white rounded'}>
                         <FormationPage
