@@ -82,7 +82,7 @@ export default function League({league,currentSeasons,previousSeasons}:{league:l
                             })}
                         </Tab.Panel>
                         <Tab.Panel as='div' className={'flex flex-col bg-white rounded p-2'}>
-                            <TeamsPage teams={league.teams}></TeamsPage>
+                            {/* <TeamsPage teams={league.teams}></TeamsPage> */}
                         </Tab.Panel>
                     </Tab.Panels>
                 </Tab.Group>
