@@ -16,7 +16,7 @@ export default function MyTeam({data}:{data:teamsType}){
         <div className='flex flex-col space-y-2 max-w-4xl w-full my-3 mx-auto p-3 bg-white backdrop-blur-sm bg-opacity-70 rounded'>
             <div className='flex flex-row space-x-2'>
                 <div className='flex w-32 aspect-square rounded-full'>
-                    <img src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${data.teamlogo}`} className='flex w-full aspect-square rounded-full'></img>
+                    <img src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${data.logo}`} className='flex w-full aspect-square rounded-full'></img>
                 </div>
                 <div className='flex-col'>
                     <h1 className='flex space-x-1'>

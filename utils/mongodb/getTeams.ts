@@ -193,7 +193,7 @@ export async function updateTeamLogo({teamId}: {teamId:string}) {
             _id: new ObjectId(teamId)
         },{
             $set: {
-                teamlogo: `${teamId}.png`
+                logo: `${teamId}.png`
             }
         })
         return team

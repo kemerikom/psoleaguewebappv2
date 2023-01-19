@@ -34,7 +34,7 @@ export type teamNameIdType={
     color1:string,
     color2:string,
     fontcolor:string,
-    teamlogo:string
+    logo:string
 }
 
 export type leagueName={
@@ -175,7 +175,7 @@ export type teamsType={
     color1:string,
     color2:string,
     fontcolor:string,
-    teamlogo:string,
+    logo:string,
     leagues:string[],
     players:userNameIdType[],
     captain?:string,

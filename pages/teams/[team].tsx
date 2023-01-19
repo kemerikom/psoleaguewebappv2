@@ -24,7 +24,7 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
             </Head>
             <div id='header' className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
-                    <img className="h-full aspect-square rounded-full" src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${team.teamlogo}`}></img>
+                    <img className="h-full aspect-square rounded-full" src={`https://storage.googleapis.com/psoleaguev2.appspot.com/teamlogos/${team.logo}`}></img>
                 </div>
                 <div className="flex flex-col w-full items-start p-3 space-y-1">
                     <h1>{team.name} [{team.shortname}]</h1>
