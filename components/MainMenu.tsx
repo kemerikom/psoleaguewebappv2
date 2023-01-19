@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Menu } from '@headlessui/react'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { SiteContext } from '../context/SiteContext'
 import {IoPersonCircle,IoPeopleCircle,IoSettingsSharp,IoLogOut,IoLogIn,IoFootball, IoNotifications} from 'react-icons/io5'
 import { logoutUser } from '../utils/firebase/logoutUser'
@@ -24,6 +24,24 @@ export default function MainMenu() {
     const siteData:any=useContext(SiteContext)
     const [regions,setRegions]=useState<regionNames[]>([])
     const [leagues,setLeagues]=useState<leagueNames[]>([])
+    const [notification, setNotification] = useState<boolean>(false)
+    const {notifications} = siteData
+    useEffect(() => {
+        if (siteData){
+            if (notifications){
+                if(!notifications.find((notification: notificationType)=>notification.id == '1')){
+                    setNotification(true)
+                }else{
+                    setNotification(false)
+                }
+            }else{
+                setNotification(false)
+            }
+        }
+        else{
+            setNotification(false)
+        }
+    },[siteData])
     return(
         <div className="flex flex-row group h-10 sticky top-0 left-0 z-50 w-full items-center bg-black bg-opacity-10 backdrop-blur-sm justify-start hover:bg-blue-800 text-white px-2 transition-all">
             <div className="flex flex-row h-full">
@@ -37,7 +55,9 @@ export default function MainMenu() {
                     <Menu as='div' className='relative whitespace-nowrap'>
                         <Menu.Button as='div' className={'hover:bg-blue-900 relative transition-all h-full mx-2 p-2 cursor-pointer'}>
                             <IoNotifications className='text-2xl'/>
-                            {/* <div className='absolute bottom-2 right-2 w-2 aspect-square rounded-full bg-red-600'></div> */}
+                            {notification &&
+                                <div className='absolute bottom-2 right-2 w-2 aspect-square rounded-full bg-red-600'></div>
+                            }
                         </Menu.Button>
                         <Menu.Items as='div' className={'absolute bg-black bg-opacity-10 backdrop-blur-sm group-hover:bg-blue-800 hover:bg-blue-800 transition-all top-10 right-0 flex flex-col items-end gap-y-2 p-2 rounded-b outline-none'}>
                             {siteData.notifications.map((notification: notificationType) => {
