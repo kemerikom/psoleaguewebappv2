@@ -26,6 +26,7 @@ async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
                     headers:{'Content-Type': 'application/x-www-form-urlencoded'},
                     body:params
                 })
+                console.log('test')
                 const resData= await result.json()
                 const {access_token}= resData
                 if(access_token){
