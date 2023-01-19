@@ -110,7 +110,8 @@ export async function getStaticPaths() {
     const resultLeague = await getLeagueIds()
     const paths=resultLeague.map((league)=>{
         return{
-            params:{league:league._id.toString()}
+            params:{league:league._id.toString()},
+            revalidate: 10
         }
     })
     return{

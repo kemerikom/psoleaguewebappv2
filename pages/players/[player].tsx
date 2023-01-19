@@ -163,7 +163,7 @@ export async function getStaticProps({params}:{params:{player:string}}){
     const medals=JSON.parse(JSON.stringify(resMedals))
     return{
         props:{data:player,team,transfers,medals},
-        revalidate:60
+        revalidate: 10
     }
 }
 

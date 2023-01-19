@@ -50,7 +50,8 @@ export async function getStaticPaths() {
     const offers = JSON.parse(JSON.stringify(resOffers))
     const paths = offers.map((offer:any) => {
         return {
-            params: {offer: offer.id}
+            params: {offer: offer.id},
+            revalidate: 10
         }
     })
     return{
