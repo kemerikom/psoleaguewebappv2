@@ -176,7 +176,7 @@ export async function updatePlayerDiscordId({uid,discordId,discordName}:{uid:str
         await client.connect()
         const database= client.db('psoleague')
         const players=database.collection('users')
-        const result = await players.findOneAndUpdate({uid},{$set:{
+        const result = await players.updateOne({uid},{$set:{
             discordid:discordId,
             discordname:discordName
         }})
