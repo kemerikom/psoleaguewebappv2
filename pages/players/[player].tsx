@@ -50,7 +50,19 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                         {team&&
                         <div className="flex flex-row space-x-2">
                             <div className="flex w-6 aspect-square rounded-full items-center justify-center">
-                                <img className="w-full aspect-square rounded-full" src='/teamlogo.png'/>
+                                {team.logo && 
+                                    <img className="w-full aspect-square rounded-full" src={`${process.env.storagePath}/teamlogos/${team.logo}`}/>
+                                }
+                                {!team.logo &&
+                                <div className="flex w-6 h-6 aspect-square items-center justify-center"
+                                style={{backgroundColor: team.color1}}
+                                >
+                                    <IoFootball className="text-xs"
+                                    style={{color: team.color2}}
+                                    />
+                                </div>
+                                
+                                }
                             </div>
                             <div className="flex h-full items-center justify-center">
                                 <Link className="flex items-center justify-center hover:underline transition-all" href={`/teams/${team._id}`}>{team.name}</Link>
