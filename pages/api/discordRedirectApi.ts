@@ -40,7 +40,7 @@ async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
                     res.status(200).json(resUpdate)
                 }else{
                     console.log('false')
-                    res.status(400).json(false)
+                    res.status(400).json(access_token)
                 }
             } catch (error) {
                 res.status(400).json(error)
