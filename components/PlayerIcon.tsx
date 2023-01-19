@@ -19,7 +19,7 @@ export default function PlayerIcon({color1,color2,fontcolor,position,player}:{co
             style={{backgroundColor:color1,borderColor:color2,color:fontcolor}}
             >
                 {player?.id&&
-                    <Link className="flex hover:underline" href='/'>{player.username||""}</Link>
+                    <Link className="flex hover:underline" href={`/players/${player.id}`}>{player.username||""}</Link>
                 }
                 {!player?.id&&
                 <label>No Player Assingment</label>
