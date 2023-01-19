@@ -40,10 +40,10 @@ export default function Login(){
                         <label className="peer-invalid:flex hidden text-gray-300">Password must more than 6 characters</label>
                     </div>
                     <hr/>
-                    <button className="bg-green-900 py-2 px-4 rounded items-center justify-center" onClick={loginBtn}>
+                    <button className="flex bg-green-900 py-2 px-4 rounded items-center justify-center" onClick={loginBtn}>
                         {!loading && 'Login'}
                         {loading && 
-                            <IoFootball className="text-2xl animate-spin"/>
+                            <IoFootball className="flex text-2xl animate-spin"/>
                         }
                     </button>
                 </div>

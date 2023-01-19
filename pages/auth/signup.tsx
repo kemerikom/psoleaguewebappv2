@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { IoFootball } from 'react-icons/io5'
 import {withSessionSsr} from '../../utils/src/ironSessionHandlers'
+import {useRouter} from 'next/router'
 
 
 type countryType={
@@ -20,6 +21,7 @@ type posType={
 }
 
 export default function SignUp(){
+    const router = useRouter()
     const [userName,setUserName]=useState<string>("")
     const [userNameValid,setUserNameValid]=useState<boolean>(true)
     const [country,setCountry]=useState<countryType>({name:'',code:''})
@@ -121,10 +123,10 @@ export default function SignUp(){
                     </div>
                 </div>
                 <hr/>
-                <button className="bg-green-900 py-2 px-4 rounded" onClick={createUser}>
+                <button className="flex bg-green-900 py-2 px-4 rounded items-center justify-center" onClick={createUser}>
                     {!loading&&'Sign Up'}
                     {loading&&
-                    <IoFootball className='text-2xl animate-spin'/>
+                    <IoFootball className='flex text-2xl animate-spin'/>
                     }
                 </button>
                 <div className="flex flex-row w-full items-center justify-between">
@@ -169,7 +171,8 @@ export default function SignUp(){
             })
         })
         if(res.status===200){
-
+            toast.success('Welcome to Pro Soccer League')
+            router.push('/')
         }else{
             const result = await res.json()
             toast.error(result)
