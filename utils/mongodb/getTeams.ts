@@ -243,3 +243,42 @@ export async function kickPlayerFromTeam({teamId, player}: {teamId:string, playe
         await client.close()
     }
 }
+
+
+export async function getTeamByFullName({teamName}: {teamName: string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database = client.db('psoleague')
+        const teams = database.collection('teams')
+        const team = await teams.findOne({name: teamName})
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function createTeam({name, shortName, color1, color2, fontColor, captain, captainUserName ,origin}: {name: string, shortName:string, color1: string, color2: string, fontColor:string, captain: string, captainUserName: string, origin: string}) {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database = client.db('psoleague')
+        const teams = database.collection('teams')
+        const team = await teams.insertOne({
+            name,
+            shortname: shortName,
+            color1,
+            color2,
+            fontcolor: fontColor,
+            captain,
+            players: [{id: captain, username: captainUserName}],
+            origin,
+            teamsize: 8,
+            formation: '313'
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}

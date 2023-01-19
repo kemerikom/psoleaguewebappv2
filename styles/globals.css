@@ -6,7 +6,6 @@ html {
     @apply bg-stadium bg-fixed bg-no-repeat bg-cover bg-center
 }
 
-
 *{
     @apply select-none appearance-none outline-none hover:outline-none focus:outline-none
 }
