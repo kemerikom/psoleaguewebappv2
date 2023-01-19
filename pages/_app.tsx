@@ -6,17 +6,20 @@ import {auth} from '../utils/firebase/config'
 import { onAuthStateChanged} from 'firebase/auth'
 import {logoutUser} from '../utils/firebase/logoutUser'
 import MainMenu from '../components/MainMenu'
-import { playerType } from '../typings'
+import { notificationType, playerType } from '../typings'
 import { MongoClient } from 'mongodb'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user,setUser]=useState<any>()
   const [uid,setUid]=useState<string|null>(null)
   const [login,setLogin]=useState<boolean>(false)
+  const [notifications, setNotifications] =useState <notificationType[]>([])
   const siteData ={
     user,
     uid,
-    login
+    login,
+    notifications,
+    setNotifications
   }
   onAuthStateChanged(auth,async(user)=>{
     if(user){

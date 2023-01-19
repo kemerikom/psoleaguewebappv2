@@ -1,6 +1,7 @@
 import ReactCountryFlag from "react-country-flag";
 import Link from "next/link";
 import { playerType,teamsType } from "../../typings";
+import { IoPeopleCircle } from "react-icons/io5";
 
 export default function Header({user,userTeam}:{user:playerType,userTeam:teamsType}){
     return(
@@ -15,7 +16,17 @@ export default function Header({user,userTeam}:{user:playerType,userTeam:teamsTy
                 <ReactCountryFlag countryCode={user?.country} svg title={user?.country} style={{width:'30px'}}/>
                 <Link href={`/teams/${userTeam?._id}`} className='link flex flex-row'>
                     <div className="flex w-8 h-8 aspect-square rounded-full">
-                        <img src="/teamlogo.png" className="h-6 w-6 aspect-square object-contain rounded-full"></img>
+                        {userTeam.logo && 
+                            <img src={userTeam.logo} className="h-6 w-6 aspect-square object-contain rounded-full"></img>
+                        }
+                        {!userTeam.logo && 
+                            <div className="h-6 w-6 aspect-square object-contain rounded-full"
+                            style={{backgroundColor: userTeam.color1}}>
+                                <IoPeopleCircle className="text-base"
+                                style={{color: userTeam.fontcolor}}
+                                />
+                            </div>
+                        }
                     </div>
                     {userTeam?.name} [{userTeam?.shortname}]
                 </Link>

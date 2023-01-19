@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { offerType } from "../../typings";
+import { notificationType, offerType } from "../../typings";
 import { transferPlyerToTeam } from "./getTransfers";
 
 
@@ -157,6 +157,32 @@ export async function checkTransfer( {offerId}: {offerId:string}){
                 await transferPlyerToTeam({offer})
             }
         }
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function getOfferNotifications({userId, teamId}: {userId: string, teamId?: string}): Promise<notificationType[]> {
+    const client = new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database = client.db('psoleague')
+        const offers = database.collection('offers')
+        const offer = await offers.find({
+            $or: [
+                {'toplayer.id': userId},
+                {'toteam.id': teamId}
+            ]
+        }).toArray()
+        const result: notificationType[] = offer.map((o) => {
+            return {
+                id: o._id.toString(),
+                title: `${o.fromteam.name} want to transfer ${o.toplayer.username}`,
+                href: `${process.env.appPath}/offers/${o._id.toString()}/answer`
+            }
+        })
+        return result
     }finally{
         await client.close()
     }

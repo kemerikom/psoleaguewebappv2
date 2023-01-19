@@ -1,5 +1,5 @@
 import { Int32, ObjectId } from "mongodb"
-import React, { Component } from "react"
+import React, { Component, Dispatch } from "react"
 
 export type firebaseConfigType={
     apiKey:string,
@@ -11,10 +11,18 @@ export type firebaseConfigType={
     measurementId:string
 }
 
+export type notificationType = {
+    id: string,
+    title: string,
+    href: string
+}
+
 export type siteDataType={
     uid:string|null,
     user:any,
-    login:boolean
+    login:boolean,
+    notifications: notificationType[],
+    setNotifications: Dispatch<notificationType[]>
 }
 
 
