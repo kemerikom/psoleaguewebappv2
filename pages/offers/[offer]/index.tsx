@@ -34,7 +34,8 @@ export async function getStaticProps({params}:{params: {offer: string}}) {
         return{
             props: {
                 offer
-            }
+            },
+            revalidate: 10
         }
     }else{
         return{
@@ -51,7 +52,7 @@ export async function getStaticPaths() {
     const paths = offers.map((offer:any) => {
         return {
             params: {offer: offer.id},
-            revalidate: 10
+            
         }
     })
     return{
