@@ -26,7 +26,6 @@ async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
                     headers:{'Content-Type': 'application/x-www-form-urlencoded'},
                     body:params
                 })
-                console.log('test')
                 const resData= await result.json()
                 const {access_token}= resData
                 if(access_token){
@@ -41,12 +40,11 @@ async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
                     res.status(200).json(resUpdate)
                 }else{
                     console.log('false')
-                    res.status(400).json(access_token)
+                    res.status(400).json(resData)
                 }
             } catch (error) {
                 res.status(400).json(error)
             }
-
         }else{
             res.status(400).redirect('/auth/login')
         }
