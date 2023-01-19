@@ -11,6 +11,7 @@ const redirectUri = `${process.env.appPath}/api/discordRedirectApi`
 
 async function discordRedirectApi(req:NextApiRequest,res:NextApiResponse) {
     const {code}= req.query
+    console.log('test')
     if(code){
         const uid=req.session.user?.uid
         if(uid){
