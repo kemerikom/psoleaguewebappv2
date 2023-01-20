@@ -44,7 +44,7 @@ export async function getLastTransfers() {
         await client.connect()
         const database= client.db('psoleague')
         const transfers=database.collection('transfers')
-        const transfer = await transfers.find().sort({datetime: -1}).toArray()
+        const transfer = await transfers.find().sort({datetime: -1}).limit(30).toArray()
         return transfer
     }finally{
         await client.close()
