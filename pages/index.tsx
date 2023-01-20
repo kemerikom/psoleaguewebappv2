@@ -50,17 +50,17 @@ export const getServerSideProps=withSessionSsr(
                 if (team){
                     const offerNotifications = await getOfferNotifications({userId: user._id.toString(), teamId: team._id.toString()})
                     return {
-                        props: {notifications: offerNotifications}
+                        props: {notifications: offerNotifications.length ==0? notifications: offerNotifications}
                     }
                 }else{
                     const offerNotifications = await getOfferNotifications({userId: user._id.toString()})
                     return {
-                        props: {notifications: offerNotifications}
+                        props: {notifications: offerNotifications.length ==0? notifications: offerNotifications}
                     }
                 }
             }else{
                 return {
-                    props:{notifications}
+                    props:{notifications: notifications}
                 }
             }
         }else{
