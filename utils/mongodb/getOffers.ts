@@ -175,7 +175,9 @@ export async function getOfferNotifications({userId, teamId}: {userId: string, t
                 {'toteam.id': teamId}
             ]
         }).toArray()
-        const result: notificationType[] = offer.map((o) => {
+        const result: notificationType[] = 
+            offer.filter((o) => {return !((o.acceptplayer || o.rejectplayer) & (o.acceptteam || o.rejectteam))} )
+            .map((o) => {
             return {
                 id: o._id.toString(),
                 title: `${o.fromteam.name} want to transfer ${o.toplayer.username}`,

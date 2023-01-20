@@ -9,6 +9,7 @@ import { withSessionSsr } from '../utils/src/ironSessionHandlers'
 export default function Index({notifications}: {notifications: notificationType[]}){
     const siteData = useContext(SiteContext)
     siteData.setNotifications(notifications)
+    console.log('nt',notifications)
     return(
         <div className='flex flex-row my-3 items-center justify-center p-3 flex-wrap'>
             <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-100px)] h-[calc(100vh-100px)] bg-white backdrop-blur-sm bg-opacity-70 rounded items-center p-2'>

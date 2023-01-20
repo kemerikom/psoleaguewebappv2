@@ -56,7 +56,9 @@ export default function MainMenu() {
                         <Menu.Button as='div' className={'hover:bg-blue-900 relative transition-all h-full mx-2 p-2 cursor-pointer'}>
                             <IoNotifications className='text-2xl'/>
                             {notification &&
-                                <div className='absolute bottom-2 right-2 w-2 aspect-square rounded-full bg-red-600'></div>
+                                <div className='flex absolute bottom-1 right-1 w-4 h-4 aspect-square rounded-full bg-red-600 items-center justify-center text-xs'>
+                                    {notifications.length>=9? '9+': notifications.length}
+                                </div>
                             }
                         </Menu.Button>
                         <Menu.Items as='div' className={'absolute bg-black bg-opacity-10 backdrop-blur-sm group-hover:bg-blue-800 hover:bg-blue-800 transition-all top-10 right-0 flex flex-col items-end gap-y-2 p-2 rounded-b outline-none'}>
@@ -93,21 +95,21 @@ export default function MainMenu() {
                                 <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/'}>
                                     <IoPersonCircle className='text-2xl'/>
                                     <label className='cursor-pointer'>Profile</label>
-                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full bg-red-600'></div>
+                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full'></div>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/myteam'}>
                                     <IoPeopleCircle className='text-2xl'/>
                                     <label className='cursor-pointer'>My Team</label>
-                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full bg-red-600'></div>
+                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full'></div>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <Link className='flex flex-row relative items-center justify-between space-x-2 hover:bg-blue-900 transition-all py-2 px-2 w-full rounded' href={'/settings'}>
                                     <IoSettingsSharp className='text-2xl'/>
                                     <label className='cursor-pointer'>Settings</label>
-                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full bg-red-600'></div>
+                                    <div className='absolute bottom-2 left-2 w-2 aspect-square rounded-full'></div>
                                 </Link>
                             </Menu.Item>
                             <hr/>
