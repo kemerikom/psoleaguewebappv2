@@ -9,7 +9,7 @@ import { getTransferByUserId } from "../../utils/mongodb/getTransfers"
 import ReactCountryFlag from "react-country-flag";
 import { Tab } from "@headlessui/react"
 import Link from "next/link"
-import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoFootball} from 'react-icons/io5'
+import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoFootball, IoPeopleCircle} from 'react-icons/io5'
 import { BiTransferAlt } from "react-icons/bi"
 import { getUserMedals } from "../../utils/mongodb/getMedals"
 import { ToastContainer, toast } from 'react-toastify'
@@ -54,10 +54,10 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                                     <img className="w-full aspect-square rounded-full" src={`${process.env.storagePath}/teamlogos/${team.logo}`}/>
                                 }
                                 {!team.logo &&
-                                <div className="flex w-6 h-6 aspect-square items-center justify-center"
+                                <div className="flex w-6 h-6 aspect-square items-center justify-center rounded-full"
                                 style={{backgroundColor: team.color1}}
                                 >
-                                    <IoFootball className="text-xs"
+                                    <IoPeopleCircle className="text-xs"
                                     style={{color: team.color2}}
                                     />
                                 </div>

@@ -10,13 +10,25 @@ import { getUserByUid } from '../utils/mongodb/getUsers'
 import { getTeam, getTeamByUserId } from '../utils/mongodb/getTeams'
 import { withSessionSsr } from '../utils/src/ironSessionHandlers'
 import Settings from '../components/myteam/Settings'
+import { IoPeopleCircle } from 'react-icons/io5'
 
 export default function MyTeam({data}:{data:teamsType}){
     return(
         <div className='flex flex-col space-y-2 max-w-4xl w-full my-3 mx-auto p-3 bg-white backdrop-blur-sm bg-opacity-70 rounded'>
             <div className='flex flex-row space-x-2'>
                 <div className='flex w-32 aspect-square rounded-full'>
-                    <img src={`${process.env.storagePath}/teamlogos/${data.logo}`} className='flex w-full aspect-square rounded-full'></img>
+                    {data.logo && 
+                        <img src={`${process.env.storagePath}/teamlogos/${data.logo}`} className='flex w-full aspect-square rounded-full'></img>
+                    }
+                    {!data.logo && 
+                        <div className='flex w-32 h-32 aspect-square items-center justify-center rounded-full'
+                        style={{backgroundColor: data.color1}}
+                        >
+                            <IoPeopleCircle className='text-8xl'
+                            style={{color: data.color2}}
+                            />
+                        </div>
+                    }
                 </div>
                 <div className='flex-col'>
                     <h1 className='flex space-x-1'>

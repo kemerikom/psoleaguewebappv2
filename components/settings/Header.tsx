@@ -20,7 +20,7 @@ export default function Header({user,userTeam}:{user:playerType,userTeam:teamsTy
                             <img src={userTeam.logo} className="h-6 w-6 aspect-square object-contain rounded-full"></img>
                         }
                         {!userTeam.logo && 
-                            <div className="h-6 w-6 aspect-square object-contain rounded-full"
+                            <div className="flex h-6 w-6 aspect-square object-contain rounded-full items-center justify-center"
                             style={{backgroundColor: userTeam.color1}}>
                                 <IoPeopleCircle className="text-base"
                                 style={{color: userTeam.fontcolor}}
