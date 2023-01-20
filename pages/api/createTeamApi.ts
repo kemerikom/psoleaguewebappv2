@@ -34,7 +34,6 @@ async function createTeamApi(req: NextApiRequest, res:NextApiResponse) {
                     }else{
                         res.status(400).json('This team name already taken')
                     }
-                    res.status(200).json(team)
                 }else{
                     res.status(400).json('User has team')
                 }
