@@ -37,3 +37,17 @@ export async function transferPlyerToTeam({offer}:{offer: offerType}) {
     }
 }
 
+
+export async function getLastTransfers() {
+    const client= new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const transfers=database.collection('transfers')
+        const transfer = await transfers.find().sort({datetime: -1}).toArray()
+        return transfer
+    }finally{
+        await client.close()
+    }
+}
+

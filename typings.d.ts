@@ -265,12 +265,12 @@ export type transferType={
         avatar?:string
     },
     from?:{
-        teamid:string,
+        id:string,
         teamname:string,
         logo?:string
     },
     to?:{
-        teamid:string,
+        id:string,
         teamname:string,
         logo?:string
     },
