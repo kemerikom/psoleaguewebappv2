@@ -14,6 +14,7 @@ export default function Header({user,userTeam}:{user:playerType,userTeam:teamsTy
                     {user?.username}
                 </h1>
                 <ReactCountryFlag countryCode={user?.country} svg title={user?.country} style={{width:'30px'}}/>
+                {userTeam && 
                 <Link href={`/teams/${userTeam?._id}`} className='link flex flex-row'>
                     <div className="flex w-8 h-8 aspect-square rounded-full">
                         {userTeam.logo && 
@@ -30,6 +31,8 @@ export default function Header({user,userTeam}:{user:playerType,userTeam:teamsTy
                     </div>
                     {userTeam?.name} [{userTeam?.shortname}]
                 </Link>
+                }
+                
                 <div className="flex flex-row space-x-2">
                     <div className=" flex w-6 aspect-square rounded-full bg-green-600 items-center justify-center text-xs text-white cursor-default">
                         <label>{user?.mainpos}</label>
