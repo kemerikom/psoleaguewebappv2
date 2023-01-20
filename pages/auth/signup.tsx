@@ -123,7 +123,7 @@ export default function SignUp(){
                     </div>
                 </div>
                 <hr/>
-                <button className="flex bg-green-900 py-2 px-4 rounded items-center justify-center" onClick={createUser}>
+                <button className="flex bg-green-900 py-2 px-4 rounded items-center justify-center" disabled={!userNameValid} onClick={createUser}>
                     {!loading&&'Sign Up'}
                     {loading&&
                     <IoFootball className='flex text-2xl animate-spin'/>
@@ -155,30 +155,32 @@ export default function SignUp(){
         setUserName(e)
     }
     async function createUser(){
-        setLoading(true)
-        const data={
-            email:email,
-            password:password,
-            username:userName,
-            country:country.code||'XX',
-            mainpos:mainPos.pos,
-            secondpos:secPos.pos
-        }
-        const res = await fetch(`${process.env.appPath}/api/createUserApi`,{
-            method:'POST',
-            body:JSON.stringify({
-                data
+        if(userNameValid){
+            setLoading(true)
+            const data={
+                email:email,
+                password:password,
+                username:userName,
+                country:country.code||'XX',
+                mainpos:mainPos.pos,
+                secondpos:secPos.pos
+            }
+            const res = await fetch(`${process.env.appPath}/api/createUserApi`,{
+                method:'POST',
+                body:JSON.stringify({
+                    data
+                })
             })
-        })
-        if(res.status===200){
-            toast.success('Welcome to Pro Soccer League')
-            router.push('/')
-        }else{
-            const result = await res.json()
-            toast.error(result)
+            if(res.status===200){
+                toast.success('Welcome to Pro Soccer League')
+                router.push('/')
+            }else{
+                const result = await res.json()
+                toast.error(result)
+            }
+            setLoading(false)
+             //here devam et
         }
-        setLoading(false)
-        //here devam et
     }
 }
 
