@@ -17,12 +17,14 @@ async function steamDbApi(req:NextApiRequest,res:NextApiResponse){
             const result = await updatePlayerSteamId({uid,steamId:user.steamid,avatar:user.avatar})
             if(result){
                 res.status(200).redirect('/settings/steam')
+            }else{
+                res.status(400).redirect('/settings/steam')
             }
         }else{
-
+            res.status(400).redirect('/settings/steam')
         }
     } catch (error) {
-        
+        res.status(400).redirect('/settings/steam')
     }
 }
 
