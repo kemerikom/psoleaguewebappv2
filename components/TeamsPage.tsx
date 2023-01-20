@@ -8,7 +8,7 @@ export default function TeamsPage({teams}:{teams:teamsType[]}){
             {teams?.map((team)=>{
                 let bs= Math.floor(Math.random()*(350))+150
                 return(
-                <div key={team.name} id='teamBack' className="flex flex-1 flex-row flex-shrink-0 m-1 p-2 rounded cursor-pointer transition-all">
+                <div key={team.name} id='teamBack' className="flex flex-row flex-shrink-0 m-1 p-2 rounded cursor-pointer transition-all">
                 <style jsx>
                     {`
                         #teamBack{

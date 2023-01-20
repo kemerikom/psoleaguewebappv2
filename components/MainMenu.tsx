@@ -29,7 +29,7 @@ export default function MainMenu() {
     useEffect(() => {
         if (siteData){
             if (notifications){
-                if(!notifications.find((notification: notificationType)=>notification.id == '1')){
+                if(!notifications.find((notification: notificationType)=>notification.id == '1' || notifications.length != 0)){
                     setNotification(true)
                 }else{
                     setNotification(false)

@@ -95,11 +95,11 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                         )}
                     </Tab>
                 </Tab.List>
-                <Tab.Panels className={'outline-none'}>
+                <Tab.Panels className={'flex outline-none items-center justify-center'}>
                     <Tab.Panel className={'flex w-full p-2 rounded items-center justify-center'}>
                         <PlayerList players={team.players} />
                     </Tab.Panel>
-                    <Tab.Panel className={'flex w-full p-2 items-center justify-center bg-white rounded'}>
+                    <Tab.Panel className={'flex w-full p-2 max-w-2xl items-center justify-center bg-white rounded'}>
                         <FormationPage
                         color1={team.color1}
                         color2={team.color2}
