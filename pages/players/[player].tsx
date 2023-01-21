@@ -285,7 +285,7 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
 }
 
 
-export async function getStaticProps({params}:{params:{player:string}}){
+export async function getServerSideProps({params}:{params:{player:string}}){
     const resPlayer = await getPlayer({playerId:params.player})
     const player = JSON.parse(JSON.stringify(resPlayer))
     const resTeam= await getTeam({teamId:player.teamid})
@@ -301,7 +301,7 @@ export async function getStaticProps({params}:{params:{player:string}}){
 }
 
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const resultPlayer = await getPlayerIds()
     const paths=resultPlayer.map((player)=>{
         return{
@@ -315,4 +315,4 @@ export async function getStaticPaths() {
         paths,
         fallback:'blocking'
     }
-}
+} */
