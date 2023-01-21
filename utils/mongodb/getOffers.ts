@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { notificationType, offerType } from "../../typings";
-import { transferPlyerToTeam } from "./getTransfers";
+import { getTeam } from "./getTeams";
+import { transferPlayerToTeam } from "./getTransfers";
 
 
 export async function getOfferIds() {
@@ -154,7 +155,10 @@ export async function checkTransfer( {offerId}: {offerId:string}){
                 toteam: offerData.toteam
             }
             if(offer.acceptplayer && offer.acceptteam){
-                await transferPlyerToTeam({offer})
+                const team = await getTeam({teamId: offerData.toteam.id})
+                if (team){
+                    if(!team.players.includes(offerData.toplayer)) await transferPlayerToTeam({offer})
+                }
             }
         }
     }finally{

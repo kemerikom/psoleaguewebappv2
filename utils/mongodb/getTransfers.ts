@@ -18,7 +18,7 @@ export async function getTransferByUserId({userId}:{userId:string}) {
 }
 
 
-export async function transferPlyerToTeam({offer}:{offer: offerType}) {
+export async function transferPlayerToTeam({offer}:{offer: offerType}) {
     const client= new MongoClient(process.env.mongoUri)
     try{
         await client.connect()
