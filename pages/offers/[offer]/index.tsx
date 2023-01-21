@@ -35,7 +35,7 @@ export async function getServerSideProps({params}:{params: {offer: string}}) {
             props: {
                 offer
             },
-            revalidate: 10
+            //revalidate: 10
         }
     }else{
         return{

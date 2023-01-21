@@ -296,7 +296,7 @@ export async function getServerSideProps({params}:{params:{player:string}}){
     const medals=JSON.parse(JSON.stringify(resMedals))
     return{
         props:{data:player,team,transfers,medals},
-        revalidate: 5
+        //revalidate: 5
     }
 }
 
