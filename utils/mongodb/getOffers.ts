@@ -155,10 +155,11 @@ export async function checkTransfer( {offerId}: {offerId:string}){
                 toteam: offerData.toteam
             }
             if(offer.acceptplayer && offer.acceptteam){
-                const team = await getTeam({teamId: offerData.toteam.id})
+                /* const team = await getTeam({teamId: offerData.toteam.id})
                 if (team){
                     if(!team.players.includes({id: offerData.toplayer.id, username: offerData.toplayer.username})) await transferPlayerToTeam({offer})
-                }
+                } */
+                await transferPlayerToTeam({offer})
             }
         }
     }finally{
