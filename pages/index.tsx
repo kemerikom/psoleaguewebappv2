@@ -32,11 +32,11 @@ export default function Index({notifications, transfers}: {notifications: notifi
             </div>
             <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
                 <div className='flex flex-col flex-1 w-full mb-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2'>
-                    <h2 className='text-xl font-medium'>Lookin For Team</h2>
+                    <h2 className='text-xl font-medium'>Looking For Team</h2>
                     <hr/>
                 </div>
                 <div className='flex flex-col flex-1 w-full mt-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2'>
-                    <h2 className='text-xl font-medium'>Lookin For Player</h2>
+                    <h2 className='text-xl font-medium'>Looking For Player</h2>
                     <hr/>
                 </div>
             </div>
