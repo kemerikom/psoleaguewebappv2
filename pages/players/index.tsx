@@ -3,9 +3,11 @@ import { useState,useEffect } from "react"
 import { playerType } from "../../typings"
 import Link from "next/link"
 import ReactCountryFlag from "react-country-flag"
+import { getFollowingPlayers } from "../../utils/mongodb/getUsers"
+import { withSessionSsr } from "../../utils/src/ironSessionHandlers"
+import PlayerContent from "../../components/players/PlayerContet"
 
-
-export default function Index(){
+export default function Index({playerList}: {playerList: playerType[]}){
     const [searchTerm,setSearchTerm]=useState<string>("")
     const [search,setSearch]=useState(false)
     const [players,setPlayers]=useState<playerType[]>([])
@@ -48,19 +50,53 @@ export default function Index(){
                         })}
                     </div>
                 }
+                <div className="flex flex-row flex-wrap p-2 items-start justify-between">
+                    {playerList?.map((player) => {
+                        return(
+                            <PlayerContent key={player._id.toString()} player={player}/>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
     async function searchPlayersInfo() {
-        setLoading(true)
-        setSearch(false)
-        const res = await fetch(`${process.env.appPath}/api/searchPlayersApi`,{
-            method:'POST',
-            body:JSON.stringify({term:searchTerm})
-        })
-        const result = await res.json()
-        setPlayers(result)
-        setCompleted(true)
-        setLoading(false)
+        if(searchTerm.length>=2){
+            setLoading(true)
+            setSearch(false)
+            const res = await fetch(`${process.env.appPath}/api/searchPlayersApi`,{
+                method:'POST',
+                body:JSON.stringify({term:searchTerm})
+            })
+            const result = await res.json()
+            setPlayers(result)
+            setCompleted(true)
+            setLoading(false)
+        }
+
     }
 }
+
+
+export const getServerSideProps = withSessionSsr(
+    async function getServerSideProps({req}) {
+        const userUid = req.session.user
+        if(userUid && userUid.uid){
+            const players = await getFollowingPlayers({uid: userUid.uid})
+            if (players){
+                return {
+                    props:{playerList: players}
+                }
+            }else{
+                return{
+                    props:{playerList:[]}
+                }
+            }
+
+        }else{
+            return{
+                props:{playerList:[]}
+            }
+        }
+    }
+)

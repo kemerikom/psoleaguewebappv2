@@ -238,7 +238,7 @@ export type playerType={
     },
     discordid?:string,
     discordname?:string,
-    pp:string,
+    pp?:string,
     country:string,
     followers?:string[],
     upvote?:string[],

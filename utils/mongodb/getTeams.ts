@@ -375,3 +375,18 @@ export async function unDownVoteTeam({teamId, userUid}: {teamId: string, userUid
         await client.close()
     }
 }
+
+export async function getFollowingTeams({uid}: {uid:string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.find({
+            followers: {$in: [uid]}
+        }).limit(30).toArray()
+        return team
+    }finally{
+        await client.close()
+    }
+}

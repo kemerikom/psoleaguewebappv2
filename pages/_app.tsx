@@ -8,6 +8,7 @@ import {logoutUser} from '../utils/firebase/logoutUser'
 import MainMenu from '../components/MainMenu'
 import { notificationType, playerType } from '../typings'
 import { MongoClient } from 'mongodb'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user,setUser]=useState<any>()
@@ -41,6 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
   return (
     <SiteContext.Provider value={siteData}>
+      <Head>
+        <title>Pro Soccer League</title>
+      </Head>
       <MainMenu/>
       <Component {...pageProps} />
     </SiteContext.Provider>

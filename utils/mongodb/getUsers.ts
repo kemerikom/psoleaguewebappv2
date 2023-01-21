@@ -296,3 +296,29 @@ export async function unDownVotePlayer({playerId, userUid}: {playerId: string, u
         await client.close()
     }
 }
+
+export async function getFollowingPlayers({uid}: {uid:string}): Promise<playerType[]> {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const players=database.collection('users')
+        const player = await players.find({
+            followers: {$in: [uid]}
+        }).limit(30).toArray()
+        const result:playerType[] = player.map((p) => {
+            return {
+                _id: p._id.toString(),
+                username: p.username,
+                teamid: p.teamid,
+                country: p.country,
+                mainpos: p.mainpos,
+                secondpos: p.secondpos,
+                avatar: p.avatar || null,
+            }
+        })
+        return result
+    }finally{
+        await client.close()
+    }
+}

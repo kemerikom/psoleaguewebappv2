@@ -1,10 +1,12 @@
 import SearchBar from "../../components/SearchBar"
 import {useState,useEffect} from 'react'
-import { teamsType } from "../../typings"
+import { playerType, teamsType } from "../../typings"
 import TeamsPage from "../../components/TeamsPage"
+import { withSessionSsr } from "../../utils/src/ironSessionHandlers"
+import { getFollowingTeams } from "../../utils/mongodb/getTeams"
+import TeamContent from "../../components/teams/TeamContent"
 
-
-export default function Index(){
+export default function Index({teamList}: {teamList?: teamsType[]}){
     const [searchTerm,setSearchTerm]=useState<string>("")
     const [search,setSearch]=useState(false)
     const [teams,setTeams]=useState<teamsType[]>([])
@@ -22,8 +24,15 @@ export default function Index(){
                         <TeamsPage teams={teams}></TeamsPage>
                     </div>
                 }
+                
             </div>
-
+            <div className="flex flex-row flex-wrap p-2 items-start justify-between">
+                {teamList?.map((team) => {
+                    return(
+                        <TeamContent key={team._id.toString()} team={team}/>
+                    )
+                })}
+            </div>
         </div>
     )
     async function searchTeamsInfo() {
@@ -39,3 +48,26 @@ export default function Index(){
         setLoading(false)
     }
 }
+
+export const getServerSideProps = withSessionSsr(
+    async function getServerSideProps({req}) {
+        const userUid = req.session.user
+        if(userUid && userUid.uid){
+            const teams = await getFollowingTeams({uid: userUid.uid})
+            if (teams){
+                return {
+                    props:{teamList: JSON.parse(JSON.stringify(teams))}
+                }
+            }else{
+                return{
+                    props:{teamList:[]}
+                }
+            }
+
+        }else{
+            return{
+                props:{teamList: []}
+            }
+        }
+    }
+)

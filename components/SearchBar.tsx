@@ -19,9 +19,10 @@ export default function SearchBar({value,setValue,goSearch, loading}:{value:stri
         </div>
     )
     function keyDown(e:KeyboardEvent<HTMLInputElement>){
-        if(e.key=='Enter') goSearch(true)
+        if(e.key=='Enter' && value.length>=2) goSearch(true)
     }
     function search(){
-        goSearch(true)
+        if (value.length>=2) goSearch(true)
+
     }
 }
