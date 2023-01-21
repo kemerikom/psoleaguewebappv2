@@ -27,7 +27,7 @@ export default function Offer({offer}: {offer:offerType}){
 }
 
 
-export async function getStaticProps({params}:{params: {offer: string}}) {
+export async function getServerSideProps({params}:{params: {offer: string}}) {
     const resOffer = await getOfferById({offerId:params.offer})
     if (resOffer) {
         const offer = JSON.parse(JSON.stringify(resOffer))
@@ -46,7 +46,7 @@ export async function getStaticProps({params}:{params: {offer: string}}) {
 }
 
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const resOffers = await getOfferIds()
     const offers = JSON.parse(JSON.stringify(resOffers))
     const paths = offers.map((offer:any) => {
@@ -59,4 +59,4 @@ export async function getStaticPaths() {
         paths,
         fallback: 'blocking'
     }
-}
+} */

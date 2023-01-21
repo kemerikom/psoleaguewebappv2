@@ -308,6 +308,9 @@ export async function getStaticPaths() {
             params:{player:player._id.toString()}
         }
     })
+    if(process.env.NODE_ENV=='production'){
+
+    }
     return{
         paths,
         fallback:'blocking'
