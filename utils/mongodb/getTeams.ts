@@ -282,3 +282,96 @@ export async function createTeam({name, shortName, color1, color2, fontColor, ca
         await client.close()
     }
 }
+
+export async function favTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $push: {followers: userUid}
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+export async function unFavTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $pull: {followers: userUid}
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+export async function upVoteTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $push: {upvote: userUid},
+            $pull: {downvote: userUid}
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+export async function unUpVoteTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $pull: {upvote: userUid},
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+
+export async function downVoteTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $pull: {upvote: userUid},
+            $push: {downvote: userUid}
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}
+
+export async function unDownVoteTeam({teamId, userUid}: {teamId: string, userUid: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database= client.db('psoleague')
+        const teams=database.collection('teams')
+        const team = await teams.updateOne({_id: new ObjectId(teamId)},{
+            $pull: {downvote: userUid}
+        })
+        return team
+    }finally{
+        await client.close()
+    }
+}

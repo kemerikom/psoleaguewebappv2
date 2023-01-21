@@ -1,5 +1,5 @@
 import { matchType, teamsType } from "../../typings"
-import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoPeopleCircle} from 'react-icons/io5'
+import {IoHeartOutline, IoHeart, IoThumbsUpOutline, IoThumbsUp, IoThumbsDownOutline, IoThumbsDown, IoPeopleCircle} from 'react-icons/io5'
 import Link from "next/link";
 import { Tab } from '@headlessui/react'
 import ReactCountryFlag from "react-country-flag";
@@ -10,9 +10,17 @@ import { getTeamIds,getTeam } from "../../utils/mongodb/getTeams";
 import { getMatchByTeamId } from "../../utils/mongodb/getMatches";
 import Head from "next/head";
 import PlayerList from "../../components/teams/PlayerList";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { useState, useContext } from 'react'
+import { SiteContext } from "../../context/SiteContext"
 
-
-export default function Team({team,matches}:{team:teamsType,matches:matchType[]}){
+export default function Team({team, matches}:{team:teamsType, matches:matchType[]}){
+    const siteData = useContext(SiteContext)
+    const {uid} = siteData
+    const [followers, setFollowers] = useState<string[]>(team.followers || [])
+    const [upVotes, setUpVotes] = useState<string[]>(team.upvote || [])
+    const [downVotes, setDownVotes] = useState<string[]>(team.downvote || [])
     return(
         <div className="flex flex-col max-w-5xl w-full mx-auto rounded p-2 space-y-2 bg-white backdrop-blur-sm bg-opacity-70">
             <Head>
@@ -23,6 +31,18 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 <meta property="og:image" content={`${process.env.appPath}/teams/${team._id.toString()}}]`}></meta>
                 <meta name="og:country-name" content="TR"></meta>
             </Head>
+            <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
             <div id='header' className="flex flex-row h-40">
                 <div className="flex items-center h-full aspect-square">
                     {team.logo && 
@@ -55,19 +75,43 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
                 </div>
                 <div>
                     <div className="flex flex-row-reverse space-x-2">
-                        <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer">
-                            {team.followers?`${team.followers.length+1}`:0}
-                            <IoHeartOutline/>
-                        </label>
+                        {followers?.includes(uid || 'XX') && 
+                            <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer" onClick={unFavTeam}>
+                                {followers?`${followers.length}`:0}
+                                <IoHeart className="text-pink-800"/>
+                            </label>
+                        }
+                        {!followers?.includes(uid || 'XX') &&
+                            <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer" onClick={favTeam}>
+                                {followers?`${followers.length}`:0}
+                                <IoHeartOutline/>
+                            </label>
+                        }
                         <div className="flex flex-row space-x-2 mx-1 border border-black rounded px-1">
-                            <label className="flex flex-row items-center justify-center text-lg cursor-pointer">
-                                <IoThumbsUpOutline/>
-                                {team.upvote?`${team.upvote.length}`:0}
-                            </label>
-                            <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer">
-                                <IoThumbsDownOutline/>
-                                {team.downvote?`${team.downvote.length}`:0}
-                            </label>
+                            {upVotes.includes(uid || 'XX') && 
+                                <label className="flex flex-row items-center justify-center text-lg cursor-pointer" onClick={unUpVoteTeam}>
+                                    <IoThumbsUp/>
+                                    {upVotes?`${upVotes.length}`:0}
+                                </label>
+                            }
+                            {!upVotes.includes(uid || 'XX') && 
+                                <label className="flex flex-row items-center justify-center text-lg cursor-pointer" onClick={upVoteTeam}>
+                                    <IoThumbsUpOutline/>
+                                    {upVotes?`${upVotes.length}`:0}
+                                </label>
+                            }
+                            {downVotes.includes(uid || 'XX') && 
+                                <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer" onClick={unDownVoteTeam}>
+                                    <IoThumbsDown/>
+                                    {downVotes?`${downVotes.length}`:0}
+                                </label>
+                            }
+                            {!downVotes.includes(uid || 'XX') && 
+                                <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer" onClick={downVoteTeam}>
+                                    <IoThumbsDownOutline/>
+                                    {downVotes?`${downVotes.length}`:0}
+                                </label>
+                            }
                         </div>
                     </div>
                 </div>
@@ -119,6 +163,109 @@ export default function Team({team,matches}:{team:teamsType,matches:matchType[]}
             </Tab.Group>
         </div>
     )
+    async function favTeam(){
+        const res = await fetch (`${process.env.appPath}/api/favTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            setFollowers((favs) => [...favs, uid || 'XX'])
+            toast.success(`You are following ${team.name}`)
+        }
+    }
+
+    async function unFavTeam() {
+        const res = await fetch (`${process.env.appPath}/api/unFavTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) { 
+            toast.error(result)
+        }else{
+            setFollowers(followers.filter((fav) => fav != (uid || 'XX')))
+            toast.success(`You are not following ${team.name}`)
+        }
+    }
+
+    async function upVoteTeam(){
+        const res = await fetch (`${process.env.appPath}/api/upVoteTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(upVotes.includes(uid || 'XX')){
+                setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }else{
+                setUpVotes((ups) => [...ups, uid || 'XX'])
+                if (downVotes.includes(uid || 'XX')) setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function unUpVoteTeam(){
+        const res = await fetch (`${process.env.appPath}/api/unUpVoteTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(upVotes.includes(uid || 'XX')){
+                setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }else{
+                setUpVotes((ups) => [...ups, uid || 'XX'])
+                if (downVotes.includes(uid || 'XX')) setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function downVoteTeam() {
+        const res = await fetch (`${process.env.appPath}/api/downVoteTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(downVotes.includes(uid || 'XX')){
+                setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }else{
+                setDownVotes((downs) => [...downs, uid || 'XX'])
+                if (upVotes.includes(uid || 'XX')) setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function unDownVoteTeam() {
+        const res = await fetch (`${process.env.appPath}/api/unDownVoteTeamApi`,{
+            method: 'POST',
+            body: JSON.stringify({teamId: team._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(downVotes.includes(uid || 'XX')){
+                setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }else{
+                setDownVotes((downs) => [...downs, uid || 'XX'])
+                if (upVotes.includes(uid || 'XX')) setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
 }
 
 
@@ -129,7 +276,7 @@ export async function getStaticProps({params}:{params:{team:string}}) {
     const matches=JSON.parse(JSON.stringify(resMatches))
     return{
         props:{team,matches},
-        revalidate:10
+        revalidate: 5
     }
 }
 

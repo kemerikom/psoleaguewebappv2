@@ -9,16 +9,22 @@ import { getTransferByUserId } from "../../utils/mongodb/getTransfers"
 import ReactCountryFlag from "react-country-flag";
 import { Tab } from "@headlessui/react"
 import Link from "next/link"
-import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoFootball, IoPeopleCircle} from 'react-icons/io5'
+import {IoHeartOutline, IoThumbsUpOutline, IoThumbsDownOutline, IoFootball, IoPeopleCircle, IoHeart, IoThumbsUp, IoThumbsDown} from 'react-icons/io5'
 import { BiTransferAlt } from "react-icons/bi"
 import { getUserMedals } from "../../utils/mongodb/getMedals"
 import { ToastContainer, toast } from 'react-toastify'
-import { useState} from 'react'
+import { useState, useContext} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
+import { SiteContext } from "../../context/SiteContext"
 
 
 export default function Player({data,team,transfers,medals}:{data:playerType,team:teamsType,transfers:transferType[],medals:medalType[]}){
+    const siteData = useContext(SiteContext)
+    const {uid} = siteData
     const [loading, setLoading] = useState<boolean>(false)
+    const [followers, setFollowers] = useState<string[]>(data.followers || [])
+    const [upVotes, setUpVotes] = useState<string[]>(data.upvote || [])
+    const [downVotes, setDownVotes] = useState<string[]>(data.downvote || [])
     return(
         <div className="max-w-5xl mx-auto p-3 w-full">
             <Head>
@@ -80,19 +86,43 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
                     </div>
                     <div>
                         <div className="flex flex-row-reverse space-x-2">
-                            <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer">
-                                {data.followers?`${data.followers.length+1}`:0}
-                                <IoHeartOutline/>
-                            </label>
+                            {followers?.includes(uid || 'XX') && 
+                                <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer" onClick={unFavPerson}>
+                                    {followers?`${followers.length}`:0}
+                                    <IoHeart className="text-pink-800"/>
+                                </label>
+                            }
+                            {!followers?.includes(uid || 'XX') &&
+                                <label className="flex flex-row space-x-1 mx-1 items-center justify-center text-lg cursor-pointer" onClick={favPerson}>
+                                    {followers?`${followers.length}`:0}
+                                    <IoHeartOutline/>
+                                </label>
+                            }
                             <div className="flex flex-row space-x-2 mx-1 border border-black rounded px-1">
-                                <label className="flex flex-row items-center justify-center text-lg cursor-pointer">
-                                    <IoThumbsUpOutline/>
-                                    {data.upvote?`${data.upvote.length}`:0}
-                                </label>
-                                <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer">
-                                    <IoThumbsDownOutline/>
-                                    {data.downvote?`${data.downvote.length}`:0}
-                                </label>
+                                {upVotes.includes(uid || 'XX') && 
+                                    <label className="flex flex-row items-center justify-center text-lg cursor-pointer" onClick={unUpVotePerson}>
+                                        <IoThumbsUp/>
+                                        {upVotes?`${upVotes.length}`:0}
+                                    </label>
+                                }
+                                {!upVotes.includes(uid || 'XX') && 
+                                    <label className="flex flex-row items-center justify-center text-lg cursor-pointer" onClick={upVotePerson}>
+                                        <IoThumbsUpOutline/>
+                                        {upVotes?`${upVotes.length}`:0}
+                                    </label>
+                                }
+                                {downVotes.includes(uid || 'XX') && 
+                                    <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer" onClick={unDownVotePerson}>
+                                        <IoThumbsDown/>
+                                        {downVotes?`${downVotes.length}`:0}
+                                    </label>
+                                }
+                                {!downVotes.includes(uid || 'XX') && 
+                                    <label className="flex flex-row space-x-1 items-center justify-center text-lg cursor-pointer" onClick={downVotePerson}>
+                                        <IoThumbsDownOutline/>
+                                        {downVotes?`${downVotes.length}`:0}
+                                    </label>
+                                }
                             </div>
                             <button className="btnPrimary" onClick={sendTransferOffer}>
                                 {loading &&
@@ -149,6 +179,109 @@ export default function Player({data,team,transfers,medals}:{data:playerType,tea
         setLoading(false)
     }
 
+    async function favPerson(){
+        const res = await fetch (`${process.env.appPath}/api/favPlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            setFollowers((favs) => [...favs, uid || 'XX'])
+            toast.success(`You are following ${data.username}`)
+        }
+    }
+
+    async function unFavPerson() {
+        const res = await fetch (`${process.env.appPath}/api/unFavPlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) { 
+            toast.error(result)
+        }else{
+            setFollowers(followers.filter((fav) => fav != (uid || 'XX')))
+            toast.success(`You are not following ${data.username}`)
+        }
+    }
+
+    async function upVotePerson(){
+        const res = await fetch (`${process.env.appPath}/api/upVotePlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(upVotes.includes(uid || 'XX')){
+                setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }else{
+                setUpVotes((ups) => [...ups, uid || 'XX'])
+                if (downVotes.includes(uid || 'XX')) setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function unUpVotePerson(){
+        const res = await fetch (`${process.env.appPath}/api/unUpVotePlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(upVotes.includes(uid || 'XX')){
+                setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }else{
+                setUpVotes((ups) => [...ups, uid || 'XX'])
+                if (downVotes.includes(uid || 'XX')) setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function downVotePerson() {
+        const res = await fetch (`${process.env.appPath}/api/downVotePlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(downVotes.includes(uid || 'XX')){
+                setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }else{
+                setDownVotes((downs) => [...downs, uid || 'XX'])
+                if (upVotes.includes(uid || 'XX')) setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
+
+    async function unDownVotePerson() {
+        const res = await fetch (`${process.env.appPath}/api/unDownVotePlayerApi`,{
+            method: 'POST',
+            body: JSON.stringify({playerId: data._id.toString()})
+        })
+        const result = await res.json()
+        if (res.status != 200) {
+            toast.error(result)
+        }else{
+            if(downVotes.includes(uid || 'XX')){
+                setDownVotes(downVotes.filter((downs) => downs != (uid || 'XX')))
+            }else{
+                setDownVotes((downs) => [...downs, uid || 'XX'])
+                if (upVotes.includes(uid || 'XX')) setUpVotes(upVotes.filter((ups) => ups != (uid || 'XX')))
+            }
+            toast.success(`Your vote successfully changed`)
+        }
+    }
 }
 
 
@@ -163,7 +296,7 @@ export async function getStaticProps({params}:{params:{player:string}}){
     const medals=JSON.parse(JSON.stringify(resMedals))
     return{
         props:{data:player,team,transfers,medals},
-        revalidate: 10
+        revalidate: 5
     }
 }
 
