@@ -52,7 +52,7 @@ export default function MainMenu() {
             </div>
             <div className='flex flex-row ml-auto h-full items-center justify-start'>
                 <div className='flex flex-row h-full'>
-                    <Menu as='div' className='relative whitespace-nowrap'>
+                    {/* <Menu as='div' className='relative whitespace-nowrap'>
                         <Menu.Button as='div' className={'hover:bg-blue-900 relative transition-all h-full mx-2 p-2 cursor-pointer'}>
                             <IoNotifications className='text-2xl'/>
                             {notification &&
@@ -74,7 +74,7 @@ export default function MainMenu() {
                                 )
                             })}
                         </Menu.Items>
-                    </Menu>
+                    </Menu> */}
                     <Menu>
                         <Menu.Button as='div' className={'hover:bg-blue-900 relative transition-all h-full mx-2 p-2 cursor-pointer'}>
                             {siteData.user!=null&&siteData.user.photoURL&&
