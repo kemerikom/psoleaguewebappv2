@@ -81,7 +81,7 @@ export async function addLeagueAdmin({leagueId,userId,userName}:{leagueId:string
         const database=client.db('psoleague')
         const leagues=database.collection('leagues')
         const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
-            $push:{
+            $addToSet:{
                 admins:{
                     id:userId,
                     username:userName
@@ -123,7 +123,7 @@ export async function addLeagueModerator({leagueId,userId,userName}:{leagueId:st
         const database=client.db('psoleague')
         const leagues=database.collection('leagues')
         const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
-            $push:{
+            $addToSet:{
                 mods:{
                     id:userId,
                     username:userName
@@ -165,7 +165,7 @@ export async function addLeagueRefree({leagueId,refreeUserName,refreeId}:{league
         const database=client.db('psoleague')
         const leagues=database.collection('leagues')
         const league= await leagues.updateOne({_id:new ObjectId(leagueId)},{
-            $push:{
+            $addToSet:{
                 refrees:{
                     id:refreeId,
                     username:refreeUserName

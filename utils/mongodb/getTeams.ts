@@ -144,7 +144,7 @@ export async function addPlayerToTeam({offer}: {offer: offerType}) {
         await teams.updateOne({
             _id: new ObjectId(offer.fromteam.id)
         },{
-            $push:{
+            $addToSet:{
                 players:{
                     id: offer.toplayer.id,
                     username: offer.toplayer.username
@@ -290,7 +290,7 @@ export async function favTeam({teamId, userUid}: {teamId: string, userUid: strin
         const database= client.db('psoleague')
         const teams=database.collection('teams')
         const team = await teams.updateOne({_id: new ObjectId(teamId)},{
-            $push: {followers: userUid}
+            $addToSet: {followers: userUid}
         })
         return team
     }finally{
@@ -320,7 +320,7 @@ export async function upVoteTeam({teamId, userUid}: {teamId: string, userUid: st
         const database= client.db('psoleague')
         const teams=database.collection('teams')
         const team = await teams.updateOne({_id: new ObjectId(teamId)},{
-            $push: {upvote: userUid},
+            $addToSet: {upvote: userUid},
             $pull: {downvote: userUid}
         })
         return team
@@ -353,7 +353,7 @@ export async function downVoteTeam({teamId, userUid}: {teamId: string, userUid: 
         const teams=database.collection('teams')
         const team = await teams.updateOne({_id: new ObjectId(teamId)},{
             $pull: {upvote: userUid},
-            $push: {downvote: userUid}
+            $addToSet: {downvote: userUid}
         })
         return team
     }finally{

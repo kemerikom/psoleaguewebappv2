@@ -210,7 +210,7 @@ export async function favPlayer({playerId, userUid}: {playerId: string, userUid:
         const database= client.db('psoleague')
         const players=database.collection('users')
         const player = await players.updateOne({_id: new ObjectId(playerId)},{
-            $push: {followers: userUid}
+            $addToSet: {followers: userUid}
         })
         return player
     }finally{
@@ -242,7 +242,7 @@ export async function upVotePlayer({playerId, userUid}: {playerId: string, userU
         const database= client.db('psoleague')
         const players=database.collection('users')
         const player = await players.updateOne({_id: new ObjectId(playerId)},{
-            $push: {upvote: userUid},
+            $addToSet: {upvote: userUid},
             $pull: {downvote: userUid}
         })
         return player
@@ -274,7 +274,7 @@ export async function downVotePlayer({playerId, userUid}: {playerId: string, use
         const players=database.collection('users')
         const player = await players.updateOne({_id: new ObjectId(playerId)},{
             $pull: {upvote: userUid},
-            $push: {downvote: userUid}
+            $addToSet: {downvote: userUid}
         })
         return player
     }finally{
