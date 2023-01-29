@@ -93,7 +93,7 @@ export default function League({league,currentSeasons,previousSeasons}:{league:l
 }
 
 
-export async function getStaticProps({params}:{params:{league:string}}) {
+export async function getServerSideProps({params}:{params:{league:string}}) {
     const resLeague = await getLeague({league:params.league})
     const league = JSON.parse(JSON.stringify(resLeague))
     const resCurrentSeason = await getCurrentSeasons({leagueId:league._id.toString()})
@@ -101,13 +101,12 @@ export async function getStaticProps({params}:{params:{league:string}}) {
     const resSeasons = await getLeaguePreviousTables({leagueId:league._id.toString()})
     const previousSeasons = JSON.parse(JSON.stringify(resSeasons))
     return{
-        props:{league,currentSeasons,previousSeasons},
-        revalidate: 30
+        props:{league,currentSeasons,previousSeasons}
     }
 }
 
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const resultLeague = await getLeagueIds()
     const paths=resultLeague.map((league)=>{
         return{
@@ -118,4 +117,4 @@ export async function getStaticPaths() {
         paths,
         fallback:'blocking'
     }
-}
+} */

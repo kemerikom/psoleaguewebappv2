@@ -1,0 +1,10 @@
+{
+    "functions": {
+        "pages/*.tsx": {
+            "memory" : 256
+        },
+        "components/**/*": {
+            "memory": 256
+        }
+    }
+}

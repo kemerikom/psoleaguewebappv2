@@ -269,19 +269,18 @@ export default function Team({team, matches}:{team:teamsType, matches:matchType[
 }
 
 
-export async function getStaticProps({params}:{params:{team:string}}) {
+export async function getServerSideProps({params}:{params:{team:string}}) {
     const resTeam=await getTeam({teamId:params.team})
     const team=JSON.parse(JSON.stringify(resTeam))
     const resMatches= await getMatchByTeamId({teamId:params.team})
     const matches=JSON.parse(JSON.stringify(resMatches))
     return{
-        props:{team,matches},
-        revalidate: 5
+        props:{team,matches}
     }
 }
 
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const result = await getTeamIds()
     const paths=result.map((r:any)=>{
         return{
@@ -292,4 +291,4 @@ export async function getStaticPaths() {
         paths,
         fallback:'blocking'
     }
-}
+} */

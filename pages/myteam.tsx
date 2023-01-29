@@ -104,7 +104,7 @@ export const getServerSideProps= withSessionSsr(
                         return {
                             redirect: {
                                 permanent: false,
-                                destination: `teams/${team._id.toString()}`
+                                destination: `/teams/${team._id.toString()}`
                             }
                         }
                     }
@@ -112,7 +112,7 @@ export const getServerSideProps= withSessionSsr(
                     return {
                         redirect:{
                             permanent: false,
-                            destination: 'createteam'
+                            destination: '/createteam'
                         }
                     }
                 }
@@ -120,7 +120,7 @@ export const getServerSideProps= withSessionSsr(
                 return{
                     redirect:{
                         permanent: false,
-                        destination: 'auth/login'
+                        destination: '/auth/login'
                     }
                 }
             }

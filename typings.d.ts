@@ -1,4 +1,5 @@
 import { Int32, ObjectId } from "mongodb"
+import { type } from "os"
 import React, { Component, Dispatch } from "react"
 
 export type firebaseConfigType={
@@ -325,6 +326,17 @@ export type offerType = {
 
     datetime: number,
     bot: boolean
+}
+
+export type LookingForTeamType = {
+    _id: string,
+    username: string,
+    userid: string,
+    mainpos?: string,
+    secpos?: string,
+    avatar?: string,
+    country?: string,
+    datetime: number
 }
 
 declare global{

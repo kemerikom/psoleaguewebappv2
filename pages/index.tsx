@@ -1,4 +1,4 @@
-import { notificationType, transferType } from '../typings'
+import { LookingForTeamType, notificationType, transferType } from '../typings'
 import { getOfferNotifications } from '../utils/mongodb/getOffers'
 import { getTeamByUserId } from '../utils/mongodb/getTeams'
 import { getLastTransfers } from '../utils/mongodb/getTransfers'
@@ -6,8 +6,9 @@ import { getUserByUid } from '../utils/mongodb/getUsers'
 import { withSessionSsr } from '../utils/src/ironSessionHandlers'
 import Transfer from '../components/index/Transfer'
 import Link from 'next/link'
+import LookingForTeam from '../components/LookingForTeam'
 
-export default function Index({notifications, transfers}: {notifications: notificationType[], transfers: transferType[]}){
+export default function Index({notifications, transfers, lookingForTeam}: {notifications: notificationType[], transfers: transferType[], lookingForTeam?: LookingForTeamType[]}){
     return(
         <div className='flex flex-row my-3 items-center justify-center p-3 flex-wrap'>
             <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
@@ -44,9 +45,16 @@ export default function Index({notifications, transfers}: {notifications: notifi
                 })}
             </div>
             <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
-                <div className='flex flex-col flex-1 w-full mb-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2'>
-                    <h2 className='text-xl font-medium'>Looking For Team</h2>
+                <div className='flex flex-col flex-1 space-y-2 w-full mb-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2 overflow-auto scrollbarStyle'>
+                    <h2 className='text-xl font-medium sticky top-0 rounded p-2 w-full text-center backdrop-blur-sm'>Looking For Team</h2>
                     <hr/>
+                    <div className='flex flex-col w-full'>
+                        {lookingForTeam?.map((lft) => {
+                            return(
+                                <LookingForTeam data={lft}/>
+                            )
+                        })}
+                    </div>
                 </div>
                 <div className='flex flex-col flex-1 w-full mt-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2'>
                     <h2 className='text-xl font-medium'>Looking For Player</h2>
