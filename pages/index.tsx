@@ -7,10 +7,17 @@ import { withSessionSsr } from '../utils/src/ironSessionHandlers'
 import Transfer from '../components/index/Transfer'
 import Link from 'next/link'
 import LookingForTeam from '../components/LookingForTeam'
+import { lookingForTeamList } from '../utils/mongodb/getLookingFor'
+import { IoAdd } from 'react-icons/io5'
+import { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import { toastSettings } from '../utils/src/toastSettings'
 
 export default function Index({notifications, transfers, lookingForTeam}: {notifications: notificationType[], transfers: transferType[], lookingForTeam?: LookingForTeamType[]}){
+    const [loading, setLoading] = useState<boolean>(false)
     return(
         <div className='flex flex-row my-3 items-center justify-center p-3 flex-wrap'>
+            <ToastContainer theme='colored'/>
             <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
                 <div className='flex flex-col flex-1 w-full mb-1 space-y-2 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2 overflow-auto scrollbarStyle'>
                     <h2 className='text-xl font-medium'>Notifications</h2>
@@ -44,14 +51,20 @@ export default function Index({notifications, transfers, lookingForTeam}: {notif
                     )
                 })}
             </div>
-            <div className='flex flex-col m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
+            <div className='flex flex-col group relative m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
                 <div className='flex flex-col flex-1 space-y-2 w-full mb-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2 overflow-auto scrollbarStyle'>
-                    <h2 className='text-xl font-medium sticky top-0 rounded p-2 w-full text-center backdrop-blur-sm'>Looking For Team</h2>
+                    <h2 className='text-xl font-medium sticky top-0 rounded p-2 w-full text-center backdrop-blur-sm'>
+                        Looking For Team
+                        <button className='flex w-8 h-8 opacity-0 group-hover:opacity-100 hover:shadow-gray-600 hover:shadow-md absolute top-0 right-2 rounded-full bg-blue-600 text-white items-center justify-center transition-all' onClick={addLookingForTeam}>
+                            <IoAdd className='text-2xl'/>
+                        </button>
+                    </h2>
                     <hr/>
-                    <div className='flex flex-col w-full'>
+                    
+                    <div className='flex flex-col w-full space-y-2'>
                         {lookingForTeam?.map((lft) => {
                             return(
-                                <LookingForTeam data={lft}/>
+                                <LookingForTeam key={lft._id.toString()} data={lft}/>
                             )
                         })}
                     </div>
@@ -61,9 +74,22 @@ export default function Index({notifications, transfers, lookingForTeam}: {notif
                     <hr/>
                 </div>
             </div>
-            
         </div>
     )
+    async function addLookingForTeam(){
+        if (loading) return
+        setLoading(true)
+        const resLft = await fetch(`${process.env.appPath}/api/addLookingForTeamApi`, {
+            method: 'POST'
+        })
+        const lft = await resLft.json()
+        if (resLft.status == 200){
+            toast.success('Succesfully updated', toastSettings)
+        }else{
+            toast.error(lft, toastSettings)
+        }
+        setLoading(false)
+    }
 }
 
 
@@ -74,6 +100,7 @@ export const getServerSideProps=withSessionSsr(
         ]
         const userUid = req.session.user
         const transferList = await getLastTransfers()
+        const lookingForTeam = await lookingForTeamList({page:1})
         if(userUid && userUid.uid){
             const user = await getUserByUid({uid: userUid.uid})
             if (user){
@@ -83,7 +110,8 @@ export const getServerSideProps=withSessionSsr(
                     return {
                         props: {
                             notifications: offerNotifications.length ==0? notifications: JSON.parse(JSON.stringify(offerNotifications)),
-                            transfers: JSON.parse(JSON.stringify(transferList))
+                            transfers: JSON.parse(JSON.stringify(transferList)),
+                            lookingForTeam: JSON.parse(JSON.stringify(lookingForTeam))
                         }
                     }
                 }else{
@@ -91,7 +119,8 @@ export const getServerSideProps=withSessionSsr(
                     return {
                         props: {
                             notifications: offerNotifications.length ==0? notifications: JSON.parse(JSON.stringify(offerNotifications)),
-                            transfers: JSON.parse(JSON.stringify(transferList))
+                            transfers: JSON.parse(JSON.stringify(transferList)),
+                            lookingForTeam: JSON.parse(JSON.stringify(lookingForTeam))
                         }
                     }
                 }
@@ -99,7 +128,8 @@ export const getServerSideProps=withSessionSsr(
                 return {
                     props:{
                         notifications,
-                        transfers: JSON.parse(JSON.stringify(transferList))
+                        transfers: JSON.parse(JSON.stringify(transferList)),
+                        lookingForTeam: JSON.parse(JSON.stringify(lookingForTeam))
                     }
                 }
             }
@@ -107,7 +137,8 @@ export const getServerSideProps=withSessionSsr(
             return {
                 props:{
                     notifications,
-                    transfers: JSON.parse(JSON.stringify(transferList))
+                    transfers: JSON.parse(JSON.stringify(transferList)),
+                    lookingForTeam: JSON.parse(JSON.stringify(lookingForTeam))
                 }
             }
         }
