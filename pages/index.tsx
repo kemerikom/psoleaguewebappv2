@@ -8,12 +8,14 @@ import Transfer from '../components/index/Transfer'
 import Link from 'next/link'
 import LookingForTeam from '../components/LookingForTeam'
 import { lookingForTeamList } from '../utils/mongodb/getLookingFor'
-import { IoAdd } from 'react-icons/io5'
+import { IoAdd, IoFootball } from 'react-icons/io5'
 import { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { toastSettings } from '../utils/src/toastSettings'
+import { useRouter } from 'next/router'
 
 export default function Index({notifications, transfers, lookingForTeam}: {notifications: notificationType[], transfers: transferType[], lookingForTeam?: LookingForTeamType[]}){
+    const router = useRouter()
     const [loading, setLoading] = useState<boolean>(false)
     return(
         <div className='flex flex-row my-3 items-center justify-center p-3 flex-wrap'>
@@ -56,7 +58,13 @@ export default function Index({notifications, transfers, lookingForTeam}: {notif
                     <h2 className='text-xl font-medium sticky top-0 rounded p-2 w-full text-center backdrop-blur-sm'>
                         Looking For Team
                         <button className='flex w-8 h-8 opacity-0 group-hover:opacity-100 hover:shadow-gray-600 hover:shadow-md absolute top-0 right-2 rounded-full bg-blue-600 text-white items-center justify-center transition-all' onClick={addLookingForTeam}>
-                            <IoAdd className='text-2xl'/>
+                            {loading && 
+                                <IoFootball className='text-2xl animate-spin'/>
+                            }
+                            {!loading && 
+                                <IoAdd className='text-2xl'/>
+                            }
+                            
                         </button>
                     </h2>
                     <hr/>
@@ -85,6 +93,7 @@ export default function Index({notifications, transfers, lookingForTeam}: {notif
         const lft = await resLft.json()
         if (resLft.status == 200){
             toast.success('Succesfully updated', toastSettings)
+            router.reload()
         }else{
             toast.error(lft, toastSettings)
         }

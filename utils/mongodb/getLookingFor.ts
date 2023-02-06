@@ -21,15 +21,17 @@ export async function addLookingForTeam({userName, userId, mainPos, secPos, avat
         await client.connect()
         const database = client.db('psoleague')
         const lfts = database.collection('lookingforteam')
-        const lft = await lfts.insertOne({
+        const lft = await lfts.updateOne({
+            userid: userId
+        }, {$set:{
             username: userName,
             userid: userId,
             mainpos: mainPos || null,
             secpos: secPos || null,
             avatar: avatar || null,
             country: country || null,
-            datetime
-        })
+            datetime}
+        }, {upsert: true})
         return lft
     }finally{
         await client.close()
@@ -45,20 +47,19 @@ export async function checkLookingForTeamTime({userId, dateTime}: {userId: strin
         const lfts = database.collection('lookingforteam')
         const newDate = new Date(dateTime)
         newDate.setHours(newDate.getHours() - 12)
-        console.log(userId, dateTime)
-        const lft = await lfts.findOne({
-            $and: [
-                {userid: userId},
-                {datetime: {$gt: newDate}}
-            ]
-            
-        })
-        console.log('lft', lft)
-        if (lft) {
-            return false
+        const lft = await lfts.find({
+            userid: userId
+        }).sort({datetime: -1}).limit(1).toArray()
+        if (lft.length > 0){
+            if (lft[0].datetime > newDate) {
+                return false
+            }else{
+                return true
+            }
         }else{
             return true
         }
+
     }finally{
         await client.close()
     }
