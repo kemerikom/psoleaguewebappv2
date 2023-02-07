@@ -56,7 +56,7 @@ export default function Index({notifications, transfers, lookingForTeam}: {notif
             <div className='flex flex-col group relative m-2 max-w-md w-full max-h-[calc(100vh-110px)] h-[calc(100vh-100px)] rounded items-center p-1'>
                 <div className='flex flex-col flex-1 space-y-2 w-full mb-1 rounded bg-white backdrop-blur-sm bg-opacity-70 items-center justify-start p-2 overflow-auto scrollbarStyle'>
                     <h2 className='text-xl font-medium sticky top-0 rounded p-2 w-full text-center backdrop-blur-sm'>
-                        Looking For Team
+                        <Link href={'/looking_for_team'} className='link'>Looking For Team</Link>
                         <button className='flex w-8 h-8 opacity-0 group-hover:opacity-100 hover:shadow-gray-600 hover:shadow-md absolute top-0 right-2 rounded-full bg-blue-600 text-white items-center justify-center transition-all' onClick={addLookingForTeam}>
                             {loading && 
                                 <IoFootball className='text-2xl animate-spin'/>
