@@ -39,6 +39,26 @@ export async function addLookingForTeam({userName, userId, mainPos, secPos, avat
 }
 
 
+export async function addLookingForPlayer({teamId, positions}: {teamId: string, positions: string[]}): Promise<boolean> {
+    const client = new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database = client.db('psoleague')
+        const collection = database.collection('lookingforplayer')
+        const lfp = await collection.insertOne({
+            teamid: teamId,
+            positions
+        })
+        if (lfp.insertedId) {
+            return true
+        }else {
+            return false
+        }
+    }finally {
+        await client.close()
+    }
+}
+
 export async function checkLookingForTeamTime({userId, dateTime}: {userId: string, dateTime: number}) {
     const client = new MongoClient(process.env.mongoUri)
     try{

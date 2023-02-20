@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId, WithId } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { playerType } from "../../typings";
 
 
