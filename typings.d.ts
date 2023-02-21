@@ -339,6 +339,16 @@ export type LookingForTeamType = {
     datetime: number
 }
 
+
+export type lookingForPlayerType = {
+    _id: string | ObjectId,
+    teamid: string,
+    teamname: string,
+    teamlogo?: string,
+    positions: string[],
+    datetime: number,
+}
+
 declare global{
     namespace NodeJS{
         interface ProcessEnv{
