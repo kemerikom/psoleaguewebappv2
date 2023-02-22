@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState, useContext } from 'react'
 import { SiteContext } from "../../context/SiteContext"
 
-export default function Team({team, matches}:{team:teamsType, matches:matchType[]}){
+export default function Team({team, matches}:{team: teamsType, matches: matchType[]}){
     const siteData = useContext(SiteContext)
     const {uid} = siteData
     const [followers, setFollowers] = useState<string[]>(team.followers || [])
@@ -275,7 +275,7 @@ export async function getServerSideProps({params}:{params:{team:string}}) {
     const resMatches= await getMatchByTeamId({teamId:params.team})
     const matches=JSON.parse(JSON.stringify(resMatches))
     return{
-        props:{team,matches}
+        props:{team, matches}
     }
 }
 

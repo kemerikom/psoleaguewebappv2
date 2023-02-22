@@ -160,8 +160,6 @@ export type tablePointsType={
     diff:number
 }
 
-
-
 export type seasonTableType={
     _id:string,
     seasonname:string,
