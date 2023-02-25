@@ -22,7 +22,7 @@ export default function LookingForPlayerCard({data}: {data: lookingForPlayerType
                 <div className="flex flex-row flex-wrap items-center">
                     {data.positions.map((pos) => {
                         return(
-                            <div className="flex items-center h-8 w-8 aspect-square m-1 justify-center text-center bg-green-600 rounded-full text-white text-sm">
+                            <div key={pos} className="flex items-center h-8 w-8 aspect-square m-1 justify-center text-center bg-green-600 rounded-full text-white text-sm">
                                 {pos}
                             </div>
                         )

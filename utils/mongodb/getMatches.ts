@@ -88,3 +88,19 @@ export async function updateRefreeAndDate({matchId,refreeId,refreeName,dateTime}
         await client.close()
     }
 }
+
+
+export async function getMatchById({matchId}: {matchId: string}) {
+    const client=new MongoClient(process.env.mongoUri)
+    try{
+        await client.connect()
+        const database=client.db('psoleague')
+        const matches=database.collection('matches')
+        const match= await matches.findOne({_id: new ObjectId(matchId)})
+        return match
+    }catch (err) {
+        return null
+    }finally{
+        await client.close()
+    }
+}

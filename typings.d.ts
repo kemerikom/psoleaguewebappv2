@@ -215,14 +215,65 @@ export type matchType={
     hometeamname:string,
     hometeamlogo:string,
     hometeamscore:number,
-    refreeid:string|null,
-    refreename:string|null,
+    refreeid:string | null,
+    refreename:string | null,
     awayteamid:string,
     awayteamname:string,
     awayteamlogo:string,
     awayteamscore:number,
     datetime:number,
     completed:boolean
+}
+
+
+export type matchStatsType = {
+    _id: ObjectId | string,
+    leagueid: string,
+    leaguename: string,
+    hometeam: {
+        id: string,
+        teamname: string,
+        logo?: string
+    },
+    awayteam: {
+        id: string,
+        teamname: string,
+        logo?: string
+    },
+    homeplayers: userNameIdType[],
+    awayplayers: userNameIdType[],
+    homestats: teamMatchStats,
+    awaystats: teamMatchStats
+    homeplayerstats?: playerMatchStats[],
+    awayplayerstats?: playerMatchStats[]
+}
+
+
+export type playerMatchStats = {
+    id: string,
+    username: string,
+    teamid: string,
+    score: number,
+    assists: number,
+    passes: number,
+    goals: number,
+    tkls: number,
+    catches: number,
+    saves: number
+}
+
+export type teamMatchStats = {
+    goals: number,
+    assists: number,
+    passes: number,
+    tkls: number,
+    positions: number,
+    corners: number,
+    thrown: number,
+    penalties: number,
+    fouls: number,
+    yellows: number,
+    reds: number
 }
 
 export type playerType={
